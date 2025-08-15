@@ -176,10 +176,14 @@ body {
   overflow-x: hidden;
 }
 
-.hero-section {
-  position: relative;
-  z-index: var(--z-base);
+/* ✨ FULL VIEWPORT WIDTH SLIDER */
+.hero-slider {
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  max-width: none !important;
 }
+
 
 .content-wrapper {
   background: var(--bg-secondary);

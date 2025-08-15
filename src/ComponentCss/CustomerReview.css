@@ -1,0 +1,386 @@
+.customer-review-section {
+  background: #ecf4fc;
+  min-height: 700px;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.customer-review-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header Styles */
+.customer-review-header {
+  text-align: left;
+  margin-bottom: 60px;
+  padding-left: 20px;
+}
+
+.customer-review-header h2 {
+  color: #1e293b;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+/* Carousel Styles */
+.customer-review-carousel {
+  margin-bottom: 40px;
+}
+
+.customer-review-cards-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.customer-review-cards-track {
+  display: flex;
+  gap: 30px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  padding-left: 20px;
+}
+
+.customer-review-cards-track:active {
+  cursor: grabbing;
+}
+
+/* Review Card Styles - Large Cards */
+.customer-review-card {
+  min-width: 450px;
+  max-width: 450px;
+  background: white;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 6px rgba(0, 0, 0, 0.03),
+    0 10px 20px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-height: 320px;
+}
+
+.customer-review-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 10px 15px rgba(0, 0, 0, 0.05),
+    0 20px 25px rgba(0, 0, 0, 0.03);
+}
+
+/* Review Header - Enhanced Layout */
+.review-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.customer-avatar-container {
+  flex-shrink: 0;
+}
+
+.customer-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.customer-review-card:hover .customer-avatar {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.customer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.customer-info {
+  flex: 1;
+  min-width: 0;
+  padding-top: 5px;
+}
+
+.customer-name-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.customer-name {
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #22c55e;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+}
+
+.verified-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.customer-company {
+  color: #475569;
+  font-size: 1rem;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.customer-contact {
+  margin-top: 5px;
+}
+
+.customer-email {
+  color: #3b82f6;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.customer-email:hover {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+/* Review Content - Enhanced */
+.review-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.review-text {
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+  text-align: justify;
+  font-weight: 400;
+}
+
+.review-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: auto;
+}
+
+/* Score Styles - Enhanced */
+.review-score-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.review-dons {
+  display: flex;
+  gap: 3px;
+}
+
+.don {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s ease;
+}
+
+.don.filled {
+  color: #fbbf24;
+  filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
+}
+
+.don.half-filled {
+  color: #fbbf24;
+  filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
+}
+
+.don.empty {
+  color: #d1d5db;
+  stroke-width: 1.5;
+}
+
+.don:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .customer-review-card {
+    min-width: 420px;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .customer-review-card {
+    min-width: 380px;
+    max-width: 380px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .customer-review-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .customer-review-card {
+    min-width: 350px;
+    max-width: 350px;
+  }
+  
+  .customer-avatar {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .customer-review-section {
+    padding: 80px 0;
+  }
+  
+  .customer-review-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-left: 0;
+  }
+  
+  .customer-review-header h2 {
+    font-size: 2.2rem;
+  }
+  
+  .customer-review-cards-track {
+    padding-left: 20px;
+  }
+  
+  .customer-review-card {
+    min-width: 320px;
+    max-width: 320px;
+    padding: 25px;
+    min-height: 280px;
+  }
+  
+  .customer-avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .customer-name {
+    font-size: 1.1rem;
+  }
+  
+  .customer-company {
+    font-size: 0.9rem;
+  }
+  
+  .review-text {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customer-review-section {
+    padding: 60px 0;
+  }
+  
+  .customer-review-container {
+    padding: 0 15px;
+  }
+  
+  .customer-review-header h2 {
+    font-size: 1.9rem;
+  }
+  
+  .customer-review-cards-track {
+    padding-left: 15px;
+  }
+  
+  .customer-review-card {
+    min-width: 300px;
+    max-width: 300px;
+    padding: 20px;
+    min-height: 260px;
+  }
+  
+  .review-header {
+    gap: 15px;
+  }
+  
+  .customer-avatar {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #e2e8f0;
+  }
+  
+  .customer-name {
+    font-size: 1rem;
+  }
+  
+  .customer-company {
+    font-size: 0.85rem;
+  }
+  
+  .customer-email {
+    font-size: 0.8rem;
+  }
+  
+  .verified-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+  
+  .review-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .don {
+    width: 16px;
+    height: 16px;
+  }
+}

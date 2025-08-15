@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import ImageSlider from "./imageslider";
+import { useNavigate } from "react-router-dom";
+import ImageSlider from "../Components/imageslider";
 import { CButton } from "@coreui/react";
-import ContactForm from "./contactform";
-import HPSProductCard from './productCard';
+import ContactForm from "../Components/queryForm";
+import ProductCard from "../Components/productCard";
+import Poster from "../Components/poster";
+import CustomerReview from "../Components/customerreview"; // Add this import
+import Footer from "./Footer"; // Add this import
+
 import "../style/home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const heroImages = [
     {
       url: "/src/assets/luffy.jpg",
@@ -14,7 +21,7 @@ const Home = () => {
     },
     {
       url: "/src/assets/413842.jpg",
-      alt: "HPS Constructions - POP Services", 
+      alt: "HPS Constructions - POP Services",
       title: "Professional POP Solutions",
     },
     {
@@ -33,67 +40,71 @@ const Home = () => {
     {
       id: 1,
       title: "Bamboo Solutions",
-      description: "Sustainable bamboo construction materials for eco-friendly and durable buildings that stand the test of time.",
+      description:
+        "Sustainable bamboo construction materials for eco-friendly and durable buildings that stand the test of time.",
       price: 599,
       unit: "piece",
       rating: 4.8,
-      imageUrl: "./src/assets/luffy.jpg"
+      imageUrl: "./src/assets/luffy.jpg",
     },
     {
       id: 2,
-      title: "POP Services", 
-      description: "Professional Plaster of Paris solutions for modern interiors with artistic designs and precision finishing.",
+      title: "POP Services",
+      description:
+        "Professional Plaster of Paris solutions for modern interiors with artistic designs and precision finishing.",
       price: 399,
       unit: "sq ft",
       rating: 4.6,
-      imageUrl: "./src/assets/413842.jpg"
+      imageUrl: "./src/assets/413842.jpg",
     },
     {
       id: 3,
       title: "Expert Consultation",
-      description: "Get professional advice and customized solutions for your construction projects from our experienced team.",
+      description:
+        "Get professional advice and customized solutions for your construction projects from our experienced team.",
       price: 2999,
-      unit: "session", 
+      unit: "session",
       rating: 5.0,
-      imageUrl: "./src/assets/12345.avif"
+      imageUrl: "./src/assets/12345.avif",
     },
     {
       id: 4,
       title: "Interior Design",
-      description: "Complete interior design solutions with modern aesthetics and functional layouts for residential and commercial spaces.",
+      description:
+        "Complete interior design solutions with modern aesthetics and functional layouts for residential and commercial spaces.",
       price: 1599,
       unit: "room",
       rating: 4.7,
-      imageUrl: "./src/assets/123.jpg"
-    }
+      imageUrl: "./src/assets/123.jpg",
+    },
   ];
 
   // HUMAN INTERACTIONS EFFECT
   useEffect(() => {
-    const cards = document.querySelectorAll('.hps-card');
-    const carousel = document.querySelector('.infinite-carousel');
+    const cards = document.querySelectorAll(".hps-card");
+    const carousel = document.querySelector(".infinite-carousel");
 
     // Mouse movement tracking for interactive effects
     const handleMouseMove = (e, card) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      
+
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      
+
       // Update CSS custom properties for mouse-following effects
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-      card.style.setProperty('--cursor-x', `${(x / rect.width) * 100}%`);
-      
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+      card.style.setProperty("--cursor-x", `${(x / rect.width) * 100}%`);
+
       // Image parallax effect
-      const img = card.querySelector('.card-image img');
+      const img = card.querySelector(".card-image img");
       if (img) {
         const moveX = (x - centerX) / 20;
         const moveY = (y - centerY) / 20;
-        img.style.setProperty('--img-x', `${moveX}px`);
-        img.style.setProperty('--img-y', `${moveY}px`);
+        img.style.setProperty("--img-x", `${moveX}px`);
+        img.style.setProperty("--img-y", `${moveY}px`);
       }
     };
 
@@ -103,22 +114,22 @@ const Home = () => {
       const rect = card.getBoundingClientRect();
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
-      
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
     };
 
     // Apply interactions to each card
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => handleMouseMove(e, card));
-      card.addEventListener('touchmove', (e) => handleTouch(e, card));
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.removeProperty('--mouse-x');
-        card.style.removeProperty('--mouse-y');
-        card.style.removeProperty('--cursor-x');
-        card.style.removeProperty('--img-x');
-        card.style.removeProperty('--img-y');
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => handleMouseMove(e, card));
+      card.addEventListener("touchmove", (e) => handleTouch(e, card));
+
+      card.addEventListener("mouseleave", () => {
+        card.style.removeProperty("--mouse-x");
+        card.style.removeProperty("--mouse-y");
+        card.style.removeProperty("--cursor-x");
+        card.style.removeProperty("--img-x");
+        card.style.removeProperty("--img-y");
       });
     });
 
@@ -128,21 +139,21 @@ const Home = () => {
     let scrollLeft;
 
     if (carousel) {
-      carousel.addEventListener('mousedown', (e) => {
+      carousel.addEventListener("mousedown", (e) => {
         isDown = true;
         startX = e.pageX - carousel.offsetLeft;
         scrollLeft = carousel.scrollLeft;
       });
 
-      carousel.addEventListener('mouseleave', () => {
+      carousel.addEventListener("mouseleave", () => {
         isDown = false;
       });
 
-      carousel.addEventListener('mouseup', () => {
+      carousel.addEventListener("mouseup", () => {
         isDown = false;
       });
 
-      carousel.addEventListener('mousemove', (e) => {
+      carousel.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - carousel.offsetLeft;
@@ -153,9 +164,9 @@ const Home = () => {
 
     // Cleanup function
     return () => {
-      cards.forEach(card => {
-        card.removeEventListener('mousemove', handleMouseMove);
-        card.removeEventListener('touchmove', handleTouch);
+      cards.forEach((card) => {
+        card.removeEventListener("mousemove", handleMouseMove);
+        card.removeEventListener("touchmove", handleTouch);
       });
     };
   }, []);
@@ -169,7 +180,7 @@ const Home = () => {
             images={heroImages}
             autoSlide={true}
             slideInterval={8000}
-            showDots={true}
+            showDots={false}
             showArrows={false}
             showProgressBar={false}
             height="500px"
@@ -187,16 +198,17 @@ const Home = () => {
             <header className="section-header">
               <h2>Our Premium Products</h2>
               <p className="section-description">
-                Discover our range of sustainable construction solutions crafted with expertise and innovation
+                Discover our range of sustainable construction solutions crafted
+                with expertise and innovation
               </p>
             </header>
 
             <div className="button-container">
               <CButton
                 color="primary"
-                size="lg" 
+                size="lg"
                 className="explore-button"
-                onClick={() => console.log("Explore products")}
+                onClick={() => navigate("/products")}
               >
                 Explore Our Products
               </CButton>
@@ -206,27 +218,48 @@ const Home = () => {
             <div className="infinite-carousel">
               <div className="carousel-track">
                 {/* Triple the products for infinite effect */}
-                {[...products, ...products, ...products].map((product, index) => (
-                  <div key={`${product.id}-${index}`} className="carousel-item">
-                    <HPSProductCard
-                      title={product.title}
-                      description={product.description}
-                      price={product.price}
-                      unit={product.unit}
-                      rating={product.rating}
-                      imageUrl={product.imageUrl}
-                      onShare={() => console.log(`Shared: ${product.title}`)}
-                      onLearnMore={() => console.log(`Learn more: ${product.title}`)}
-                    />
-                  </div>
-                ))}
+                {[...products, ...products, ...products].map(
+                  (product, index) => (
+                    <div
+                      key={`${product.id}-${index}`}
+                      className="carousel-item"
+                    >
+                      <ProductCard
+                        title={product.title}
+                        description={product.description}
+                        price={product.price}
+                        unit={product.unit}
+                        rating={product.rating}
+                        imageUrl={product.imageUrl}
+                        onShare={() => console.log(`Shared: ${product.title}`)}
+                        onLearnMore={() => navigate("/products")}
+                      />
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
         </section>
       </div>
 
+      {/* Contact Form */}
       <ContactForm />
+
+      <hr />
+
+      {/* ✨ CORRECT ORDER: Badge (About Services) comes FIRST */}
+      <Poster />
+
+      <hr />
+
+      {/* ✨ Customer Reviews come AFTER services explanation */}
+      <CustomerReview />
+
+      <hr />
+
+      {/* Footer always comes last */}
+      <Footer />
     </main>
   );
 };

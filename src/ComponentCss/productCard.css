@@ -215,7 +215,7 @@
   left: 100%;
 }
 
-/* HUMAN INTERACTION: Description typewriter effect */
+/* ✨ ENHANCED: Description with MORE BOLD effect on hover */
 .card-description {
   font-size: 0.75rem;
   color: #64748b;
@@ -224,14 +224,19 @@
   font-weight: 400;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   word-wrap: break-word;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .hps-card:hover .card-description {
   animation: textReveal 0.8s ease-out forwards;
+  /* ✨ UPDATED: Description becomes MORE BOLD on hover */
+  font-weight: 600;
+  color: #374151;
 }
 
 @keyframes textReveal {
@@ -261,8 +266,6 @@
 .rating-section {
   flex: 1;
   min-width: 0;
-  background: linear-gradient(135deg, #fefce8, #fef3c7);
-  border: 1px solid #fed7aa;
   border-radius: 8px;
   padding: 6px 8px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -281,10 +284,13 @@
   left: 50%;
   width: 0;
   height: 0;
-  background: rgba(251, 191, 36, 0.3);
-  border-radius: 50%;
+  border-radius: 2px solid #fed7aa;
   transform: translate(-50%, -50%);
   transition: all 0.6s ease;
+  -webkit-border-radius: 2px solid #fed7aa;
+  -moz-border-radius: 2px solid #fed7aa;
+  -ms-border-radius: 2px solid #fed7aa;
+  -o-border-radius: 2px solid #fed7aa;
 }
 
 .hps-card:hover .rating-section::before {
@@ -293,7 +299,6 @@
 }
 
 .rating-section:hover {
-  background: linear-gradient(135deg, #fef7ed, #fed7aa);
   border-color: #fb923c;
   transform: translateY(-2px) scale(1.05);
 }
@@ -315,7 +320,7 @@
 
 /* HUMAN INTERACTION: Star twinkle effect */
 .star {
-  font-size: 10px;
+  font-size: 20px;
   transition: all 0.3s ease;
   text-shadow: 0 1px 2px rgba(251, 191, 36, 0.3);
   position: relative;
@@ -349,6 +354,7 @@
   align-items: center;
   gap: 2px;
   justify-content: center;
+  font-size: xx-large;
 }
 
 .rating-number {
@@ -356,7 +362,7 @@
   color: #9a3412;
   padding: 1px 4px;
   border-radius: 6px;
-  font-size: 0.5rem;
+  font-size: 0.85rem;
   font-weight: 700;
   min-width: 18px;
   text-align: center;
@@ -364,7 +370,7 @@
 
 .rating-label {
   color: #92400e;
-  font-size: 0.4rem;
+  font-size: 0.74rem;
   font-weight: 600;
 }
 
@@ -372,8 +378,6 @@
 .price-section {
   flex: 1;
   min-width: 0;
-  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-  border: 1px solid #bbf7d0;
   border-radius: 8px;
   padding: 6px 8px;
   text-align: center;
@@ -394,12 +398,6 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(5, 150, 105, 0.2),
-    transparent
-  );
   transition: left 0.6s ease;
 }
 
@@ -408,8 +406,6 @@
 }
 
 .price-section:hover {
-  background: linear-gradient(135deg, #ecfdf5, #bbf7d0);
-  border-color: #4ade80;
   transform: translateY(-2px) scale(1.05);
 }
 
@@ -451,9 +447,9 @@
 .price-unit {
   background: #bbf7d0;
   color: #065f46;
-  padding: 1px 4px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-size: 0.4rem;
+  font-size: 0.65rem;
   font-weight: 600;
   display: inline-block;
 }
@@ -485,6 +481,10 @@
   overflow: hidden;
   white-space: nowrap;
   transform-origin: center;
+  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-share:hover,
@@ -587,6 +587,7 @@
   .card-description {
     font-size: 0.6875rem;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
   
   /* Reduce complex animations on mobile */
@@ -630,10 +631,10 @@
   }
   
   .rating-price-row {
-    flex-direction: column;
+    flex-direction: row;
     gap: 4px;
     min-height: 55px;
-    margin-bottom: 8px;
+    margin: 10px;
   }
   
   .card-actions {

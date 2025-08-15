@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import '../Style/imageslider.css';
+import '../ComponentCss/imageslider.css';
 
 const ImageSlider = ({ 
   images = [], 

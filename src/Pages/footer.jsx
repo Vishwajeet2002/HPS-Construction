@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../style/Footer.css'; // Add custom CSS file
+import '../Style/footer.css'; // Add custom CSS file
 
 const Footer = () => {
     const [email, setEmail] = useState('');

@@ -1,0 +1,495 @@
+/* HPS Constructions Topbar Styles */
+.topbar {
+  background-color: #ffffff;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.topbar-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+}
+
+/* Logo - Left Side */
+.topbar-logo {
+  justify-self: start;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ✨ ENHANCED: Logo hover effect */
+.topbar-logo:hover {
+  transform: scale(1.05);
+}
+
+.topbar-logo h2 {
+  color: rgb(0, 0, 0);
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-family: Poppins;
+  transition: all 0.3s ease;
+}
+
+.topbar-logo:hover h2 {
+  color: #2563eb;
+  text-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Navigation Menu */
+.topbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 30px;
+  justify-self: center;
+}
+
+.topbar-menu li {
+  cursor: pointer;
+  color: black;
+  position: relative;
+}
+
+.topbar-menu li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: Poppins;
+  position: relative;
+  overflow: hidden;
+
+  /* Enhanced smooth transitions */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -moz-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -ms-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  -o-transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Hardware acceleration for smoother performance */
+  transform: translateZ(0);
+  will-change: transform, background-color, color;
+  backface-visibility: hidden;
+}
+
+/* ✨ FIXED: Subtle text-only hover effect */
+.topbar-menu li a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: linear-gradient(45deg, #2563eb, #3b82f6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.topbar-menu li a:hover {
+  color: white;
+  /* Subtle transform - no scaling, minimal lift */
+  transform: translateY(-1px);
+  /* Subtle shadow */
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.topbar-menu li a:hover::before {
+  /* Smaller ripple effect - just covers text area */
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.topbar-menu li a:active {
+  transform: translateY(0);
+}
+
+/* Right Side */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-self: end;
+  flex-shrink: 0;
+}
+
+/* Actions (Search + Wishlist) */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Search Bar */
+.topbar-search form {
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+  background: var(--Secondary, #f5f5f5);
+  padding: 3px 9px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ ENHANCED: Search form hover effect */
+.topbar-search form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.topbar-search form:hover::before {
+  left: 100%;
+}
+
+.topbar-search form:focus-within {
+  background: white;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  transform: scale(1.02);
+}
+
+.search-input {
+  height: 10px;
+  background: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 5px 8px;
+  outline: none;
+  width: 90px;
+  font-size: 13px;
+  transition: width 0.3s ease;
+}
+
+.search-input:focus {
+  width: 130px;
+  color: rgb(0, 0, 0);
+}
+
+.search-input::placeholder {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* ✨ ENHANCED: Search button hover effect */
+.search-button:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+.search-button:active {
+  transform: scale(0.95) rotate(15deg);
+}
+
+/* Wishlist */
+.topbar-wishlist {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✨ ENHANCED: Wishlist hover effect */
+.topbar-wishlist::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.topbar-wishlist:hover {
+  transform: scale(1.15);
+  box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+}
+
+.topbar-wishlist:hover::before {
+  transform: scale(1);
+}
+
+.topbar-wishlist:hover .wishlist-icon {
+  color: white !important;
+  animation: heartBeat 0.8s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.wishlist-icon {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.wishlist-icon.active {
+  color: #ff6b6b;
+}
+
+/* Contact Icons */
+.topbar-contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ✨ FIXED: Smooth Contact Icon Hover */
+.contact-icon {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  color: #6b7280;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.contact-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.contact-icon:hover {
+  color: white;
+  transform: scale(1.08) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.contact-icon:hover::before {
+  transform: scale(1);
+}
+
+.contact-icon:active {
+  transform: scale(1.02) translateY(0);
+}
+
+/* ✨ FIXED: Smooth WhatsApp Container Hover */
+.whatsapp-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #059669;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.whatsapp-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.15), transparent);
+  transition: left 0.4s ease;
+}
+
+.whatsapp-container:hover {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: white;
+  transform: scale(1.03) translateY(-1px);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  border-color: #10b981;
+}
+
+.whatsapp-container:hover::before {
+  left: 100%;
+}
+
+.whatsapp-container:active {
+  transform: scale(1.01) translateY(0);
+}
+
+/* Mobile Menu Toggle */
+.topbar-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* ✨ ENHANCED: Mobile toggle hover effect */
+.topbar-toggle:hover {
+  background: rgba(37, 99, 235, 0.1);
+  transform: scale(1.1);
+}
+
+.topbar-toggle span {
+  width: 20px;
+  height: 3px;
+  background-color: rgb(0, 0, 0);
+  margin: 2px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.topbar-toggle:hover span {
+  background: linear-gradient(45deg, #2563eb, #3b82f6);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.topbar-toggle:hover span:nth-child(1) {
+  transform: translateY(1px);
+}
+
+.topbar-toggle:hover span:nth-child(3) {
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .topbar-container {
+    display: flex;
+    justify-content: space-between;
+    height: 55px;
+  }
+
+  .topbar-menu {
+    position: fixed;
+    left: -100%;
+    top: 55px;
+    flex-direction: column;
+    background-color: #333;
+    width: 100%;
+    display: flex;
+    padding: 7px 12px 7px 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: left 0.3s ease;
+  }
+
+  .topbar-menu.active {
+    left: 0;
+    background: linear-gradient(135deg, #1f2937, #374151);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ✨ FIXED: Subtle mobile menu items */
+  .topbar-menu li a {
+    color: white;
+    padding: 10px 16px;
+    width: 70%;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  .topbar-menu li a:hover {
+    background: rgba(37, 99, 235, 0.8);
+    /* Subtle mobile effect */
+    transform: translateY(-1px);
+  }
+
+  .topbar-actions {
+    display: none;
+  }
+
+  .phone-number {
+    display: none;
+  }
+
+  .topbar-toggle {
+    display: flex;
+  }
+
+  .topbar-logo h2 {
+    font-size: 19px;
+  }
+
+  /* ✨ FIXED: Consistent Mobile Hover Effects */
+  .whatsapp-container:hover {
+    transform: scale(1.02) translateY(-1px);
+  }
+
+  .contact-icon:hover {
+    transform: scale(1.05) translateY(-1px);
+  }
+}
+
+/* ✨ ENHANCED: Global accessibility for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .topbar-menu li a:hover,
+  .search-button:hover,
+  .topbar-wishlist:hover,
+  .contact-icon:hover,
+  .whatsapp-container:hover {
+    transform: none !important;
+  }
+}

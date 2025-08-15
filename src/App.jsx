@@ -1,39 +1,39 @@
-// App.js (in src/)
-import Topbar from "./pages/Topbar";
+// App.jsx (src/)
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Topbar from "./Components/Topbar";
 import Home from "./Pages/home";
+import ProductsPage from "./Pages/products";
+import Contact from "./Pages/contact"; // ✅ ADD CONTACT IMPORT
 import "./App.css";
-import Footer from "./pages/footer"; // Importing Footer component
-import ContactForm from "./Pages/contactform";
 
 function App() {
   return (
-    <>
+    <Router>
       <div className="App">
         <Topbar />
-        <ContactForm />
 
-        {/* Main content starts here */}
-        <main className="main-content">
-          {/* Image Slider Section - Should be at the top */}
-
-          {/* Welcome Section with line breaks */}
-          {/* <section className="welcome-section">
-          <div className="container">
-            <h1>Welcome to HPS Constructions</h1>
-            <br />
-            <p>Your trusted partner for bamboo and POP construction solutions.</p>
-            <br />
-            <p>Building sustainable futures with innovative designs and eco-friendly materials.</p>
-          </div>
-        </section> */}
-          <Home />
-        </main>
+        <Routes>
+          {/* HOME ROUTE */}
+          <Route
+            path="/"
+            element={
+              <>
+                <main className="main-content">
+                  <Home />
+                </main>
+              </>
+            }
+          />
+          
+          {/* PRODUCTS ROUTE */}
+          <Route path="/products" element={<ProductsPage />} />
+          
+          {/* ✅ CONTACT ROUTE - ADD THIS */}
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-      <hr></hr>
-      <div>
-        <Footer />
-      </div>
-    </>
+    </Router>
   );
 }
 
