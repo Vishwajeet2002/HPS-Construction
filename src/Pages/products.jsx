@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HPSProductCard from "../Components/productCard";
-import "../style/prodcuts.css";
+import "../Style/prodcuts.css";
 
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
