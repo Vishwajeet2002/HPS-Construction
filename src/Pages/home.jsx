@@ -8,7 +8,7 @@ import Poster from "../Components/poster";
 import CustomerReview from "../Components/CustomerReview"; // Add this import
 import Footer from "./footer"; // Add this import
 
-import "../style/home.css";
+import "../style/Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
