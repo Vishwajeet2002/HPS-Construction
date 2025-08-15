@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from "@emailjs/browser";
-import '../style/contact.css';
+import '../Style/contact.css';
 
 import { 
   FaPhone, 

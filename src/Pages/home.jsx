@@ -5,8 +5,8 @@ import { CButton } from "@coreui/react";
 import ContactForm from "../Components/queryForm";
 import ProductCard from "../Components/productCard";
 import Poster from "../Components/poster";
-import CustomerReview from "../Components/customerreview"; // Add this import
-import Footer from "./Footer"; // Add this import
+import CustomerReview from "../Components/CustomerReview"; // Add this import
+import Footer from "./footer"; // Add this import
 
 import "../style/home.css";
 
