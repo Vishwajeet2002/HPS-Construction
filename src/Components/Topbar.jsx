@@ -182,7 +182,7 @@ const Topbar = () => {
               <div className="contact-icon">
                 <FaWhatsapp className="whatsapp-icon" />
               </div>
-              <span className="phone-number">9555633827</span>
+              <span className="phone-number">9565550142</span>
             </div>
           </div>
 
