@@ -2,8 +2,8 @@
 .contact-page {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
-  color: #1f2937;
-  padding-top: 60px; /* Account for fixed navbar */
+  color: #111827;
+  padding-top: 60px;
 }
 
 .container {
@@ -14,7 +14,7 @@
 
 /* ✨ Hero Section */
 .contact-hero {
-  background: linear-gradient(135deg, #1e3c72 0%, #2563eb 50%, #059669 100%);
+  background: linear-gradient(135deg, #1A271E 0%, #233528 50%, #4A7A2D 100%);
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24);
+  background: linear-gradient(45deg, #C58022, #9E671C, #C58022);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -137,7 +137,7 @@
 /* ✨ Quick Contact Section */
 .quick-contact {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #F3F4F6 0%, #EEF2F7 100%);
 }
 
 .section-title {
@@ -145,7 +145,7 @@
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 3rem;
-  background: linear-gradient(45deg, #1e3c72, #2563eb);
+  background: linear-gradient(45deg, #233528, #4A7A2D);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,11 +207,11 @@
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #1f2937;
+  color: #111827;
 }
 
 .contact-card p {
-  color: #6b7280;
+  color: #6B7280;
   font-weight: 500;
 }
 
@@ -232,12 +232,12 @@
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  color: #1f2937;
+  color: #111827;
 }
 
 .form-info p {
   font-size: 1.2rem;
-  color: #6b7280;
+  color: #6B7280;
   margin-bottom: 2rem;
 }
 
@@ -251,9 +251,9 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  background: linear-gradient(135deg, #F3F4F6, #E2E8F0);
   border-radius: 15px;
-  border-left: 4px solid #059669;
+  border-left: 4px solid #4A7A2D;
 }
 
 .highlight-icon {
@@ -265,30 +265,30 @@
 }
 
 .highlight-icon.bamboo {
-  color: #059669;
+  color: #4A7A2D;
 }
 
 .highlight-icon.pop {
-  color: #2563eb;
+  color: #233528;
 }
 
 .highlight h4 {
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #1f2937;
+  color: #111827;
 }
 
 .highlight p {
-  color: #6b7280;
+  color: #6B7280;
   margin: 0;
 }
 
 .business-hours {
-  background: linear-gradient(135deg, #1e3c72, #2563eb);
+  background: linear-gradient(135deg, #233528, #4A7A2D);
   color: white;
   padding: 2rem;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(30, 60, 114, 0.3);
+  box-shadow: 0 10px 30px rgba(35, 53, 40, 0.3);
 }
 
 .business-hours h4 {
@@ -312,11 +312,11 @@
 
 /* ✨ Contact Form */
 .contact-form {
-  background: linear-gradient(135deg, #f8fafc, #ffffff);
+  background: linear-gradient(135deg, #F3F4F6, #ffffff);
   padding: 3rem;
   border-radius: 25px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  border: 1px solid #E5E7EB;
 }
 
 .form-header {
@@ -328,18 +328,18 @@
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  color: #1f2937;
+  color: #111827;
 }
 
 .form-header p {
-  color: #6b7280;
+  color: #6B7280;
 }
 
 /* ✨ DUAL SEND INFO BANNER */
 .dual-send-info {
-  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-  border: 2px solid #059669;
-  color: #065f46;
+  background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+  border: 2px solid #10B981;
+  color: #065F46;
   padding: 12px 16px;
   border-radius: 12px;
   margin: 1rem 0 1.5rem 0;
@@ -395,7 +395,7 @@
 .form-group textarea {
   width: 100%;
   padding: 1rem 1.25rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #E5E7EB;
   border-radius: 12px;
   font-size: 1rem;
   transition: all 0.3s ease;
@@ -407,8 +407,8 @@
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  border-color: #233528;
+  box-shadow: 0 0 0 3px rgba(35, 53, 40, 0.1);
   transform: translateY(-1px);
 }
 
@@ -421,7 +421,7 @@
 .submit-btn {
   width: 100%;
   padding: 1.25rem 2rem;
-  background: linear-gradient(135deg, #059669, #10b981);
+  background: linear-gradient(135deg, #4A7A2D, #10B981);
   color: white;
   border: none;
   border-radius: 15px;
@@ -433,15 +433,15 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+  box-shadow: 0 8px 25px rgba(74, 122, 45, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(5, 150, 105, 0.5);
-  background: linear-gradient(135deg, #047857, #059669);
+  box-shadow: 0 12px 35px rgba(74, 122, 45, 0.5);
+  background: linear-gradient(135deg, #2F4A36, #047857);
 }
 
 .submit-btn:active {
@@ -449,7 +449,7 @@
 }
 
 .submit-btn.submitting {
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  background: linear-gradient(135deg, #6B7280, #9CA3AF);
   cursor: not-allowed;
 }
 
@@ -471,14 +471,14 @@
 .success-message {
   margin-top: 1rem;
   padding: 1rem;
-  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-  color: #065f46;
+  background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+  color: #065F46;
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
-  border: 2px solid #10b981;
+  border: 2px solid #10B981;
   animation: successPulse 2s ease-in-out infinite;
 }
 
@@ -491,20 +491,20 @@
 .error-message {
   margin-top: 1rem;
   padding: 1rem;
-  background: linear-gradient(135deg, #fee2e2, #fecaca);
-  color: #dc2626;
+  background: linear-gradient(135deg, #FEE2E2, #FECACA);
+  color: #DC2626;
   border-radius: 10px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-weight: 600;
-  border: 2px solid #f87171;
+  border: 2px solid #F87171;
 }
 
 /* ✨ Why Choose Us Section */
 .why-choose-us {
   padding: 5rem 0;
-  background: linear-gradient(135deg, #1e3c72 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #233528 0%, #4A7A2D 100%);
   color: white;
 }
 
@@ -553,7 +553,7 @@
 /* ✨ Social CTA Section */
 .social-cta {
   padding: 4rem 0;
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  background: linear-gradient(135deg, #4A7A2D 0%, #10B981 100%);
   color: white;
   text-align: center;
 }

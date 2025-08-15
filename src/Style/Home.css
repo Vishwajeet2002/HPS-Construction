@@ -1,42 +1,47 @@
-/* CSS Custom Properties - Consolidated for HPS Constructions */
+/* CSS Custom Properties - HPS Construction Brand Colors */
 :root {
-  /* Color Palette */
-  --primary-color: #007bff;
-  --primary-hover: #0056b3;
-  --primary-light: #e3f2fd;
-  --primary-dark: #004085;
-  --secondary-color: #6c757d;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
+  /* Brand Color Palette */
+  --primary-color: #233528;
+  --primary-hover: #1A271E;
+  --primary-light: #ECF3EF;
+  --primary-dark: #152742;
+  --secondary-color: #6B7280;
+  --success-color: #10B981;
+  --warning-color: #FBBF24;
+  --danger-color: #EF4444;
+  
+  /* Construction Brand Colors */
+  --bamboo-green: #4A7A2D;
+  --rope-orange: #C58022;
+  --rope-orange-dark: #9E671C;
   
   /* Text Colors */
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
-  --text-muted: #adb5bd;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
   --text-light: #ffffff;
-  --text-dark: #343a40;
+  --text-dark: #1F2937;
   
   /* Background Colors */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-accent: #e9ecef;
-  --bg-dark: #212529;
-  --bg-light: #f8f9fa;
+  --bg-secondary: #F3F4F6;
+  --bg-accent: #EEF2F7;
+  --bg-dark: #233528;
+  --bg-light: #F3F4F6;
   
   /* Shadows */
-  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  --shadow-md: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  --shadow-xl: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-  --shadow-2xl: 0 1.5rem 3rem rgba(0, 0, 0, 0.25);
-  --shadow-focus: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  --shadow-sm: 0 0.125rem 0.25rem rgba(35, 53, 40, 0.075);
+  --shadow-md: 0 0.25rem 0.5rem rgba(35, 53, 40, 0.1);
+  --shadow-lg: 0 0.5rem 1rem rgba(35, 53, 40, 0.15);
+  --shadow-xl: 0 1rem 2rem rgba(35, 53, 40, 0.2);
+  --shadow-2xl: 0 1.5rem 3rem rgba(35, 53, 40, 0.25);
+  --shadow-focus: 0 0 0 0.2rem rgba(35, 53, 40, 0.25);
   
   /* Borders */
   --border-width: 1px;
-  --border-color: #dee2e6;
-  --border-light: rgba(0, 123, 255, 0.08);
-  --border-medium: rgba(0, 123, 255, 0.15);
+  --border-color: #E5E7EB;
+  --border-light: rgba(35, 53, 40, 0.08);
+  --border-medium: rgba(35, 53, 40, 0.15);
   --border-dark: rgba(0, 0, 0, 0.125);
   --border-radius-sm: 0.25rem;
   --border-radius-md: 0.375rem;
@@ -111,13 +116,13 @@
 /* Dark Mode Variables */
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-primary: #f8f9fa;
-    --text-secondary: #adb5bd;
-    --text-muted: #6c757d;
-    --bg-primary: #212529;
-    --bg-secondary: #343a40;
-    --bg-accent: #495057;
-    --border-color: #495057;
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+    --text-muted: #6B7280;
+    --bg-primary: #1F2937;
+    --bg-secondary: #374151;
+    --bg-accent: #4B5563;
+    --border-color: #4B5563;
     --border-light: rgba(255, 255, 255, 0.08);
     --border-medium: rgba(255, 255, 255, 0.15);
     --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
@@ -171,7 +176,7 @@ body {
 /* Layout Components */
 .home-container {
   width: 100%;
-  min-height: 100vh; /* Fixed: was 0vh */
+  min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
@@ -183,7 +188,6 @@ body {
   margin-right: calc(-50vw + 50%) !important;
   max-width: none !important;
 }
-
 
 .content-wrapper {
   background: var(--bg-secondary);
@@ -238,7 +242,7 @@ body {
   bottom: 0;
   background: radial-gradient(
     ellipse at center top,
-    rgba(0, 123, 255, 0.03) 0%,
+    rgba(35, 53, 40, 0.03) 0%,
     transparent 50%
   );
   pointer-events: none;
@@ -299,12 +303,11 @@ body {
   align-items: center;
   justify-content: center;
   padding: var(--spacing-6) var(--spacing-12);
-  
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   border-radius: var(--border-radius-pill);
   border: none;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, var(--rope-orange) 0%, var(--rope-orange-dark) 100%);
   color: var(--text-light);
   cursor: pointer;
   transition: var(--transition-slow);
@@ -316,7 +319,6 @@ body {
   text-decoration: none;
   min-height: 3rem;
   will-change: transform;
-  
 }
 
 .explore-button::before {
@@ -337,6 +339,7 @@ body {
 .explore-button:hover {
   transform: translateY(-0.125rem) scale(1.02);
   box-shadow: var(--shadow-xl);
+  background: linear-gradient(135deg, var(--rope-orange-dark) 0%, #7A5116 100%);
 }
 
 .explore-button:active {
@@ -384,7 +387,7 @@ body {
   left: 0;
   right: 0;
   height: 0.25rem;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+  background: linear-gradient(90deg, var(--rope-orange), var(--rope-orange-dark));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform var(--transition-slow);
@@ -419,6 +422,7 @@ body {
 /* Card Content */
 .card-content {
   position: relative;
+  padding: var(--spacing-6);
 }
 
 .feature-card h3 {
@@ -431,7 +435,7 @@ body {
 }
 
 .feature-card:hover h3 {
-  color: var(--primary-color);
+  color: var(--rope-orange);
 }
 
 .feature-card p {
@@ -468,7 +472,21 @@ body {
   background: var(--bg-primary);
 }
 
-/* Responsive Design */
+/* Mobile Responsive Design - Enhanced */
+@media screen and (max-width: 992px) {
+  .features-section {
+    padding: var(--spacing-20) var(--container-padding);
+  }
+  
+  .features-grid {
+    gap: clamp(var(--spacing-6), 3vw, var(--spacing-12));
+  }
+  
+  .container {
+    padding: 0 var(--spacing-5);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .features-section {
     padding: var(--spacing-16) var(--container-padding-sm);
@@ -492,10 +510,19 @@ body {
   .explore-button {
     padding: var(--spacing-4) var(--spacing-8);
     font-size: var(--font-size-base);
+    min-height: 2.75rem;
   }
 
   .button-container {
     margin-bottom: var(--spacing-8);
+  }
+  
+  .card-content {
+    padding: var(--spacing-5);
+  }
+  
+  .features-section h2 {
+    font-size: clamp(var(--font-size-xl), 4vw, var(--font-size-3xl));
   }
 }
 
@@ -520,6 +547,20 @@ body {
   .button-container {
     margin-bottom: var(--spacing-6);
   }
+  
+  .explore-button {
+    padding: var(--spacing-3) var(--spacing-6);
+    font-size: var(--font-size-sm);
+    min-height: 2.5rem;
+  }
+  
+  .card-content {
+    padding: var(--spacing-4);
+  }
+  
+  .features-section h2 {
+    font-size: clamp(var(--font-size-lg), 5vw, var(--font-size-2xl));
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -528,7 +569,17 @@ body {
   }
   
   .card-content {
-    padding: var(--spacing-6);
+    padding: var(--spacing-3);
+  }
+  
+  .explore-button {
+    padding: var(--spacing-2) var(--spacing-5);
+    font-size: var(--font-size-sm);
+    min-height: 2.25rem;
+  }
+  
+  .features-section {
+    padding: var(--spacing-10) var(--spacing-1);
   }
 }
 
@@ -543,14 +594,35 @@ body {
   }
 }
 
-/* Accessibility Enhancements */
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .explore-button {
+    min-height: 3rem;
+    min-width: 3rem;
+    padding: var(--spacing-4) var(--spacing-8);
+  }
+  
+  .feature-card {
+    margin-bottom: var(--spacing-6);
+  }
+  
+  .feature-card:hover {
+    transform: none;
+  }
+  
+  .feature-card:active {
+    transform: scale(0.98);
+  }
+}
+
+/* High Contrast Mode */
 @media (prefers-contrast: high) {
   .feature-card {
     border: 2px solid var(--text-primary);
   }
   
   .explore-button {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--rope-orange);
   }
   
   .section-divider {
@@ -559,6 +631,7 @@ body {
   }
 }
 
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -601,7 +674,7 @@ body {
   contain: layout style paint;
 }
 
-/* Modern CSS Features */
+/* Modern CSS Features - Container Queries */
 @supports (container-type: inline-size) {
   .features-grid {
     container-type: inline-size;
@@ -614,7 +687,7 @@ body {
   }
 }
 
-/* Touch and Hover Device Support */
+/* Hover Support Detection */
 @media (hover: hover) and (pointer: fine) {
   .feature-card:hover {
     transform: translateY(-0.5rem);
@@ -624,15 +697,3 @@ body {
     transform: translateY(-0.125rem) scale(1.02);
   }
 }
-
-@media (hover: none) and (pointer: coarse) {
-  .explore-button {
-    min-height: 3rem;
-    min-width: 3rem;
-  }
-  
-  .feature-card {
-    margin-bottom: var(--spacing-6);
-  }
-}
-

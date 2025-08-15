@@ -32,7 +32,7 @@ const Topbar = () => {
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(
-      "Hello! We are HPS Constructions. We are here to assist you in making your business grow with the help of Bamboo and POP (Plaster of Paris). How can we help you today?"
+      "Hello! Sir. I want assistance with Bamboo and POP (Plaster of Paris). How can you help me today?"
     );
     window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
     console.log("WhatsApp chat opened");
