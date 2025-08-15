@@ -83,6 +83,7 @@
 }
 
 .customer-review-card {
+  /* Desktop default */
   min-width: clamp(280px, 40vw, 450px);
   max-width: clamp(280px, 40vw, 450px);
   background: var(--card);
@@ -97,7 +98,7 @@
   display: flex;
   flex-direction: column;
   gap: clamp(15px, 3vw, 25px);
-  min-height: clamp(260px, 35vw, 320px);
+  min-height: clamp(280px, 40vw, 320px);
   flex-shrink: 0;
   box-sizing: border-box;
   pointer-events: auto;
@@ -273,16 +274,51 @@
 }
 
 /* RESPONSIVE BREAKPOINTS */
+
+/* Tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .customer-review-card {
+    min-width: calc(50vw - 45px);
+    max-width: calc(50vw - 45px);
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .customer-review-header {
     text-align: center;
     padding-left: 0;
   }
+  
+  .customer-review-cards-container {
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .customer-review-cards-track {
+    padding-left: 7.5vw; /* Center the first card */
+    gap: 15px;
+  }
+  
+  .customer-review-card {
+    min-width: 85vw;
+    max-width: 85vw;
+    margin-right: 15px;
+  }
 }
 
+/* Small mobile */
 @media (max-width: 480px) {
   .customer-review-cards-track {
-    padding-left: 15px;
+    padding-left: 6.5vw;
+    gap: 10px;
+  }
+  
+  .customer-review-card {
+    min-width: 87vw;
+    max-width: 87vw;
+    margin-right: 10px;
   }
 }
 

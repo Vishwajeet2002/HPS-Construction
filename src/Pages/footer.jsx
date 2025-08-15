@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import hpsLogo from '/src/assets/logo.png'; // Make sure your logo is at this path
+import hpsLogo from '/images/logo.png'; // Make sure your logo is at this path
 import '../Style/footer.css';
 import { FaEnvelope, FaPhoneAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 

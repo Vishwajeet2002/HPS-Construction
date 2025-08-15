@@ -90,7 +90,7 @@ const Topbar = () => {
       <div className="topbar-container">
         {/* Logo/Brand */}
         <div className="topbar-logo" onClick={(e) => handleNavigation(e, "/")}>
-          <img src="/src/assets/nlogo.png" alt="HPS Constructions Logo" />
+          <img src="/images/nlogo.png" alt="HPS Constructions Logo" />
         </div>
 
         {/* Navigation Links */}

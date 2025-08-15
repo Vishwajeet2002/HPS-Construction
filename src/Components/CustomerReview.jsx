@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import "../ComponentCss/CustomerReview.css";
 
 // Import all customer images
-import luffyImg from "../assets/luffy.jpg";
-import img413842 from "../assets/413842.jpg";
-import img12345 from "../assets/12345.avif";
-import img123 from "../assets/123.jpg";
+import luffyImg from "/images/luffy.jpg";
+import img413842 from "/images/413842.jpg";
+import img12345 from "/images/12345.avif";
+import img123 from "/images/123.jpg";
 
 const CustomerReview = () => {
   const reviews = [
@@ -93,26 +93,36 @@ const CustomerReview = () => {
   const calculateDimensions = useCallback(() => {
     if (!containerRef.current) return;
     
-    const container = containerRef.current;
-    const firstCard = container.querySelector('.customer-review-card');
+    const screenWidth = window.innerWidth;
     
-    if (firstCard) {
-      const cardStyle = window.getComputedStyle(firstCard);
-      const gap = parseFloat(cardStyle.marginRight || 0);
-      const newCardWidth = firstCard.offsetWidth + gap;
-      setCardWidth(newCardWidth);
-      
-      // Calculate cards to show based on screen size
-      const screenWidth = window.innerWidth;
-      let newCardsToShow = 1;
-      
-      if (screenWidth >= 1400) newCardsToShow = 3;
-      else if (screenWidth >= 1024) newCardsToShow = 2;
-      else if (screenWidth >= 768) newCardsToShow = 2;
-      else newCardsToShow = 1;
-      
-      setCardsToShow(Math.min(newCardsToShow, reviews.length));
+    // Calculate cards to show based on screen size
+    let newCardsToShow = 1;
+    let cardWidthPercentage = 85; // Default mobile width
+    
+    if (screenWidth >= 1400) {
+      newCardsToShow = 3;
+      cardWidthPercentage = 30;
+    } else if (screenWidth >= 1024) {
+      newCardsToShow = 2;
+      cardWidthPercentage = 45;
+    } else if (screenWidth >= 768) {
+      newCardsToShow = 2;
+      cardWidthPercentage = 45;
+    } else {
+      // Mobile - single card
+      newCardsToShow = 1;
+      cardWidthPercentage = 85; // Show 85% of screen width for mobile
     }
+    
+    setCardsToShow(Math.min(newCardsToShow, reviews.length));
+    
+    // Calculate card width based on screen size and desired percentage
+    const gap = screenWidth <= 768 ? 15 : 30;
+    const containerPadding = screenWidth <= 768 ? 30 : 40; // Left + right padding
+    const availableWidth = screenWidth - containerPadding;
+    const newCardWidth = (availableWidth * cardWidthPercentage / 100) + gap;
+    
+    setCardWidth(newCardWidth);
   }, [reviews.length]);
 
   // Don Score Component
@@ -278,7 +288,10 @@ const CustomerReview = () => {
     
     e.preventDefault();
     const diffX = clientX - startX.current;
-    const threshold = 80;
+    
+    // Different thresholds for mobile vs desktop
+    const isMobile = window.innerWidth <= 768;
+    const threshold = isMobile ? 50 : 80; // Lower threshold for mobile
     const shouldSlide = Math.abs(diffX) > threshold;
 
     if (shouldSlide && !isTransitioning) {
