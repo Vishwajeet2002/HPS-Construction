@@ -60,7 +60,7 @@ export default function ProductCard({
     const message = encodeURIComponent(
       `Hi HPS Constructions! I'm interested in ${title} (₹${price}/${unit}). Please provide more details.`
     );
-    window.open(`https://wa.me/919555633827?text=${message}`, "_blank");
+    window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
     onLearnMore();
   };
 

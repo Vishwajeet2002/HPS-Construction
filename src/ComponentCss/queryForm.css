@@ -1,11 +1,9 @@
-/* ✨ FLOATING CONTACT WIDGET - CONSTRUCTION BUSINESS */
 .floating-contact-widget {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 99999;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
   opacity: 0;
   transform: translateY(100px) scale(0.8);
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -16,9 +14,8 @@
   transform: translateY(0) scale(1);
 }
 
-/* ✨ CONSTRUCTION-THEMED FLOATING BUTTON */
 .floating-button {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, #C58022 0%, #9E671C 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -27,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 8px 30px rgba(197, 128, 34, 0.4);
   position: relative;
   overflow: hidden;
   animation: floatBounce 3s ease-in-out infinite;
@@ -36,7 +33,7 @@
 
 .floating-button:hover {
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+  box-shadow: 0 15px 40px rgba(197, 128, 34, 0.6);
 }
 
 @keyframes floatBounce {
@@ -85,7 +82,6 @@
   }
 }
 
-/* ✨ MODAL OVERLAY */
 .contact-overlay {
   position: fixed;
   top: 0;
@@ -131,21 +127,19 @@
   }
 }
 
-/* ✨ SCROLLABLE MODAL CONTAINER */
 .contact-container.modal {
   background: white;
   border-radius: 20px;
   width: 100%;
   max-width: 600px;
-  max-height: 85vh; /* ✅ SCROLLABLE HEIGHT */
-  overflow-y: auto; /* ✅ ENABLE SCROLLING */
+  max-height: 85vh;
+  overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(245, 158, 11, 0.2);
+  border: 2px solid rgba(197, 128, 34, 0.2);
   position: relative;
   animation: modalSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ✅ CUSTOM SCROLLBAR */
 .contact-container.modal::-webkit-scrollbar {
   width: 8px;
 }
@@ -156,12 +150,12 @@
 }
 
 .contact-container.modal::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #C58022, #9E671C);
   border-radius: 10px;
 }
 
 .contact-container.modal::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #d97706, #b45309);
+  background: linear-gradient(135deg, #9E671C, #7A5116);
 }
 
 @keyframes modalSlideIn {
@@ -175,9 +169,8 @@
   }
 }
 
-/* ✨ CONSTRUCTION-THEMED HEADER */
 .modal .contact-header {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, #C58022 0%, #9E671C 100%);
   color: white;
   border-radius: 20px 20px 0 0;
   padding: 1.5rem 2.5rem 1.25rem;
@@ -186,7 +179,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 4px 20px rgba(197, 128, 34, 0.3);
 }
 
 .modal .contact-title {
@@ -197,7 +190,6 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ✨ CLOSE BUTTON */
 .modal .close-button {
   position: absolute;
   top: 12px;
@@ -225,9 +217,8 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* ✨ AUTO-OPEN STYLING */
 .auto-open .contact-header {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #10B981 0%, #047857 100%);
   position: sticky;
   overflow: hidden;
 }
@@ -248,7 +239,6 @@
   100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
 }
 
-/* ✨ SCROLLABLE CONTENT */
 .modal .contact-content {
   padding: 2rem 2.5rem;
 }
@@ -257,28 +247,27 @@
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #4b5563;
+  color: #374151;
   font-weight: 500;
 }
 
-/* ✨ BUSINESS INFO BANNER */
 .dual-send-info {
-  background: linear-gradient(135deg, #fef3c7, #fed7aa);
+  background: linear-gradient(135deg, #FEF3C7, #FED7AA);
   padding: 16px 20px;
   border-radius: 15px;
   margin-bottom: 2rem;
   font-size: 1rem;
-  color: #92400e;
+  color: #92400E;
   text-align: center;
-  border: 2px solid #f59e0b;
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
+  border: 2px solid #C58022;
+  box-shadow: 0 6px 20px rgba(197, 128, 34, 0.2);
   font-weight: 600;
 }
 
 .auto-open .dual-send-info {
-  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-  border: 2px solid #059669;
-  color: #065f46;
+  background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+  border: 2px solid #10B981;
+  color: #065F46;
   animation: infoPulse 3s ease-in-out infinite;
 }
 
@@ -287,22 +276,20 @@
   50% { transform: scale(1.02); }
 }
 
-/* ✨ WELCOME MESSAGE */
 .welcome-message {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border: 2px solid #f59e0b;
+  background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+  border: 2px solid #C58022;
   border-radius: 18px;
   padding: 20px 24px;
   margin-bottom: 2rem;
   text-align: center;
   font-size: 1.05rem;
-  color: #92400e;
-  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25);
+  color: #92400E;
+  box-shadow: 0 8px 25px rgba(197, 128, 34, 0.25);
   font-weight: 500;
   line-height: 1.6;
 }
 
-/* ✨ FORM LAYOUT */
 .modal .contact-form {
   display: flex;
   flex-direction: column;
@@ -314,7 +301,6 @@
   flex-direction: column;
 }
 
-/* ✨ FORM ELEMENTS */
 label {
   font-weight: 700;
   color: #374151;
@@ -325,7 +311,7 @@ label {
 
 input, textarea {
   padding: 1.25rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #E5E7EB;
   border-radius: 15px;
   font-size: 1.1rem;
   transition: all 0.3s ease;
@@ -337,41 +323,39 @@ input, textarea {
 
 input:focus, textarea:focus {
   outline: none;
-  border-color: #f59e0b;
+  border-color: #C58022;
   background: white;
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 0 0 4px rgba(197, 128, 34, 0.1);
   transform: translateY(-2px);
 }
 
 input.error, textarea.error {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: #EF4444;
+  background: #FEF2F2;
 }
 
 .error-message {
-  color: #ef4444;
+  color: #EF4444;
   font-size: 0.9rem;
   margin-top: 0.5rem;
   font-weight: 500;
   display: block;
 }
 
-/* ✨ LARGE TEXTAREA */
 textarea {
   min-height: 120px;
   max-height: 200px;
   resize: vertical;
 }
 
-/* ✨ PROMINENT SUBMIT BUTTON */
 .modal .submit-button {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, #C58022 0%, #9E671C 100%);
   font-weight: 800;
   font-size: 1.3rem;
   padding: 1.5rem 3rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 12px 35px rgba(197, 128, 34, 0.4);
   border-radius: 18px;
   transition: all 0.3s ease;
   margin-top: 1rem;
@@ -383,9 +367,9 @@ textarea {
 }
 
 .modal .submit-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  background: linear-gradient(135deg, #9E671C 0%, #7A5116 100%);
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 18px 45px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 18px 45px rgba(197, 128, 34, 0.5);
 }
 
 .modal .submit-button:disabled {
@@ -394,13 +378,12 @@ textarea {
   transform: none;
 }
 
-/* ✨ SKIP BUTTON */
 .skip-button {
   width: 100%;
   padding: 1rem;
   background: transparent;
-  color: #6b7280;
-  border: 2px solid #e5e7eb;
+  color: #6B7280;
+  border: 2px solid #E5E7EB;
   border-radius: 15px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -410,12 +393,11 @@ textarea {
 }
 
 .skip-button:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
+  background: #F9FAFB;
+  border-color: #D1D5DB;
   color: #374151;
 }
 
-/* ✨ TOAST STYLES */
 .toast {
   position: fixed;
   top: 100px;
@@ -431,29 +413,29 @@ textarea {
   z-index: 99999;
   min-width: 320px;
   animation: slideIn 0.4s ease;
-  border: 2px solid #f59e0b;
+  border: 2px solid #C58022;
 }
 
 .toast-success {
-  border-left: 6px solid #059669;
-  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-left: 6px solid #10B981;
+  background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
 }
 
 .toast-error {
-  border-left: 6px solid #ef4444;
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border-left: 6px solid #EF4444;
+  background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
 }
 
 .toast-message {
   flex: 1;
   font-weight: 600;
-  color: #1f2937;
+  color: #111827;
 }
 
 .toast-close {
   background: rgba(0,0,0,0.1);
   border: none;
-  color: #6b7280;
+  color: #6B7280;
   cursor: pointer;
   font-size: 18px;
   padding: 4px;
@@ -482,7 +464,6 @@ textarea {
   }
 }
 
-/* ✨ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .floating-contact-widget {
     bottom: 20px;

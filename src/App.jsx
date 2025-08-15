@@ -1,38 +1,26 @@
-// App.jsx (src/)
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Topbar from "./Components/Topbar";
-import Home from "./Pages/home";
-import ProductsPage from "./Pages/products";
-import Contact from "./Pages/contact"; // ✅ ADD CONTACT IMPORT
-import "./App.css";
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Topbar from './Components/Topbar';
+import Home from './Pages/home';
+import ProductsPage from './Pages/products';
+import Contact from './Pages/contact';
+import ScrollToTop from './Components/ScrollToTop';   // ⭐ new line
+import './App.css';
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <Topbar />
+      <Topbar />
 
+      {/* every route is now a child of ScrollToTop */}
+      <ScrollToTop>
         <Routes>
-          {/* HOME ROUTE */}
-          <Route
-            path="/"
-            element={
-              <>
-                <main className="main-content">
-                  <Home />
-                </main>
-              </>
-            }
-          />
-          
-          {/* PRODUCTS ROUTE */}
+          <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
-          
-          {/* ✅ CONTACT ROUTE - ADD THIS */}
           <Route path="/contact" element={<Contact />} />
         </Routes>
-      </div>
+      </ScrollToTop>
     </Router>
   );
 }

@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* INFINITE CAROUSEL WITH HUMAN INTERACTIONS */
 .infinite-carousel {
   width: 100%;
   overflow: hidden;
   padding: 50px 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #F3F4F6 0%, #EEF2F7 100%);
   position: relative;
   cursor: grab;
 }
@@ -37,20 +36,18 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* HUMAN INTERACTION: Tilt effect on hover */
 .carousel-item:hover {
   transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) translateZ(20px);
   z-index: 10;
 }
 
-/* HPS PRODUCT CARD WITH HUMAN TOUCH */
 .hps-card {
   width: 320px;
   height: 420px;
   background: #ffffff;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  border: 2px solid #e2e8f0;
+  border: 2px solid #E5E7EB;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   position: relative;
@@ -59,10 +56,6 @@
   flex-direction: column;
   cursor: pointer;
   transform-style: preserve-3d;
-}
-
-/* HUMAN INTERACTION: Breathing effect */
-.hps-card {
   animation: cardBreathe 4s ease-in-out infinite;
 }
 
@@ -75,10 +68,9 @@
   animation: none;
   transform: translateY(-12px) scale(1.03);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-  border-color: #1e3c72;
+  border-color: #233528;
 }
 
-/* HUMAN INTERACTION: Magnetic effect */
 .hps-card::after {
   content: '';
   position: absolute;
@@ -86,7 +78,7 @@
   left: -5px;
   right: -5px;
   bottom: -5px;
-  background: linear-gradient(45deg, #1e3c72, transparent, #2563eb);
+  background: linear-gradient(45deg, #233528, transparent, #4A7A2D);
   z-index: -1;
   border-radius: 20px;
   opacity: 0;
@@ -97,7 +89,6 @@
   opacity: 0.3;
 }
 
-/* HUMAN INTERACTION: Top border following cursor */
 .hps-card::before {
   content: '';
   position: absolute;
@@ -105,7 +96,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1e3c72, #2563eb, #3b82f6);
+  background: linear-gradient(90deg, #233528, #4A7A2D, #C58022);
   transform: scaleX(0);
   transform-origin: var(--cursor-x, left);
   transition: transform 0.4s ease;
@@ -116,7 +107,6 @@
   transform: scaleX(1);
 }
 
-/* CARD IMAGE - EXACTLY HALF HEIGHT */
 .card-image {
   height: 210px;
   position: relative;
@@ -133,13 +123,11 @@
   transform-origin: center center;
 }
 
-/* HUMAN INTERACTION: Image follows mouse */
 .hps-card:hover .card-image img {
   transform: scale(1.1) translate(var(--img-x, 0px), var(--img-y, 0px));
   filter: brightness(1.1) contrast(1.1);
 }
 
-/* HUMAN INTERACTION: Parallax overlay */
 .image-overlay {
   position: absolute;
   top: 0;
@@ -149,7 +137,7 @@
   background: radial-gradient(
     circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
     transparent 20%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(35, 53, 40, 0.3) 100%
   );
   transition: all 0.3s ease;
   opacity: 0.6;
@@ -159,7 +147,6 @@
   opacity: 0.8;
 }
 
-/* CARD CONTENT - OTHER HALF */
 .card-content {
   height: 210px;
   padding: 16px;
@@ -170,18 +157,16 @@
   position: relative;
 }
 
-/* TITLE AND DESCRIPTION GROUP */
 .title-description-group {
   flex: 1;
   margin-bottom: 12px;
   min-height: 0;
 }
 
-/* HUMAN INTERACTION: Text shimmer effect */
 .card-title {
   font-size: 1rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #111827;
   margin: 0 0 6px 0;
   line-height: 1.3;
   letter-spacing: -0.025em;
@@ -200,25 +185,24 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(30, 60, 114, 0.2),
+    rgba(35, 53, 40, 0.2),
     transparent
   );
   transition: left 0.6s ease;
 }
 
 .hps-card:hover .card-title {
-  color: #1e3c72;
-  text-shadow: 0 0 8px rgba(30, 60, 114, 0.3);
+  color: #233528;
+  text-shadow: 0 0 8px rgba(35, 53, 40, 0.3);
 }
 
 .hps-card:hover .card-title::before {
   left: 100%;
 }
 
-/* ✨ ENHANCED: Description with MORE BOLD effect on hover */
 .card-description {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #6B7280;
   line-height: 1.4;
   margin: 0;
   font-weight: 400;
@@ -234,7 +218,6 @@
 
 .hps-card:hover .card-description {
   animation: textReveal 0.8s ease-out forwards;
-  /* ✨ UPDATED: Description becomes MORE BOLD on hover */
   font-weight: 600;
   color: #374151;
 }
@@ -251,7 +234,6 @@
   }
 }
 
-/* RATING + PRICE ROW - SMALLER THAN BUTTONS */
 .rating-price-row {
   display: flex;
   justify-content: space-between;
@@ -262,11 +244,9 @@
   flex-shrink: 0;
 }
 
-/* RATING SECTION WITH PULSE INTERACTION */
 .rating-section {
   flex: 1;
   min-width: 0;
-  border-radius: 8px;
   padding: 6px 8px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
@@ -276,7 +256,6 @@
   overflow: hidden;
 }
 
-/* HUMAN INTERACTION: Rating pulse effect */
 .rating-section::before {
   content: '';
   position: absolute;
@@ -284,13 +263,8 @@
   left: 50%;
   width: 0;
   height: 0;
-  border-radius: 2px solid #fed7aa;
   transform: translate(-50%, -50%);
   transition: all 0.6s ease;
-  -webkit-border-radius: 2px solid #fed7aa;
-  -moz-border-radius: 2px solid #fed7aa;
-  -ms-border-radius: 2px solid #fed7aa;
-  -o-border-radius: 2px solid #fed7aa;
 }
 
 .hps-card:hover .rating-section::before {
@@ -299,7 +273,7 @@
 }
 
 .rating-section:hover {
-  border-color: #fb923c;
+  border-color: #C58022;
   transform: translateY(-2px) scale(1.05);
 }
 
@@ -318,17 +292,16 @@
   justify-content: center;
 }
 
-/* HUMAN INTERACTION: Star twinkle effect */
 .star {
   font-size: 20px;
   transition: all 0.3s ease;
-  text-shadow: 0 1px 2px rgba(251, 191, 36, 0.3);
+  text-shadow: 0 1px 2px rgba(197, 128, 34, 0.3);
   position: relative;
 }
 
 .hps-card:hover .star.filled {
   animation: starTwinkle 0.8s ease-in-out infinite;
-  text-shadow: 0 0 8px rgba(251, 191, 36, 0.8);
+  text-shadow: 0 0 8px rgba(197, 128, 34, 0.8);
 }
 
 @keyframes starTwinkle {
@@ -338,11 +311,11 @@
 }
 
 .star.filled {
-  color: #f59e0b;
+  color: #C58022;
 }
 
 .star.half {
-  color: #fbbf24;
+  color: #FBBF24;
 }
 
 .star.empty {
@@ -358,8 +331,8 @@
 }
 
 .rating-number {
-  background: #fed7aa;
-  color: #9a3412;
+  background: #FED7AA;
+  color: #9A3412;
   padding: 1px 4px;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -369,16 +342,14 @@
 }
 
 .rating-label {
-  color: #92400e;
+  color: #92400E;
   font-size: 0.74rem;
   font-weight: 600;
 }
 
-/* PRICE SECTION WITH COUNTING ANIMATION */
 .price-section {
   flex: 1;
   min-width: 0;
-  border-radius: 8px;
   padding: 6px 8px;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -390,7 +361,6 @@
   overflow: hidden;
 }
 
-/* HUMAN INTERACTION: Price glow effect */
 .price-section::after {
   content: '';
   position: absolute;
@@ -398,6 +368,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(10, 238, 162, 0.12), transparent);
   transition: left 0.6s ease;
 }
 
@@ -420,10 +391,9 @@
 .currency {
   font-size: 0.5rem;
   font-weight: 600;
-  color: #059669;
+  color: #10B981;
 }
 
-/* HUMAN INTERACTION: Amount counter animation */
 .amount {
   font-size: 0.875rem;
   font-weight: 800;
@@ -445,8 +415,8 @@
 }
 
 .price-unit {
-  background: #bbf7d0;
-  color: #065f46;
+  background: #BBF7D0;
+  color: #065F46;
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 0.65rem;
@@ -454,7 +424,6 @@
   display: inline-block;
 }
 
-/* CARD ACTIONS - LARGER THAN RATING/PRICE */
 .card-actions {
   display: flex;
   gap: 8px;
@@ -463,7 +432,6 @@
   position: relative;
 }
 
-/* HUMAN INTERACTION: Button magnetic effect */
 .btn-share,
 .btn-learn {
   flex: 1;
@@ -481,19 +449,14 @@
   overflow: hidden;
   white-space: nowrap;
   transform-origin: center;
-  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  -ms-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-share:hover,
 .btn-learn:hover {
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(30, 60, 114, 0.4);
+  box-shadow: 0 8px 20px rgba(35, 53, 40, 0.4);
 }
 
-/* HUMAN INTERACTION: Ripple effect */
 .btn-share::before,
 .btn-learn::before {
   content: '';
@@ -516,30 +479,29 @@
 
 .btn-share {
   background: transparent;
-  color: #1e3c72;
-  border: 1.5px solid #1e3c72;
+  color: #233528;
+  border: 1.5px solid #233528;
 }
 
 .btn-share:hover {
-  background: #1e3c72;
+  background: #233528;
   color: white;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+  box-shadow: 0 4px 12px rgba(35, 53, 40, 0.3);
 }
 
 .btn-learn {
-  background: linear-gradient(135deg, #1e3c72, #2563eb);
+  background: linear-gradient(135deg, #233528, #4A7A2D);
   color: white;
   border: 1.5px solid transparent;
 }
 
 .btn-learn:hover {
-  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  background: linear-gradient(135deg, #1A271E, #2F4A36);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(30, 60, 114, 0.4);
+  box-shadow: 0 4px 12px rgba(35, 53, 40, 0.4);
 }
 
-/* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
   .infinite-carousel {
     padding: 40px 20px;
@@ -590,7 +552,6 @@
     line-clamp: 2;
   }
   
-  /* Reduce complex animations on mobile */
   .hps-card:hover {
     transform: translateY(-6px) scale(1.02);
   }
@@ -650,7 +611,6 @@
   }
 }
 
-/* PERFORMANCE OPTIMIZATIONS */
 .hps-card {
   contain: layout style paint;
   will-change: transform;
@@ -660,7 +620,6 @@
   will-change: transform, box-shadow;
 }
 
-/* ACCESSIBILITY - Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .carousel-track,
   .hps-card,
@@ -677,7 +636,6 @@
   }
 }
 
-/* HIGH CONTRAST MODE */
 @media (prefers-contrast: high) {
   .hps-card {
     border: 3px solid #000 !important;

@@ -1,5 +1,24 @@
+:root {
+  --primary: #233528;
+  --primary-dark: #1A271E;
+  --primary-light: #2F4A36;
+  --bamboo: #4A7A2D;
+  --rope: #C58022;
+  --rope-dark: #9E671C;
+  --success: #10B981;
+  --warning: #FBBF24;
+  --danger: #EF4444;
+  --bg: #F3F4F6;
+  --bg-subtle: #EEF2F7;
+  --card: #FFFFFF;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6B7280;
+}
+
 .customer-review-section {
-  background: #ecf4fc;
+  background: var(--bg-subtle);
   min-height: 700px;
   padding-top: 80px;
   position: relative;
@@ -13,7 +32,6 @@
   position: relative;
 }
 
-/* Header Styles */
 .customer-review-header {
   text-align: left;
   margin-bottom: 60px;
@@ -21,7 +39,7 @@
 }
 
 .customer-review-header h2 {
-  color: #1e293b;
+  color: var(--text);
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.1;
@@ -29,7 +47,6 @@
   letter-spacing: -0.02em;
 }
 
-/* Carousel Styles */
 .customer-review-carousel {
   margin-bottom: 40px;
 }
@@ -55,11 +72,10 @@
   cursor: grabbing;
 }
 
-/* Review Card Styles - Large Cards */
 .customer-review-card {
   min-width: 450px;
   max-width: 450px;
-  background: white;
+  background: var(--card);
   border-radius: 20px;
   padding: 35px;
   box-shadow: 
@@ -67,7 +83,7 @@
     0 4px 6px rgba(0, 0, 0, 0.03),
     0 10px 20px rgba(0, 0, 0, 0.02);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -82,7 +98,6 @@
     0 20px 25px rgba(0, 0, 0, 0.03);
 }
 
-/* Review Header - Enhanced Layout */
 .review-header {
   display: flex;
   align-items: flex-start;
@@ -98,13 +113,13 @@
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid #e2e8f0;
+  border: 4px solid var(--border);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .customer-review-card:hover .customer-avatar {
-  border-color: #3b82f6;
+  border-color: var(--primary);
   transform: scale(1.05);
 }
 
@@ -130,7 +145,7 @@
 }
 
 .customer-name {
-  color: #0f172a;
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
@@ -142,7 +157,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: #22c55e;
+  background: var(--success);
   color: white;
   font-size: 0.75rem;
   padding: 4px 8px;
@@ -150,7 +165,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .verified-badge svg {
@@ -159,7 +174,7 @@
 }
 
 .customer-company {
-  color: #475569;
+  color: var(--text-muted);
   font-size: 1rem;
   margin: 0 0 8px 0;
   line-height: 1.3;
@@ -171,10 +186,10 @@
 }
 
 .customer-email {
-  color: #3b82f6;
+  color: var(--primary);
   font-size: 0.9rem;
   font-weight: 600;
-  background: #eff6ff;
+  background: #ECF3EF;
   padding: 2px 8px;
   border-radius: 8px;
   text-decoration: none;
@@ -182,11 +197,10 @@
 }
 
 .customer-email:hover {
-  background: #dbeafe;
-  color: #2563eb;
+  background: #DFEAE4;
+  color: var(--primary-light);
 }
 
-/* Review Content - Enhanced */
 .review-content {
   flex: 1;
   display: flex;
@@ -195,7 +209,7 @@
 }
 
 .review-text {
-  color: #374151;
+  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.7;
   margin: 0;
@@ -210,7 +224,6 @@
   margin-top: auto;
 }
 
-/* Score Styles - Enhanced */
 .review-score-container {
   display: flex;
   align-items: center;
@@ -229,12 +242,12 @@
 }
 
 .don.filled {
-  color: #fbbf24;
+  color: var(--warning);
   filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
 }
 
 .don.half-filled {
-  color: #fbbf24;
+  color: var(--warning);
   filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
 }
 
@@ -247,7 +260,6 @@
   transform: scale(1.1);
 }
 
-/* Responsive Design */
 @media (max-width: 1400px) {
   .customer-review-card {
     min-width: 420px;
@@ -354,7 +366,7 @@
   .customer-avatar {
     width: 50px;
     height: 50px;
-    border: 3px solid #e2e8f0;
+    border: 3px solid var(--border);
   }
   
   .customer-name {

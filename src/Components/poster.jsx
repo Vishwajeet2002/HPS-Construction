@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../ComponentCss/poster.css";
 
-const Poster = () => {
+const Poster   = () => {
   // Array of all images for horizontal carousel with scores
   const images = [
     { src: "/src/assets/luffy.jpg", score: 4.8 },
@@ -216,7 +216,7 @@ const Poster = () => {
           <div className="badge-left-content">
             <div className="badge-logo-container">
               <img
-                src="/src/assets/hcl-logo.png"
+                src="/src/assets/logo.png"
                 alt="Company Logo"
                 className="badge-logo"
               />

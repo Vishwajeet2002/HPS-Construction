@@ -144,22 +144,22 @@ Please contact me for bamboo and POP services.`
     {
       icon: <FaPhone />,
       title: 'Call Us',
-      info: '+91 9555633827',
-      action: () => window.location.href = 'tel:9555633827',
+      info: '+91 9565550142',
+      action: () => window.location.href = 'tel:+919565550142',
       color: '#3b82f6'
     },
     {
       icon: <FaWhatsapp />,
       title: 'WhatsApp',
       info: 'Chat with us instantly',
-      action: () => window.open('https://wa.me/919555633827?text=Hello! I need bamboo and POP supplies.', '_blank'),
+      action: () => window.open('https://wa.me/+919565550142?text=Hello! I need bamboo and POP supplies.', '_blank'),
       color: '#25D366'
     },
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      info: 'hps.constructions@gmail.com',
-      action: () => window.location.href = 'mailto:hps.constructions@gmail.com',
+      info: 'haripalsingh2580@gmailcom',
+      action: () => window.location.href = 'mailto:haripalsingh2580@gmailcom',
       color: '#dc2626'
     },
     {
@@ -269,7 +269,7 @@ Please contact me for bamboo and POP services.`
                   <p>Fill out the form and we'll get back to you within 24 hours</p>
                   {/* ✨ Added dual sending info */}
                   <div className="dual-send-info">
-                    📧 Your message will be sent via Email & WhatsApp
+                    📧 Your message will be sent from here
                   </div>
                 </div>
 
@@ -357,12 +357,12 @@ Please contact me for bamboo and POP services.`
                   {isSubmitting ? (
                     <>
                       <div className="spinner"></div>
-                      Sending to Email & WhatsApp...
+                      Sending...
                     </>
                   ) : (
                     <>
                       <FaPaperPlane />
-                      Send via Email & WhatsApp
+                      Click here
                     </>
                   )}
                 </button>
@@ -443,7 +443,7 @@ Please contact me for bamboo and POP services.`
                 <FaLinkedin />
               </a>
               <a 
-                href="https://wa.me/919555633827?text=Hello! I'm interested in your bamboo and POP services."
+                href="https://wa.me/+919565550142?text=Hello! I'm interested in your bamboo and POP services."
                 className="social-link whatsapp"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -454,9 +454,9 @@ Please contact me for bamboo and POP services.`
 
             <div className="emergency-contact">
               <p>Need immediate assistance?</p>
-              <a href="tel:9555633827" className="emergency-btn">
+              <a href="tel:+919565550142" className="emergency-btn">
                 <FaPhone />
-                Call Now: +91 9555633827
+                Call Now: +91 9565550142
               </a>
             </div>
           </div>

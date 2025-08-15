@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import HPSProductCard from "../Components/productCard";
 import "../Style/prodcuts.css";
+import Footer from "./footer";
+import Poster from "../Components/poster";
 
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -256,6 +258,8 @@ const ProductsPage = () => {
           </button>
         </div>
       </section>
+      <Poster/>
+      <Footer/>
     </div>
   );
 };
