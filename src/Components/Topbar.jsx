@@ -26,7 +26,7 @@ const Topbar = () => {
   };
 
   const handlePhoneCall = () => {
-    window.location.href = "tel:9555633827";
+    window.location.href = "tel:9565550142";
     console.log("Phone call initiated");
   };
 
@@ -34,7 +34,7 @@ const Topbar = () => {
     const message = encodeURIComponent(
       "Hello! We are HPS Constructions. We are here to assist you in making your business grow with the help of Bamboo and POP (Plaster of Paris). How can we help you today?"
     );
-    window.open(`https://wa.me/919555633827?text=${message}`, "_blank");
+    window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
     console.log("WhatsApp chat opened");
   };
 
