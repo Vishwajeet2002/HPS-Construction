@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ImageSlider from "../Components/imageslider";
+import ImageSlider from "../Components/imageSlider";
 import { CButton } from "@coreui/react";
 import ContactForm from "../Components/queryForm";
 import ProductCard from "../Components/productCard";
