@@ -1,7 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 import "../ComponentCss/productCard.css";
 import bambooFlooringImage from "/images/luffy.jpg";
+import contactForm from "../Components/queryForm.jsx";
 
 export default function ProductCard({
   title = "Premium Bamboo Flooring",
@@ -14,6 +16,11 @@ export default function ProductCard({
   onLearnMore = () => console.log("Learn more clicked"),
 }) {
   const navigate = useNavigate();
+
+  // Initialize EmailJS (you can also do this in your main app)
+  React.useEffect(() => {
+    emailjs.init('aalvm8cdhpgqGnbdN'); // Your EmailJS public key
+  }, []);
 
   // Star rating component
   const StarRating = ({ rating }) => {
@@ -52,8 +59,33 @@ export default function ProductCard({
     onCall();
   };
 
-  const handleLearnMore = (e) => {
+  // Function to send automatic email
+  const sendAutomaticEmail = async () => {
+    try {
+      await emailjs.send('service_xz17hoo', 'template_ergrx3a', {
+        from_name: 'Website Visitor',
+        phone_number: 'Not provided',
+        service_needed: title,
+        user_query: `User showed interest in ${title} (₹${price}/${unit}). ${description}`,
+        submission_time: new Date().toLocaleString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          dateStyle: 'full',
+          timeStyle: 'short'
+        }),
+        product_details: `Product: ${title}, Price: ₹${price}/${unit}, Rating: ${rating}`,
+        interaction_type: 'Product Interest - Learn More Button'
+      });
+      console.log('Automatic email sent successfully');
+    } catch (error) {
+      console.error('Failed to send automatic email:', error);
+    }
+  };
+
+  const handleLearnMore = async (e) => {
     e.stopPropagation();
+    
+    // First, send automatic email in background
+    await sendAutomaticEmail();
     
     // Create modal for contact options
     const modal = document.createElement('div');
@@ -61,24 +93,33 @@ export default function ProductCard({
     modal.innerHTML = `
       <div class="contact-modal">
         <div class="contact-modal-header">
-          <h3>Contact Us About ${title}</h3>
-          <button class="modal-close">&times;</button>
+          <h3>Interest Recorded for ${title}</h3>
+          <button class="modal-close" aria-label="Close modal">&times;</button>
         </div>
         <div class="contact-modal-body">
-          <p>How would you like to get more information?</p>
+          <div class="auto-email-notification">
+            <span class="notification-icon">📧</span>
+            <p>We've automatically recorded your interest and notified our team!</p>
+          </div>
+          <p><strong>How would you like us to contact you?</strong></p>
           <div class="contact-options">
             <button class="contact-option whatsapp-option">
               <span class="option-icon">💬</span>
-              <span class="option-text">WhatsApp</span>
-            </button>
-            <button class="contact-option email-option">
-              <span class="option-icon">📧</span>
-              <span class="option-text">Email</span>
+              <div class="option-content">
+                <span class="option-text">WhatsApp</span>
+                <span class="option-description">Chat with us instantly</span>
+              </div>
             </button>
             <button class="contact-option call-option">
               <span class="option-icon">📞</span>
-              <span class="option-text">Call Now</span>
+              <div class="option-content">
+                <span class="option-text">Call Now</span>
+                <span class="option-description">Speak directly with us</span>
+              </div>
             </button>
+          </div>
+          <div class="modal-footer-note">
+            <small>💡 Our team has been notified about your interest in ${title}</small>
           </div>
         </div>
       </div>
@@ -86,35 +127,35 @@ export default function ProductCard({
 
     document.body.appendChild(modal);
 
+    // Add entrance animation
+    requestAnimationFrame(() => {
+      modal.classList.add('show');
+    });
+
     // Handle WhatsApp
     modal.querySelector('.whatsapp-option').onclick = () => {
       const message = encodeURIComponent(
-        `Hi HPS Constructions! I'm interested in ${title} (₹${price}/${unit}). Please provide more details.`
+        `🏗️ *Interest in ${title}*\n\nHi HPS Constructions!\n\nI'm interested in ${title} (₹${price}/${unit}).\n\n${description}\n\nPlease provide more details about:\n• Availability\n• Installation process\n• Bulk pricing\n• Quality specifications\n\nThank you!`
       );
       window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
-      document.body.removeChild(modal);
-    };
-
-    // Handle Email
-    modal.querySelector('.email-option').onclick = () => {
-      const subject = encodeURIComponent(`Inquiry about ${title}`);
-      const body = encodeURIComponent(
-        `Hello HPS Constructions,\n\nI'm interested in ${title} (₹${price}/${unit}).\n\n${description}\n\nPlease provide more details about this product/service.\n\nThank you!`
-      );
-      window.location.href = `mailto:info@hpsconstructions.com?subject=${subject}&body=${body}`;
-      document.body.removeChild(modal);
+      closeModal();
     };
 
     // Handle Call
     modal.querySelector('.call-option').onclick = () => {
       window.location.href = "tel:9565550142";
-      document.body.removeChild(modal);
+      closeModal();
     };
 
     // Handle close
     const closeModal = () => {
       if (document.body.contains(modal)) {
-        document.body.removeChild(modal);
+        modal.classList.add('hide');
+        setTimeout(() => {
+          if (document.body.contains(modal)) {
+            document.body.removeChild(modal);
+          }
+        }, 300);
       }
     };
 
@@ -189,7 +230,7 @@ export default function ProductCard({
             <span className="btn-text">Call</span>
             <span className="btn-icon call-icon">📞</span>
           </button>
-          <button className="btn-learn" onClick={handleLearnMore} title="Contact Options">
+          <button className="btn-learn" onClick={handleLearnMore} title="Show Interest">
             <span className="btn-text">Learn More</span>
             <span className="btn-icon learn-icon">💬</span>
           </button>

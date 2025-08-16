@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ContactForm from "../Components/queryForm";
 import ProductCard from "../Components/productCard";
 import Poster from "../Components/poster";
 import CustomerReview from "../Components/CustomerReview";
@@ -119,9 +118,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Form */}
-      <ContactForm />
 
       {/* Services Poster */}
       <Poster />

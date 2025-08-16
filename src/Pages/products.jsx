@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HPSProductCard from "../Components/productCard";
+import QueryForm from "../Components/queryForm";
 import "../Style/products.css";
 import Footer from "./footer";
 import Poster from "../Components/poster";
@@ -230,6 +231,9 @@ const ProductsPage = () => {
 
       <Poster />
       <Footer />
+
+      {/* QueryForm Component - Handles floating button and popup */}
+      <QueryForm />
     </div>
   );
 };

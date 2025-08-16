@@ -29,10 +29,10 @@ const Topbar = () => {
     window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
   };
 
-  // Matches navigation item to current path
+  // Updated path matching for new routing structure
   const isActive = (path) => {
     if (path === "/" && location.pathname === "/") return true;
-    if (path === "/products" && location.pathname === "/products") return true;
+    if (path === "/about" && location.pathname === "/about") return true;
     if (path === "/contact" && location.pathname.startsWith("/contact")) return true;
     return false;
   };
@@ -45,8 +45,8 @@ const Topbar = () => {
       } else {
         navigate("/");
       }
-    } else if (path === "/products") {
-      navigate("/products");
+    } else if (path === "/about") {
+      navigate("/about");
     } else if (path === "/contact") {
       navigate("/contact");
     }
@@ -56,33 +56,33 @@ const Topbar = () => {
   return (
     <nav className="topbar">
       <div className="topbar-container">
-        {/* Logo */}
-        <div className="topbar-logo" onClick={(e) => handleNavigation(e, "/products")}>
+        {/* Logo - now routes to homepage (/) */}
+        <div className="topbar-logo" onClick={(e) => handleNavigation(e, "/")}>
           <img src="/images/nlogo.png" alt="HPS Constructions Logo" />
         </div>
 
         {/* Navigation Links */}
         <ul className={`topbar-menu ${isMenuOpen ? "active" : ""}`}>
-          {/* Products is the new 'Home': first item, routes to /products */}
-          <li>
-            <a
-              href="/products"
-              onClick={(e) => handleNavigation(e, "/products")}
-              className={isActive("/products") ? "active" : ""}
-            >
-              Home
-              {isActive("/products") && <span className="active-indicator"></span>}
-            </a>
-          </li>
-          {/* Home is the old 'About': second item, routes to / */}
+          {/* Home - routes to / (ProductsPage content) */}
           <li>
             <a
               href="/"
               onClick={(e) => handleNavigation(e, "/")}
               className={isActive("/") ? "active" : ""}
             >
-              About
+              Home
               {isActive("/") && <span className="active-indicator"></span>}
+            </a>
+          </li>
+          {/* About - routes to /about (old Home content) */}
+          <li>
+            <a
+              href="/about"
+              onClick={(e) => handleNavigation(e, "/about")}
+              className={isActive("/about") ? "active" : ""}
+            >
+              About
+              {isActive("/about") && <span className="active-indicator"></span>}
             </a>
           </li>
           {/* Contact */}
