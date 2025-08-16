@@ -8,7 +8,7 @@ export default function ProductCard({
   price = 599,
   unit = "sq ft",
   rating = 4.8,
-  imageUrl = "/assets/luffy.jpg",
+  imageUrl = "/images/luffy.jpg",
   onShare = () => console.log("Share clicked"),
   onLearnMore = () => console.log("Learn more clicked"),
 }) {
