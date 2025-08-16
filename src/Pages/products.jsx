@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import HPSProductCard from "../Components/productCard";
-import "../Style/prodcuts.css";
+import "../Style/products.css";
 import Footer from "./footer";
 import Poster from "../Components/poster";
 
@@ -196,7 +196,7 @@ const ProductsPage = () => {
                   unit={product.unit}
                   rating={product.rating}
                   imageUrl={product.imageUrl}
-                  onShare={() => console.log(`Shared: ${product.title}`)}
+                  onCall={() => console.log(`Called for: ${product.title}`)}
                   onLearnMore={() => console.log(`Learn more: ${product.title}`)}
                 />
               </div>

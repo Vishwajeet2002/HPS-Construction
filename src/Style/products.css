@@ -275,40 +275,39 @@
   background: linear-gradient(135deg, #9E671C 0%, #7A5116 100%);
 }
 
-/* Mobile Responsive Design - FIXED CENTERING */
+/* MOBILE RESPONSIVE DESIGN - 2 CARDS SIDE BY SIDE */
 @media (max-width: 768px) {
   .products-page {
     padding-top: clamp(45px, 10vh, 70px);
   }
 
   .products-container {
-    padding: 0 clamp(10px, 3vw, 20px);
+    padding: 0 clamp(8px, 2vw, 15px);
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
+  /* 2 CARDS SIDE BY SIDE GRID */
   .products-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(15px, 4vw, 20px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(10px, 3vw, 15px);
     width: 100%;
     max-width: 100%;
+    justify-items: center;
   }
 
   .product-item {
     width: 100%;
-    max-width: clamp(280px, 90vw, 350px);
-    margin: 0 auto;
+    max-width: clamp(160px, 45vw, 200px);
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  /* Ensure the actual product card inside is centered */
   .product-item .hps-card {
     margin: 0 auto;
     width: 100%;
@@ -342,24 +341,24 @@
   }
 
   .products-container {
-    padding: 0 clamp(8px, 2vw, 15px);
+    padding: 0 clamp(6px, 1.5vw, 12px);
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
+  /* MAINTAIN 2 CARDS ON SMALL MOBILE */
   .products-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(12px, 3vw, 16px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(8px, 2vw, 12px);
     width: 100%;
   }
 
   .product-item {
     width: 100%;
-    max-width: clamp(260px, 95vw, 320px);
-    margin: 0 auto;
+    max-width: clamp(140px, 47vw, 170px);
+    margin: 0;
     display: flex;
     justify-content: center;
   }
@@ -406,27 +405,29 @@
   }
 
   .products-container {
-    padding: 0 clamp(6px, 1.5vw, 12px);
+    padding: 0 clamp(4px, 1vw, 8px);
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
+  /* ULTRA COMPACT 2 CARDS */
   .products-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(10px, 2.5vw, 14px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(6px, 1.5vw, 10px);
     width: 100%;
   }
 
   .product-item {
     width: 100%;
-    max-width: calc(100vw - 20px);
-    margin: 0 auto;
+    max-width: clamp(130px, 48vw, 160px);
+    margin: 0;
     display: flex;
     justify-content: center;
   }
+
+  /* Continuation of products.css from where it was cut off */
 
   .product-item .hps-card {
     width: 100%;
