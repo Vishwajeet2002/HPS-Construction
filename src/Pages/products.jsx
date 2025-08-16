@@ -3,7 +3,6 @@ import HPSProductCard from "../Components/productCard";
 import "../Style/prodcuts.css";
 import Footer from "./footer";
 import Poster from "../Components/poster";
-import ImageSlider from "../Components/ImageSlider";
 
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
