@@ -3,12 +3,13 @@ import HPSProductCard from "../Components/productCard";
 import "../Style/prodcuts.css";
 import Footer from "./footer";
 import Poster from "../Components/poster";
+import ImageSlider from "../Components/ImageSlider";
 
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // All HPS Constructions Products
+  // All HPS Constructions Products (fixed image paths!)
   const allProducts = [
     {
       id: 1,
@@ -19,7 +20,7 @@ const ProductsPage = () => {
       unit: "piece",
       rating: 4.8,
       category: "bamboo",
-      imageUrl: "./src/assets/luffy.jpg",
+      imageUrl: "/images/luffy.jpg",
     },
     {
       id: 2,
@@ -30,7 +31,7 @@ const ProductsPage = () => {
       unit: "sq ft",
       rating: 4.6,
       category: "pop",
-      imageUrl: "./src/assets/413842.jpg",
+      imageUrl: "/images/413842.jpg",
     },
     {
       id: 3,
@@ -41,7 +42,7 @@ const ProductsPage = () => {
       unit: "session",
       rating: 5.0,
       category: "consultation",
-      imageUrl: "./src/assets/12345.avif",
+      imageUrl: "/images/12345.avif",
     },
     {
       id: 4,
@@ -52,7 +53,7 @@ const ProductsPage = () => {
       unit: "room",
       rating: 4.7,
       category: "design",
-      imageUrl: "./src/assets/123.jpg",
+      imageUrl: "/images/123.jpg",
     },
     {
       id: 5,
@@ -63,7 +64,7 @@ const ProductsPage = () => {
       unit: "sq ft",
       rating: 4.5,
       category: "bamboo",
-      imageUrl: "./src/assets/luffy.jpg",
+      imageUrl: "/images/luffy.jpg",
     },
     {
       id: 6,
@@ -74,7 +75,7 @@ const ProductsPage = () => {
       unit: "room",
       rating: 4.8,
       category: "pop",
-      imageUrl: "./src/assets/413842.jpg",
+      imageUrl: "/images/413842.jpg",
     },
     {
       id: 7,
@@ -85,7 +86,7 @@ const ProductsPage = () => {
       unit: "sq ft",
       rating: 4.4,
       category: "bamboo",
-      imageUrl: "./src/assets/12345.avif",
+      imageUrl: "/images/12345.avif",
     },
     {
       id: 8,
@@ -96,7 +97,7 @@ const ProductsPage = () => {
       unit: "sq ft",
       rating: 4.6,
       category: "pop",
-      imageUrl: "./src/assets/123.jpg",
+      imageUrl: "/images/123.jpg",
     },
     {
       id: 9,
@@ -107,7 +108,7 @@ const ProductsPage = () => {
       unit: "unit",
       rating: 4.9,
       category: "bamboo",
-      imageUrl: "./src/assets/luffy.jpg",
+      imageUrl: "/images/luffy.jpg",
     },
     {
       id: 10,
@@ -118,7 +119,7 @@ const ProductsPage = () => {
       unit: "project",
       rating: 4.8,
       category: "pop",
-      imageUrl: "./src/assets/413842.jpg",
+      imageUrl: "/images/413842.jpg",
     },
     {
       id: 11,
@@ -129,7 +130,7 @@ const ProductsPage = () => {
       unit: "kitchen",
       rating: 4.7,
       category: "bamboo",
-      imageUrl: "./src/assets/12345.avif",
+      imageUrl: "/images/12345.avif",
     },
     {
       id: 12,
@@ -140,7 +141,7 @@ const ProductsPage = () => {
       unit: "room",
       rating: 4.5,
       category: "pop",
-      imageUrl: "./src/assets/123.jpg",
+      imageUrl: "/images/123.jpg",
     },
   ];
 
@@ -167,12 +168,6 @@ const ProductsPage = () => {
       {/* MAIN HEADING - CENTER TOP */}
       <div className="main-heading-container">
         {/* <h1 className="main-heading">HPS CONSTRUCTION ALL PRODUCTS</h1> */}
-
-        {/* SUB HEADINGS ROW */}
-        {/* <div className="sub-headings-container">
-        <h2 className="sub-heading-left">Explore Our Products</h2>
-        <h2 className="sub-heading-right">BAMBOO/POP</h2>
-      </div> */}
 
         {/* FILTER SECTION */}
         <div className="filter-section">
@@ -258,9 +253,9 @@ const ProductsPage = () => {
           </button>
         </div>
       </section>
-      <Poster/>
-      <Footer/>
-    </div>
+      <Poster />
+      <Footer />  
+      </div>
   );
 };
 

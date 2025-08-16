@@ -754,3 +754,65 @@
     border-color: rgba(255, 255, 255, 0.2);
   }
 }
+
+
+/* ❶ Tablet portrait (768 – 1023 px) -------------- */
+@media (min-width:768px) and (max-width:1023px){
+  /* …everything you already have … */
+
+  /* card width: show **two** cards instead of one */
+  .badge-card{
+    flex:0 0 calc(50% - 10px);
+    min-width:calc(50% - 10px);
+    max-width:calc(50% - 10px);
+    height:320px;            /* keep your height */
+  }
+}
+
+/* ❷ Mobile landscape (640 – 767 px) -------------- */
+@media (min-width:640px) and (max-width:767px){
+  /* …everything you already have … */
+
+  .badge-card{
+    flex:0 0 calc(50% - 10px);
+    min-width:calc(50% - 10px);
+    max-width:calc(50% - 10px);
+    height:300px;
+  }
+}
+
+/* ❸ Mobile portrait (480 – 639 px) --------------- */
+@media (min-width:480px) and (max-width:639px){
+  /* …everything you already have … */
+
+  .badge-card{
+    flex:0 0 calc(50% - 10px);
+    min-width:calc(50% - 10px);
+    max-width:calc(50% - 10px);
+    height:280px;
+  }
+}
+
+/* ❹ Small-mobile (360 – 479 px) ------------------ */
+@media (min-width:360px) and (max-width:479px){
+  /* …everything you already have … */
+
+  .badge-card{
+    flex:0 0 calc(50% - 10px);
+    min-width:calc(50% - 10px);
+    max-width:calc(50% - 10px);
+    height:260px;
+  }
+}
+
+/* ❺ Extra-small (< 360 px) ----------------------- */
+@media (max-width:359px){
+  /* …everything you already have … */
+
+  .badge-card{
+    flex:0 0 calc(50% - 10px);
+    min-width:calc(50% - 10px);
+    max-width:calc(50% - 10px);
+    height:250px;
+  }
+}

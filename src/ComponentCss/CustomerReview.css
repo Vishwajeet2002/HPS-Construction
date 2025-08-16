@@ -1,4 +1,8 @@
+/* ───────────────────────────────
+   VARIABLES
+   ───────────────────────────────*/
 :root {
+  /* Color palette */
   --primary: #233528;
   --primary-dark: #1A271E;
   --primary-light: #2F4A36;
@@ -15,13 +19,28 @@
   --text: #111827;
   --text-secondary: #374151;
   --text-muted: #6B7280;
+
+  /* Carousel settings */
+  --card-w: 400px;      /* Desktop card width */
+  --gap: 20px;          /* Space between cards */
+  --speed: 30s;         /* Faster animation for better interaction */
 }
 
+/* Mobile - slower & fluid width */
+@media (max-width: 768px) {
+  :root {
+    --card-w: calc(100vw - 40px); /* Full width minus padding */
+    --gap: 15px;
+    --speed: 40s;
+  }
+}
+
+/* ───────────────────────────────
+   SECTION WRAPPER
+   ───────────────────────────────*/
 .customer-review-section {
   background: var(--bg-subtle);
-  min-height: clamp(500px, 80vh, 700px);
-  padding: clamp(60px, 8vw, 80px) 0;
-  position: relative;
+  padding: clamp(50px, 8vw, 80px) 0;
   overflow: hidden;
   width: 100%;
 }
@@ -36,9 +55,8 @@
 }
 
 .customer-review-header {
-  text-align: left;
+  text-align: center;
   margin-bottom: clamp(40px, 6vw, 60px);
-  padding-left: clamp(10px, 2vw, 20px);
 }
 
 .customer-review-header h2 {
@@ -48,8 +66,6 @@
   line-height: 1.1;
   margin: 0;
   letter-spacing: -0.02em;
-  max-width: 100%;
-  word-break: break-word;
 }
 
 .customer-review-carousel {
@@ -58,60 +74,106 @@
   position: relative;
 }
 
+/* ───────────────────────────────
+   CAROUSEL TRACK – Interactive CSS loop
+   ───────────────────────────────*/
 .customer-review-cards-container {
   overflow: hidden;
   width: 100%;
-  padding: clamp(15px, 2.5vw, 20px) 0;
-  position: relative;
+  cursor: grab;
+  user-select: none;
+}
+
+.customer-review-cards-container:active {
+  cursor: grabbing;
 }
 
 .customer-review-cards-track {
   display: flex;
-  gap: clamp(15px, 3vw, 30px);
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  gap: var(--gap);
+  width: max-content;
+  animation: scroll var(--speed) linear infinite;
   will-change: transform;
-  padding-left: clamp(15px, 2.5vw, 20px);
+  transition: transform 0.3s ease;
+}
+
+/* Interactive hover effects */
+.customer-review-cards-track:hover {
+  animation-play-state: paused;
   cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 .customer-review-cards-track:active {
   cursor: grabbing;
+  animation-play-state: paused;
 }
 
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * (var(--card-w) + var(--gap)) * 5)); /* 5 original cards */
+  }
+}
+
+/* ───────────────────────────────
+   CARD – Interactive with subtle effects
+   ───────────────────────────────*/
 .customer-review-card {
-  /* Desktop default */
-  min-width: clamp(280px, 40vw, 450px);
-  max-width: clamp(280px, 40vw, 450px);
+  min-width: var(--card-w);
+  max-width: var(--card-w);
   background: var(--card);
-  border-radius: clamp(15px, 2vw, 20px);
-  padding: clamp(20px, 4vw, 35px);
-  box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 4px 6px rgba(0, 0, 0, 0.03),
-    0 10px 20px rgba(0, 0, 0, 0.02);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--border);
+  border-radius: clamp(15px, 2vw, 20px);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  padding: clamp(20px, 4vw, 30px);
   display: flex;
   flex-direction: column;
-  gap: clamp(15px, 3vw, 25px);
-  min-height: clamp(280px, 40vw, 320px);
-  flex-shrink: 0;
-  box-sizing: border-box;
-  pointer-events: auto;
+  gap: clamp(15px, 3vw, 20px);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Subtle hover effect on cards */
 .customer-review-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.07),
-    0 10px 15px rgba(0, 0, 0, 0.05),
-    0 20px 25px rgba(0, 0, 0, 0.03);
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 25px rgba(35, 53, 40, 0.1);
 }
 
+/* Subtle glow effect on hover */
+.customer-review-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(35, 53, 40, 0.05),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.customer-review-card:hover::before {
+  left: 100%;
+}
+
+/* Prevent long words from overflowing */
+.customer-review-card * {
+  overflow-wrap: anywhere;
+}
+
+/* ───────────────────────────────
+   HEADER (avatar + name) - Interactive
+   ───────────────────────────────*/
 .review-header {
   display: flex;
   align-items: flex-start;
@@ -124,15 +186,16 @@
 }
 
 .customer-avatar {
-  width: clamp(50px, 8vw, 80px);
-  height: clamp(50px, 8vw, 80px);
+  width: clamp(50px, 8vw, 70px);
+  height: clamp(50px, 8vw, 70px);
   border-radius: 50%;
   overflow: hidden;
-  border: clamp(2px, 0.5vw, 4px) solid var(--border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: clamp(2px, 0.5vw, 3px) solid var(--border);
   transition: all 0.3s ease;
+  position: relative;
 }
 
+/* Avatar hover effect */
 .customer-review-card:hover .customer-avatar {
   border-color: var(--primary);
   transform: scale(1.05);
@@ -142,7 +205,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+.customer-review-card:hover .customer-avatar img {
+  transform: scale(1.1);
 }
 
 .customer-info {
@@ -161,12 +228,18 @@
 
 .customer-name {
   color: var(--text);
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
   letter-spacing: -0.01em;
   word-break: break-word;
+  transition: color 0.3s ease;
+}
+
+/* Name color change on hover */
+.customer-review-card:hover .customer-name {
+  color: var(--primary);
 }
 
 .verified-badge {
@@ -177,12 +250,18 @@
   color: white;
   font-size: clamp(0.65rem, 1.2vw, 0.75rem);
   padding: clamp(2px, 0.5vw, 4px) clamp(6px, 1vw, 8px);
-  border-radius: clamp(8px, 1.5vw, 12px);
+  border-radius: clamp(6px, 1.5vw, 8px);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
   flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Badge pulse effect on card hover */
+.customer-review-card:hover .verified-badge {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .customer-company {
@@ -192,6 +271,11 @@
   line-height: 1.3;
   font-weight: 600;
   word-break: break-word;
+  transition: color 0.3s ease;
+}
+
+.customer-review-card:hover .customer-company {
+  color: var(--text-secondary);
 }
 
 .customer-email {
@@ -200,18 +284,22 @@
   font-weight: 600;
   background: #ECF3EF;
   padding: clamp(1px, 0.3vw, 2px) clamp(6px, 1vw, 8px);
-  border-radius: clamp(6px, 1vw, 8px);
+  border-radius: clamp(4px, 1vw, 6px);
   text-decoration: none;
-  transition: all 0.2s ease;
   display: inline-block;
   word-break: break-all;
+  transition: all 0.3s ease;
 }
 
 .customer-email:hover {
   background: #DFEAE4;
   color: var(--primary-light);
+  transform: translateX(2px);
 }
 
+/* ───────────────────────────────
+   BODY TEXT + STARS - Interactive
+   ───────────────────────────────*/
 .review-content {
   flex: 1;
   display: flex;
@@ -222,12 +310,16 @@
 .review-text {
   color: var(--text-secondary);
   font-size: clamp(0.9rem, 1.5vw, 1rem);
-  line-height: 1.7;
+  line-height: 1.6;
   margin: 0;
-  text-align: justify;
   font-weight: 400;
   word-wrap: break-word;
   hyphens: auto;
+  transition: color 0.3s ease;
+}
+
+.customer-review-card:hover .review-text {
+  color: var(--text);
 }
 
 .review-bottom {
@@ -252,82 +344,41 @@
 }
 
 .don {
-  width: clamp(16px, 2.5vw, 20px);
-  height: clamp(16px, 2.5vw, 20px);
-  transition: all 0.2s ease;
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: 1;
   flex-shrink: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .don.filled,
 .don.half-filled {
   color: var(--warning);
-  filter: drop-shadow(0 1px 2px rgba(251, 191, 36, 0.3));
 }
 
 .don.empty {
   color: #d1d5db;
-  stroke-width: 1.5;
+}
+
+/* Interactive star effects */
+.customer-review-card:hover .don.filled,
+.customer-review-card:hover .don.half-filled {
+  transform: scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.4));
 }
 
 .don:hover {
-  transform: scale(1.1);
+  transform: scale(1.2) rotate(5deg);
 }
 
-/* RESPONSIVE BREAKPOINTS */
-
-/* Tablet */
-@media (max-width: 1024px) and (min-width: 769px) {
-  .customer-review-card {
-    min-width: calc(50vw - 45px);
-    max-width: calc(50vw - 45px);
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .customer-review-header {
-    text-align: center;
-    padding-left: 0;
-  }
-  
-  .customer-review-cards-container {
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .customer-review-cards-track {
-    padding-left: 7.5vw; /* Center the first card */
-    gap: 15px;
-  }
-  
-  .customer-review-card {
-    min-width: 85vw;
-    max-width: 85vw;
-    margin-right: 15px;
-  }
-}
-
-/* Small mobile */
-@media (max-width: 480px) {
-  .customer-review-cards-track {
-    padding-left: 6.5vw;
-    gap: 10px;
-  }
-  
-  .customer-review-card {
-    min-width: 87vw;
-    max-width: 87vw;
-    margin-right: 10px;
-  }
-}
-
-/* TOUCH DEVICES - Native Scroll */
+/* ───────────────────────────────
+   TOUCH / ACCESSIBILITY
+   ───────────────────────────────*/
 @media (hover: none) and (pointer: coarse) {
   .customer-review-cards-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -341,17 +392,59 @@
   }
   
   .customer-review-cards-track {
+    animation: none; /* Let user swipe instead */
     cursor: default;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .customer-review-card:hover {
+    transform: none;
+    border-color: var(--border);
+    box-shadow: none;
   }
 }
 
-/* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   .customer-review-cards-track {
-    transition: none;
+    animation: none !important;
   }
   
-  .customer-review-card:hover {
-    transform: none;
+  .customer-review-card,
+  .customer-avatar,
+  .don,
+  .verified-badge {
+    transition: none !important;
   }
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 480px) {
+  .customer-review-container {
+    padding: 0 15px;
+  }
+  
+  /* Reduce interaction effects on small screens */
+  .customer-review-card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* ───────────────────────────────
+   FOCUS STATES FOR ACCESSIBILITY
+   ───────────────────────────────*/
+.customer-review-card:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.customer-email:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* Smooth performance */
+.customer-review-cards-track,
+.customer-review-card,
+.customer-avatar img {
+  will-change: transform;
 }

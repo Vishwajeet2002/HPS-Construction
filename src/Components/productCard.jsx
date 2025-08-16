@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../ComponentCss/productCard.css";
 
 export default function ProductCard({
@@ -11,6 +12,8 @@ export default function ProductCard({
   onShare = () => console.log("Share clicked"),
   onLearnMore = () => console.log("Learn more clicked"),
 }) {
+  const navigate = useNavigate();
+
   const StarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -41,7 +44,8 @@ export default function ProductCard({
     );
   };
 
-  const handleShare = () => {
+  const handleShare = (e) => {
+    e.stopPropagation(); // Prevent card click
     const message = `Check out ${title} from HPS Constructions - Only ₹${price}/${unit}!`;
     if (navigator.share) {
       navigator.share({
@@ -56,7 +60,8 @@ export default function ProductCard({
     onShare();
   };
 
-  const handleLearnMore = () => {
+  const handleLearnMore = (e) => {
+    e.stopPropagation(); // Prevent card click
     const message = encodeURIComponent(
       `Hi HPS Constructions! I'm interested in ${title} (₹${price}/${unit}). Please provide more details.`
     );
@@ -64,8 +69,13 @@ export default function ProductCard({
     onLearnMore();
   };
 
+  // Handle card click - navigate to products page
+  const handleCardClick = () => {
+    navigate("/products");
+  };
+
   return (
-    <div className="hps-card">
+    <div className="hps-card" onClick={handleCardClick}>
       {/* IMAGE - HALF HEIGHT */}
       <div className="card-image">
         <img
