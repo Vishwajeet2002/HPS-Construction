@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../ComponentCss/productCard.css";
 import bambooFlooringImage from "/images/luffy.jpg";
-import placeholderImage from "/assets/placeholder.jpg";
 
 export default function ProductCard({
   title = "Premium Bamboo Flooring",
