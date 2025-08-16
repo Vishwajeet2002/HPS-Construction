@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../ComponentCss/productCard.css";
+import bambooFlooringImage from "/images/luffy.jpg";
+import placeholderImage from "/assets/placeholder.jpg";
 
 export default function ProductCard({
   title = "Premium Bamboo Flooring",
@@ -8,7 +10,7 @@ export default function ProductCard({
   price = 599,
   unit = "sq ft",
   rating = 4.8,
-  imageUrl = "/images/luffy.jpg",
+  imageUrl = bambooFlooringImage,
   onShare = () => console.log("Share clicked"),
   onLearnMore = () => console.log("Learn more clicked"),
 }) {

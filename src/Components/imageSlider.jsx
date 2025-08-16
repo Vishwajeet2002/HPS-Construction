@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../ComponentCss/imageslider.css';
+// Import images and create aliases
+import luffyImage from '/images/luffy.jpg';
+import popServiceImage from '/images/413842.jpg';
+import interiorDesignImage from '/images/12345.avif';
+import consultationImage from '/images/123.jpg';
+
 
 const ImageSlider = ({ 
   images = [], 
@@ -18,19 +24,19 @@ const ImageSlider = ({
   // HPS Construction business images
   const defaultImages = [
     {
-      url: '/images/luffy.jpg',
+      url: luffyImage,
       alt: 'HPS Construction - Sustainable Bamboo Solutions'
     },
     {
-      url: '/images/413842.jpg',
+      url: popServiceImage,
       alt: 'HPS Construction - Professional POP Services'
     },
     {
-      url: '/images/12345.avif',
+      url: interiorDesignImage,
       alt: 'HPS Construction - Modern Interior Design'
     },
     {
-      url: '/images/123.jpg',
+      url: consultationImage,
       alt: 'HPS Construction - Expert Consultation'
     }
   ];
