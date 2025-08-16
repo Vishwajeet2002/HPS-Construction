@@ -15,6 +15,7 @@ export default function ProductCard({
 }) {
   const navigate = useNavigate();
 
+  // Star rating component
   const StarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
@@ -46,7 +47,7 @@ export default function ProductCard({
   };
 
   const handleShare = (e) => {
-    e.stopPropagation(); // Prevent card click
+    e.stopPropagation();
     const message = `Check out ${title} from HPS Constructions - Only ₹${price}/${unit}!`;
     if (navigator.share) {
       navigator.share({
@@ -62,7 +63,7 @@ export default function ProductCard({
   };
 
   const handleLearnMore = (e) => {
-    e.stopPropagation(); // Prevent card click
+    e.stopPropagation();
     const message = encodeURIComponent(
       `Hi HPS Constructions! I'm interested in ${title} (₹${price}/${unit}). Please provide more details.`
     );
@@ -70,14 +71,12 @@ export default function ProductCard({
     onLearnMore();
   };
 
-  // Handle card click - navigate to products page
   const handleCardClick = () => {
     navigate("/products");
   };
 
   return (
     <div className="hps-card" onClick={handleCardClick}>
-      {/* IMAGE - HALF HEIGHT */}
       <div className="card-image">
         <img
           src={imageUrl}
@@ -89,15 +88,12 @@ export default function ProductCard({
         <div className="image-overlay"></div>
       </div>
 
-      {/* CONTENT - OTHER HALF */}
       <div className="card-content">
-        {/* TITLE AND DESCRIPTION GROUP */}
         <div className="title-description-group">
           <h3 className="card-title">{title}</h3>
           <p className="card-description">{description}</p>
         </div>
 
-        {/* RATING AND PRICE GROUP - SMALLER SIZE */}
         <div className="rating-price-row">
           <div className="rating-section">
             <StarRating rating={rating} />
@@ -112,7 +108,6 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* LARGER BUTTONS */}
         <div className="card-actions">
           <button className="btn-share" onClick={handleShare}>
             Share

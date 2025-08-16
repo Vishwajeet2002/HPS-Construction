@@ -1,8 +1,5 @@
-/* ───────────────────────────────
-   VARIABLES
-   ───────────────────────────────*/
+/* CSS Variables */
 :root {
-  /* Color palette */
   --primary: #233528;
   --primary-dark: #1A271E;
   --primary-light: #2F4A36;
@@ -20,24 +17,21 @@
   --text-secondary: #374151;
   --text-muted: #6B7280;
 
-  /* Carousel settings */
-  --card-w: 400px;      /* Desktop card width */
-  --gap: 20px;          /* Space between cards */
-  --speed: 30s;         /* Faster animation for better interaction */
+  /* Carousel configuration */
+  --card-w: 400px;
+  --gap: 20px;
+  --speed: 30s;
 }
 
-/* Mobile - slower & fluid width */
 @media (max-width: 768px) {
   :root {
-    --card-w: calc(100vw - 40px); /* Full width minus padding */
+    --card-w: calc(100vw - 40px);
     --gap: 15px;
     --speed: 40s;
   }
 }
 
-/* ───────────────────────────────
-   SECTION WRAPPER
-   ───────────────────────────────*/
+/* Section Layout */
 .customer-review-section {
   background: var(--bg-subtle);
   padding: clamp(50px, 8vw, 80px) 0;
@@ -74,9 +68,7 @@
   position: relative;
 }
 
-/* ───────────────────────────────
-   CAROUSEL TRACK – Interactive CSS loop
-   ───────────────────────────────*/
+/* Infinite Scroll Animation */
 .customer-review-cards-container {
   overflow: hidden;
   width: 100%;
@@ -97,7 +89,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Interactive hover effects */
 .customer-review-cards-track:hover {
   animation-play-state: paused;
   cursor: grab;
@@ -108,18 +99,13 @@
   animation-play-state: paused;
 }
 
+/* Keyframe for infinite scroll - moves exactly 5 cards worth of distance */
 @keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-1 * (var(--card-w) + var(--gap)) * 5)); /* 5 original cards */
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-1 * (var(--card-w) + var(--gap)) * 5)); }
 }
 
-/* ───────────────────────────────
-   CARD – Interactive with subtle effects
-   ───────────────────────────────*/
+/* Review Cards */
 .customer-review-card {
   min-width: var(--card-w);
   max-width: var(--card-w);
@@ -138,14 +124,13 @@
   overflow: hidden;
 }
 
-/* Subtle hover effect on cards */
 .customer-review-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
   box-shadow: 0 10px 25px rgba(35, 53, 40, 0.1);
 }
 
-/* Subtle glow effect on hover */
+/* Subtle shimmer effect on hover */
 .customer-review-card::before {
   content: '';
   position: absolute;
@@ -153,12 +138,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(35, 53, 40, 0.05),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(35, 53, 40, 0.05), transparent);
   transition: left 0.6s ease;
 }
 
@@ -166,14 +146,11 @@
   left: 100%;
 }
 
-/* Prevent long words from overflowing */
 .customer-review-card * {
   overflow-wrap: anywhere;
 }
 
-/* ───────────────────────────────
-   HEADER (avatar + name) - Interactive
-   ───────────────────────────────*/
+/* Card Header */
 .review-header {
   display: flex;
   align-items: flex-start;
@@ -195,7 +172,6 @@
   position: relative;
 }
 
-/* Avatar hover effect */
 .customer-review-card:hover .customer-avatar {
   border-color: var(--primary);
   transform: scale(1.05);
@@ -237,7 +213,6 @@
   transition: color 0.3s ease;
 }
 
-/* Name color change on hover */
 .customer-review-card:hover .customer-name {
   color: var(--primary);
 }
@@ -258,7 +233,6 @@
   transition: all 0.3s ease;
 }
 
-/* Badge pulse effect on card hover */
 .customer-review-card:hover .verified-badge {
   transform: scale(1.05);
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
@@ -297,9 +271,7 @@
   transform: translateX(2px);
 }
 
-/* ───────────────────────────────
-   BODY TEXT + STARS - Interactive
-   ───────────────────────────────*/
+/* Review Content */
 .review-content {
   flex: 1;
   display: flex;
@@ -343,6 +315,7 @@
   gap: clamp(2px, 0.4vw, 3px);
 }
 
+/* Star Rating System */
 .don {
   font-size: clamp(16px, 2.5vw, 20px);
   line-height: 1;
@@ -360,7 +333,6 @@
   color: #d1d5db;
 }
 
-/* Interactive star effects */
 .customer-review-card:hover .don.filled,
 .customer-review-card:hover .don.half-filled {
   transform: scale(1.1);
@@ -371,9 +343,7 @@
   transform: scale(1.2) rotate(5deg);
 }
 
-/* ───────────────────────────────
-   TOUCH / ACCESSIBILITY
-   ───────────────────────────────*/
+/* Touch Device Optimizations */
 @media (hover: none) and (pointer: coarse) {
   .customer-review-cards-container {
     overflow-x: auto;
@@ -392,11 +362,10 @@
   }
   
   .customer-review-cards-track {
-    animation: none; /* Let user swipe instead */
+    animation: none;
     cursor: default;
   }
   
-  /* Disable hover effects on touch devices */
   .customer-review-card:hover {
     transform: none;
     border-color: var(--border);
@@ -404,6 +373,7 @@
   }
 }
 
+/* Accessibility: Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .customer-review-cards-track {
     animation: none !important;
@@ -417,21 +387,17 @@
   }
 }
 
-/* Mobile specific adjustments */
 @media (max-width: 480px) {
   .customer-review-container {
     padding: 0 15px;
   }
   
-  /* Reduce interaction effects on small screens */
   .customer-review-card:hover {
     transform: translateY(-2px);
   }
 }
 
-/* ───────────────────────────────
-   FOCUS STATES FOR ACCESSIBILITY
-   ───────────────────────────────*/
+/* Focus States for Keyboard Navigation */
 .customer-review-card:focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
@@ -442,7 +408,7 @@
   outline-offset: 1px;
 }
 
-/* Smooth performance */
+/* Performance Optimizations */
 .customer-review-cards-track,
 .customer-review-card,
 .customer-avatar img {

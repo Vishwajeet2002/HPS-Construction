@@ -1,9 +1,8 @@
-/* ===== FULLY RESPONSIVE POSTER COMPONENT ===== */
-
+/* Main Section */
 .badge-section {
   background: linear-gradient(135deg, #1A271E 0%, #233528 100%);
-  min-height: clamp(500px, 80vh, 700px);
-  padding: clamp(60px, 8vw, 80px) 0;
+  min-height: clamp(400px, 70vh, 600px);
+  padding: clamp(40px, 6vw, 80px) 0;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -21,9 +20,9 @@
 }
 
 .badge-container {
-  max-width: clamp(300px, 95vw, 1400px);
+  max-width: clamp(280px, 95vw, 1400px);
   margin: 0 auto;
-  padding: 0 clamp(15px, 3vw, 20px);
+  padding: 0 clamp(10px, 2vw, 20px);
   position: relative;
   z-index: 2;
   width: 100%;
@@ -34,60 +33,59 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: clamp(20px, 4vw, 30px);
+  gap: clamp(15px, 3vw, 30px);
   flex-wrap: wrap;
 }
 
-/* ===== LEFT SIDE CONTENT ===== */
+/* Left Content */
 .badge-left-content {
   flex: 1;
-  max-width: clamp(250px, 45vw, 500px);
-  min-width: 280px;
+  max-width: clamp(220px, 45vw, 500px);
+  min-width: 250px;
 }
 
 .badge-logo-container {
-  margin-bottom: clamp(10px, 2vw, 20px);
+  margin-bottom: clamp(8px, 1.5vw, 20px);
 }
 
-/* ✅ FIXED LOGO SIZING */
 .badge-logo {
-  height: clamp(80px, 10vw, 120px);
-  width: clamp(100px, 12vw, 150px);
-  margin-top: clamp(-20px, -3vw, -30px);
+  height: clamp(60px, 8vw, 120px);
+  width: clamp(75px, 10vw, 150px);
+  margin-top: clamp(-15px, -2vw, -30px);
   filter: brightness(1.15) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   object-fit: contain;
   max-width: 100%;
 }
 
 .badge-description {
-  margin-bottom: clamp(15px, 3vw, 20px);
+  margin-bottom: clamp(10px, 2vw, 20px);
   text-align: left;
 }
 
 .badge-description h2 {
   color: white;
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
   font-weight: 700;
   line-height: 1.2;
-  margin: 0 0 clamp(8px, 1.5vw, 10px) 0;
+  margin: 0 0 clamp(6px, 1vw, 10px) 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   word-wrap: break-word;
 }
 
 .badge-description p {
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  line-height: 1.6;
+  font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+  line-height: 1.5;
   margin: 0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   word-wrap: break-word;
 }
 
-/* ===== ICONS CONTAINER ===== */
+/* Service Icons Grid */
 .badge-icons-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: clamp(20px, 4vw, 40px);
+  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+  gap: clamp(15px, 3vw, 40px);
   justify-items: center;
   max-width: 100%;
 }
@@ -96,21 +94,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(8px, 1.5vw, 10px);
+  gap: clamp(6px, 1vw, 10px);
   text-align: center;
 }
 
 .badge-icon-item span {
   color: white;
-  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
   font-weight: 500;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   white-space: nowrap;
 }
 
 .badge-icon {
-  width: clamp(50px, 8vw, 60px);
-  height: clamp(50px, 8vw, 60px);
+  width: clamp(40px, 6vw, 60px);
+  height: clamp(40px, 6vw, 60px);
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 50%;
@@ -123,23 +121,23 @@
 }
 
 .badge-icon svg {
-  width: clamp(22px, 4vw, 28px);
-  height: clamp(22px, 4vw, 28px);
+  width: clamp(18px, 3vw, 28px);
+  height: clamp(18px, 3vw, 28px);
   stroke-width: 2;
 }
 
 .badge-icon:hover {
   background: rgba(197, 128, 34, 0.25);
   border-color: rgba(197, 128, 34, 0.4);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== RIGHT SIDE CONTENT - CAROUSEL ===== */
+/* Right Content - Product Cards */
 .badge-right-content {
   flex: 1;
-  max-width: clamp(300px, 50vw, 650px);
-  min-width: 280px;
+  max-width: clamp(260px, 50vw, 650px);
+  min-width: 250px;
 }
 
 .badge-carousel-container {
@@ -150,18 +148,15 @@
 .badge-cards-container {
   overflow: hidden;
   width: 100%;
-  border-radius: clamp(12px, 2vw, 15px);
+  border-radius: clamp(10px, 1.5vw, 15px);
   contain: layout style paint;
 }
 
 .badge-cards-track {
   display: flex;
-  gap: clamp(12px, 2.5vw, 16px);
+  gap: clamp(8px, 2vw, 16px);
   cursor: grab;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   will-change: transform;
   padding: 0;
   transform-style: preserve-3d;
@@ -172,26 +167,27 @@
   cursor: grabbing;
 }
 
-/* ===== PRODUCT CARDS ===== */
+/* Product Cards */
 .badge-card {
-  flex: 0 0 calc(50% - 8px);
-  min-width: calc(50% - 8px);
-  max-width: calc(50% - 8px);
-  height: clamp(280px, 40vw, 350px);
+  flex: 0 0 calc(50% - 6px);
+  min-width: calc(50% - 6px);
+  max-width: calc(50% - 6px);
+  height: clamp(220px, 35vw, 350px);
   background: rgba(255, 255, 255, 0.1);
-  border-radius: clamp(12px, 2vw, 15px);
+  border-radius: clamp(10px, 1.5vw, 15px);
   overflow: hidden;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
   position: relative;
   transform: translate3d(0, 0, 0);
+  contain: layout style paint;
 }
 
 .badge-card:hover {
-  transform: translateY(-8px) scale(1.03) translate3d(0, 0, 0);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  transform: translateY(-6px) scale(1.02) translate3d(0, 0, 0);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
   background: rgba(255, 255, 255, 0.18);
 }
 
@@ -210,20 +206,21 @@
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
+  will-change: transform;
 }
 
 .badge-card:hover .badge-card-image-full img {
   transform: scale(1.05);
 }
 
-/* ===== PRODUCT OVERLAY ===== */
+/* Product Overlay - Shows on hover */
 .badge-card-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-  padding: clamp(15px, 3vw, 20px);
+  padding: clamp(10px, 2vw, 20px);
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -236,7 +233,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 2vw, 12px);
+  gap: clamp(6px, 1.5vw, 12px);
   text-align: center;
 }
 
@@ -244,8 +241,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(35px, 6vw, 40px);
-  height: clamp(35px, 6vw, 40px);
+  width: clamp(28px, 5vw, 40px);
+  height: clamp(28px, 5vw, 40px);
   background: rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   backdrop-filter: blur(10px);
@@ -253,103 +250,58 @@
 }
 
 .product-icon svg {
-  width: clamp(18px, 3vw, 22px);
-  height: clamp(18px, 3vw, 22px);
+  width: clamp(14px, 2.5vw, 22px);
+  height: clamp(14px, 2.5vw, 22px);
   color: white;
   stroke-width: 2;
 }
 
 .product-name {
   color: white;
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-size: clamp(0.75rem, 1.5vw, 1.1rem);
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-  max-width: 200px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  max-width: 180px;
   word-wrap: break-word;
 }
 
-/* ===== DEVICE-SPECIFIC BREAKPOINTS ===== */
-
-/* Extra Large Desktop (1920px+) */
-@media (min-width: 1920px) {
-  .badge-container {
-    max-width: 1600px;
-  }
-  
-  .badge-card {
-    height: 400px;
-  }
-  
-  .badge-logo {
-    height: 140px;
-    width: 170px;
-  }
-}
-
-/* Large Desktop (1440px - 1919px) */
-@media (min-width: 1440px) and (max-width: 1919px) {
-  .badge-content-wrapper {
-    gap: 40px;
-  }
-  
-  .badge-card {
-    height: 380px;
-  }
-  
-  .badge-logo {
-    height: 130px;
-    width: 160px;
-  }
-}
-
-/* Desktop (1200px - 1439px) */
+/* Responsive Breakpoints */
 @media (min-width: 1200px) and (max-width: 1439px) {
   .badge-content-wrapper {
-    gap: 35px;
+    gap: 28px;
   }
   
   .badge-card {
-    height: 360px;
-  }
-  
-  .badge-logo {
-    height: 120px;
-    width: 150px;
+    height: 320px;
   }
 }
 
-/* Small Desktop / Large Tablet (1024px - 1199px) */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .badge-content-wrapper {
-    gap: 30px;
+    gap: 25px;
   }
   
   .badge-card {
-    height: 340px;
+    height: 300px;
   }
   
   .badge-icons-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-  
-  .badge-logo {
-    height: 110px;
-    width: 140px;
+    gap: 25px;
   }
 }
 
-/* Tablet Portrait (768px - 1023px) */
+/* Tablet Portrait */
 @media (min-width: 768px) and (max-width: 1023px) {
   .badge-section {
-    padding: 60px 0;
+    padding: 45px 0;
   }
   
   .badge-content-wrapper {
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     text-align: center;
   }
   
@@ -366,194 +318,32 @@
   .badge-icons-container {
     justify-content: center;
     grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .badge-card {
-    flex: 0 0 70%;
-    min-width: 70%;
-    max-width: 70%;
-    height: 320px;
-  }
-  
-  .badge-logo {
-    height: 100px;
-    width: 130px;
-    margin: 0 auto;
-  }
-  
-  .badge-logo-container {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-/* Mobile Landscape (640px - 767px) */
-@media (min-width: 640px) and (max-width: 767px) {
-  .badge-section {
-    padding: 50px 0;
-  }
-  
-  .badge-content-wrapper {
-    flex-direction: column;
-    gap: 35px;
-    text-align: center;
-  }
-  
-  .badge-left-content,
-  .badge-right-content {
-    max-width: 100%;
-    min-width: auto;
-  }
-  
-  .badge-description {
-    text-align: center;
-  }
-  
-  .badge-icons-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-  
-  .badge-card {
-    flex: 0 0 80%;
-    min-width: 80%;
-    max-width: 80%;
-    height: 300px;
-  }
-  
-  .badge-logo {
-    height: 90px;
-    width: 120px;
-    margin: 0 auto;
-  }
-  
-  .badge-logo-container {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-/* Mobile Portrait (480px - 639px) */
-@media (min-width: 480px) and (max-width: 639px) {
-  .badge-section {
-    padding: 40px 0;
-  }
-  
-  .badge-container {
-    padding: 0 15px;
-  }
-  
-  .badge-content-wrapper {
-    flex-direction: column;
-    gap: 30px;
-    text-align: center;
-  }
-  
-  .badge-left-content,
-  .badge-right-content {
-    max-width: 100%;
-    min-width: auto;
-  }
-  
-  .badge-description {
-    text-align: center;
-  }
-  
-  .badge-icons-container {
-    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
-    max-width: 280px;
+    max-width: 400px;
     margin: 0 auto;
-  }
-  
-  .badge-card {
-    flex: 0 0 85%;
-    min-width: 85%;
-    max-width: 85%;
-    height: 280px;
-  }
-  
-  .badge-card-overlay {
-    padding: 15px;
   }
   
   .badge-logo {
-    height: 85px;
-    width: 110px;
     margin: 0 auto;
+    height: 70px;
+    width: 85px;
   }
   
   .badge-logo-container {
     display: flex;
     justify-content: center;
   }
-}
 
-/* Small Mobile (360px - 479px) */
-@media (min-width: 360px) and (max-width: 479px) {
-  .badge-section {
-    padding: 35px 0;
-  }
-  
-  .badge-container {
-    padding: 0 12px;
-  }
-  
-  .badge-content-wrapper {
-    flex-direction: column;
-    gap: 25px;
-    text-align: center;
-  }
-  
-  .badge-left-content,
-  .badge-right-content {
-    max-width: 100%;
-    min-width: auto;
-  }
-  
-  .badge-icons-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    max-width: 250px;
-    margin: 0 auto;
-  }
-  
   .badge-card {
-    flex: 0 0 90%;
-    min-width: 90%;
-    max-width: 90%;
-    height: 260px;
-  }
-  
-  .badge-card-overlay {
-    padding: 12px;
-  }
-  
-  .badge-logo {
-    height: 80px;
-    width: 105px;
-    margin: 0 auto;
-  }
-  
-  .badge-logo-container {
-    display: flex;
-    justify-content: center;
+    height: 250px;
   }
 }
 
-/* Extra Small Mobile (320px - 359px) */
-@media (max-width: 359px) {
+/* Mobile Devices */
+@media (max-width: 767px) {
   .badge-section {
     padding: 30px 0;
-  }
-  
-  .badge-container {
-    padding: 0 10px;
+    min-height: clamp(350px, 60vh, 500px);
   }
   
   .badge-content-wrapper {
@@ -566,6 +356,19 @@
   .badge-right-content {
     max-width: 100%;
     min-width: auto;
+  }
+  
+  .badge-description {
+    text-align: center;
+  }
+  
+  .badge-description h2 {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    margin-bottom: 8px;
+  }
+
+  .badge-description p {
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
   }
   
   .badge-icons-container {
@@ -574,25 +377,28 @@
     max-width: 220px;
     margin: 0 auto;
   }
+
+  .badge-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .badge-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .badge-icon-item span {
+    font-size: 0.65rem;
+  }
   
   .badge-card {
-    flex: 0 0 95%;
-    min-width: 95%;
-    max-width: 95%;
-    height: 250px;
-  }
-  
-  .badge-card-overlay {
-    padding: 10px;
-  }
-  
-  .product-name {
-    font-size: 0.85rem;
+    height: 200px;
   }
   
   .badge-logo {
-    height: 75px;
-    width: 100px;
+    height: 55px;
+    width: 70px;
     margin: 0 auto;
   }
   
@@ -602,36 +408,163 @@
   }
 }
 
-/* ===== ORIENTATION & INTERACTION ENHANCEMENTS ===== */
+@media (max-width: 479px) {
+  .badge-section {
+    padding: 25px 0;
+    min-height: clamp(320px, 55vh, 450px);
+  }
+  
+  .badge-container {
+    padding: 0 8px;
+  }
+
+  .badge-content-wrapper {
+    gap: 15px;
+  }
+
+  .badge-description h2 {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    margin-bottom: 6px;
+  }
+
+  .badge-description p {
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    line-height: 1.4;
+  }
+
+  .badge-icons-container {
+    gap: 8px;
+    max-width: 180px;
+  }
+
+  .badge-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .badge-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .badge-icon-item span {
+    font-size: 0.6rem;
+  }
+  
+  .badge-card {
+    height: 180px;
+  }
+  
+  .badge-card-overlay {
+    padding: 8px;
+  }
+
+  .product-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .product-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .product-name {
+    font-size: 0.7rem;
+    max-width: 140px;
+  }
+  
+  .badge-logo {
+    height: 45px;
+    width: 60px;
+  }
+}
+
+@media (max-width: 360px) {
+  .badge-section {
+    padding: 20px 0;
+    min-height: clamp(280px, 50vh, 400px);
+  }
+  
+  .badge-container {
+    padding: 0 6px;
+  }
+
+  .badge-content-wrapper {
+    gap: 12px;
+  }
+
+  .badge-description h2 {
+    font-size: clamp(0.9rem, 4vw, 1.3rem);
+    margin-bottom: 5px;
+  }
+
+  .badge-description p {
+    font-size: clamp(0.65rem, 2vw, 0.75rem);
+  }
+
+  .badge-icons-container {
+    gap: 6px;
+    max-width: 160px;
+  }
+
+  .badge-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .badge-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .badge-icon-item span {
+    font-size: 0.55rem;
+  }
+
+  .badge-card {
+    height: 160px;
+  }
+
+  .product-name {
+    font-size: 0.65rem;
+    max-width: 120px;
+  }
+
+  .badge-logo {
+    height: 40px;
+    width: 50px;
+  }
+}
 
 /* Landscape Mobile */
 @media (max-height: 500px) and (orientation: landscape) {
   .badge-section {
-    padding: 20px 0;
+    padding: 15px 0;
     min-height: auto;
   }
   
   .badge-content-wrapper {
     flex-direction: row;
-    gap: 20px;
+    gap: 15px;
   }
   
   .badge-card {
-    height: 220px;
+    height: 160px;
   }
   
   .badge-icons-container {
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
-  
+
   .badge-logo {
-    height: 70px;
-    width: 90px;
+    height: 35px;
+    width: 45px;
   }
 }
 
-/* Touch Devices */
+/* Touch Devices - Always show overlay */
 @media (hover: none) and (pointer: coarse) {
   .badge-cards-track {
     cursor: default;
@@ -660,29 +593,18 @@
   }
 }
 
-/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
-
-/* Reduced Motion */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .badge-cards-track {
-    transition: none !important;
-  }
-  
+  .badge-cards-track,
   .badge-card:hover,
-  .badge-icon:hover {
-    transform: none;
-  }
-  
-  .badge-card-overlay {
-    transition: none;
-  }
-  
+  .badge-icon:hover,
+  .badge-card-overlay,
   .badge-card-image-full img {
-    transition: none;
+    transition: none !important;
+    transform: none !important;
   }
 }
 
-/* High Contrast Mode */
 @media (prefers-contrast: high) {
   .badge-card {
     border: 2px solid white;
@@ -697,6 +619,29 @@
   .product-name {
     text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
   }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .badge-section {
+    background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
+  }
+  
+  .badge-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .badge-icon {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Performance Optimizations */
+.badge-cards-track {
+  contain: layout style paint;
+  will-change: transform;
 }
 
 /* Print Styles */
@@ -721,98 +666,5 @@
   .badge-card-overlay {
     transform: translateY(0);
     background: rgba(0, 0, 0, 0.8);
-  }
-}
-
-/* ===== PERFORMANCE OPTIMIZATIONS ===== */
-.badge-cards-track {
-  contain: layout style paint;
-  will-change: transform;
-}
-
-.badge-card {
-  contain: layout style paint;
-}
-
-.badge-card-image-full img {
-  will-change: transform;
-}
-
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .badge-section {
-    background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
-  }
-  
-  .badge-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .badge-icon {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-}
-
-
-/* ❶ Tablet portrait (768 – 1023 px) -------------- */
-@media (min-width:768px) and (max-width:1023px){
-  /* …everything you already have … */
-
-  /* card width: show **two** cards instead of one */
-  .badge-card{
-    flex:0 0 calc(50% - 10px);
-    min-width:calc(50% - 10px);
-    max-width:calc(50% - 10px);
-    height:320px;            /* keep your height */
-  }
-}
-
-/* ❷ Mobile landscape (640 – 767 px) -------------- */
-@media (min-width:640px) and (max-width:767px){
-  /* …everything you already have … */
-
-  .badge-card{
-    flex:0 0 calc(50% - 10px);
-    min-width:calc(50% - 10px);
-    max-width:calc(50% - 10px);
-    height:300px;
-  }
-}
-
-/* ❸ Mobile portrait (480 – 639 px) --------------- */
-@media (min-width:480px) and (max-width:639px){
-  /* …everything you already have … */
-
-  .badge-card{
-    flex:0 0 calc(50% - 10px);
-    min-width:calc(50% - 10px);
-    max-width:calc(50% - 10px);
-    height:280px;
-  }
-}
-
-/* ❹ Small-mobile (360 – 479 px) ------------------ */
-@media (min-width:360px) and (max-width:479px){
-  /* …everything you already have … */
-
-  .badge-card{
-    flex:0 0 calc(50% - 10px);
-    min-width:calc(50% - 10px);
-    max-width:calc(50% - 10px);
-    height:260px;
-  }
-}
-
-/* ❺ Extra-small (< 360 px) ----------------------- */
-@media (max-width:359px){
-  /* …everything you already have … */
-
-  .badge-card{
-    flex:0 0 calc(50% - 10px);
-    min-width:calc(50% - 10px);
-    max-width:calc(50% - 10px);
-    height:250px;
   }
 }

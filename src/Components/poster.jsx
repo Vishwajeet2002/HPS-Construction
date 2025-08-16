@@ -1,19 +1,18 @@
 import React from "react";
 import "../ComponentCss/poster.css";
 
-// ✅ FIXED: Use consistent relative paths for ALL images
+// Business images
 import luffyImg from "/images/luffy.jpg";
 import img413842 from "/images/413842.jpg";
 import logoImg from "/images/logo.png";
 
 const Poster = () => {
-  // ✅ Only 2 products - no sliding needed
   const products = [
     { src: luffyImg, name: "Bamboo Dining Table", type: "bamboo" },
     { src: img413842, name: "Pop Art Chair", type: "pop" },
   ];
 
-  // Icons
+  // Product type icons
   const getBambooIcon = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M12 2v20" />

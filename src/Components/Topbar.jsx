@@ -5,7 +5,6 @@ import "../ComponentCss/Topbar.css";
 
 const Topbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [isWishlistActive, setIsWishlistActive] = useState(false);
 
   const navigate = useNavigate();
@@ -15,19 +14,12 @@ const Topbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    console.log("Searching for:", searchQuery);
-  };
-
   const toggleWishlist = () => {
     setIsWishlistActive(!isWishlistActive);
-    console.log("Wishlist toggled:", !isWishlistActive);
   };
 
   const handlePhoneCall = () => {
     window.location.href = "tel:9565550142";
-    console.log("Phone call initiated");
   };
 
   const handleWhatsAppClick = () => {
@@ -35,60 +27,43 @@ const Topbar = () => {
       "Hello! Sir. I want assistance with Bamboo and POP (Plaster of Paris). How can you help me today?"
     );
     window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
-    console.log("WhatsApp chat opened");
   };
 
-  // ✨ UPDATED: Navigation handler function with smart Home and About logic
+  // Check if current path matches navigation item
+  const isActive = (path) => {
+    if (path === "/" && location.pathname === "/") return true;
+    if (path === "/about" && location.pathname === "/") return true; // About is on home page
+    if (path !== "/" && location.pathname.startsWith(path)) return true;
+    return false;
+  };
+
   const handleNavigation = (e, path) => {
-    e.preventDefault(); // Prevent default link behavior
+    e.preventDefault();
     
-    // ✨ SPECIAL CASE: Home button - scroll to top if on home page, navigate if on other page
     if (path === "/") {
       if (location.pathname === "/") {
-        // Already on home page - scroll to top
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-        console.log("Scrolled to top of home page");
+        // Scroll to top if already on home page
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        // On different page - navigate to home
         navigate("/");
-        console.log("Navigated to home page");
       }
-    }
-    // ✨ SPECIAL CASE: About button scrolls to bottom
-    else if (path === "/about") {
-      // Smooth scroll to bottom of the page
+    } else if (path === "/about") {
+      // Scroll to bottom for About section
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth"
       });
-      console.log("Scrolled to About section");
-    } 
-    // ✅ CONTACT: Navigate to contact page
-    else if (path === "/contact") {
-      navigate("/contact");
-      console.log("Navigated to Contact page");
-    }
-    // ✅ PRODUCTS: Navigate to products page  
-    else if (path === "/products") {
-      navigate("/products");
-      console.log("Navigated to Products page");
-    }
-    else {
-      // For all other navigation, use React Router
+    } else {
       navigate(path);
-      console.log(`Navigated to ${path}`);
     }
     
-    setIsMenuOpen(false); // Close mobile menu after navigation
+    setIsMenuOpen(false);
   };
 
   return (
     <nav className="topbar">
       <div className="topbar-container">
-        {/* Logo/Brand */}
+        {/* Logo */}
         <div className="topbar-logo" onClick={(e) => handleNavigation(e, "/")}>
           <img src="/images/nlogo.png" alt="HPS Constructions Logo" />
         </div>
@@ -96,64 +71,50 @@ const Topbar = () => {
         {/* Navigation Links */}
         <ul className={`topbar-menu ${isMenuOpen ? "active" : ""}`}>
           <li>
-            {/* ✨ Home button now scrolls to top if on home page */}
-            <a href="/" onClick={(e) => handleNavigation(e, "/")}>
+            <a 
+              href="/" 
+              onClick={(e) => handleNavigation(e, "/")}
+              className={isActive("/") ? "active" : ""}
+            >
               Home
+              {isActive("/") && <span className="active-indicator"></span>}
             </a>
           </li>
           <li>
-            {/* ✨ About button scrolls to bottom */}
-            <a href="/about" onClick={(e) => handleNavigation(e, "/about")}>
+            <a 
+              href="/about" 
+              onClick={(e) => handleNavigation(e, "/about")}
+              className={isActive("/about") ? "active" : ""}
+            >
               About
+              {isActive("/about") && <span className="active-indicator"></span>}
             </a>
           </li>
           <li>
-            {/* ✅ Products button navigates to products page */}
-            <a href="/products" onClick={(e) => handleNavigation(e, "/products")}>
+            <a 
+              href="/products" 
+              onClick={(e) => handleNavigation(e, "/products")}
+              className={isActive("/products") ? "active" : ""}
+            >
               Products
+              {isActive("/products") && <span className="active-indicator"></span>}
             </a>
           </li>
           <li>
-            {/* ✅ Contact button navigates to contact page */}
-            <a href="/contact" onClick={(e) => handleNavigation(e, "/contact")}>
+            <a 
+              href="/contact" 
+              onClick={(e) => handleNavigation(e, "/contact")}
+              className={isActive("/contact") ? "active" : ""}
+            >
               Contact
+              {isActive("/contact") && <span className="active-indicator"></span>}
             </a>
           </li>
         </ul>
 
-        {/* Right Side Container */}
+        {/* Right Side */}
         <div className="topbar-right">
           <div className="topbar-actions">
-            {/* Search Bar - Commented out */}
-            {/* <div className="topbar-search">
-              <form onSubmit={handleSearch}>
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="search-input"
-                />
-                <button type="submit" className="search-button">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </form>
-            </div> */}
-
             {/* Wishlist */}
             <div className="topbar-wishlist" onClick={toggleWishlist}>
               {isWishlistActive ? (
@@ -166,19 +127,11 @@ const Topbar = () => {
 
           {/* Contact Icons */}
           <div className="topbar-contact">
-            <div
-              className="contact-icon"
-              onClick={handlePhoneCall}
-              title="Call Us"
-            >
+            <div className="contact-icon" onClick={handlePhoneCall} title="Call Us">
               <FaPhone className="phone-icon" />
             </div>
 
-            <div
-              className="whatsapp-container"
-              onClick={handleWhatsAppClick}
-              title="WhatsApp"
-            >
+            <div className="whatsapp-container" onClick={handleWhatsAppClick} title="WhatsApp">
               <div className="contact-icon">
                 <FaWhatsapp className="whatsapp-icon" />
               </div>
@@ -187,7 +140,7 @@ const Topbar = () => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="topbar-toggle" onClick={toggleMenu}>
+          <div className={`topbar-toggle ${isMenuOpen ? "active" : ""}`} onClick={toggleMenu}>
             <span></span>
             <span></span>
             <span></span>

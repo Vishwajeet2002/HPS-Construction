@@ -8,13 +8,11 @@ const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // All HPS Constructions Products (fixed image paths!)
   const allProducts = [
     {
       id: 1,
       title: "Bamboo Solutions",
-      description:
-        "Sustainable bamboo construction materials for eco-friendly and durable buildings that stand the test of time.",
+      description: "Sustainable bamboo construction materials for eco-friendly and durable buildings that stand the test of time.",
       price: 599,
       unit: "piece",
       rating: 4.8,
@@ -24,8 +22,7 @@ const ProductsPage = () => {
     {
       id: 2,
       title: "POP Services",
-      description:
-        "Professional Plaster of Paris solutions for modern interiors with artistic designs and precision finishing.",
+      description: "Professional Plaster of Paris solutions for modern interiors with artistic designs and precision finishing.",
       price: 399,
       unit: "sq ft",
       rating: 4.6,
@@ -35,8 +32,7 @@ const ProductsPage = () => {
     {
       id: 3,
       title: "Expert Consultation",
-      description:
-        "Get professional advice and customized solutions for your construction projects from our experienced team.",
+      description: "Get professional advice and customized solutions for your construction projects from our experienced team.",
       price: 2999,
       unit: "session",
       rating: 5.0,
@@ -46,8 +42,7 @@ const ProductsPage = () => {
     {
       id: 4,
       title: "Interior Design",
-      description:
-        "Complete interior design solutions with modern aesthetics and functional layouts for residential and commercial spaces.",
+      description: "Complete interior design solutions with modern aesthetics and functional layouts for residential and commercial spaces.",
       price: 1599,
       unit: "room",
       rating: 4.7,
@@ -57,8 +52,7 @@ const ProductsPage = () => {
     {
       id: 5,
       title: "Bamboo Flooring",
-      description:
-        "Premium quality bamboo flooring solutions with various textures and finishes for elegant interiors.",
+      description: "Premium quality bamboo flooring solutions with various textures and finishes for elegant interiors.",
       price: 899,
       unit: "sq ft",
       rating: 4.5,
@@ -68,8 +62,7 @@ const ProductsPage = () => {
     {
       id: 6,
       title: "POP Ceiling Design",
-      description:
-        "Creative POP ceiling designs with modern lighting solutions and architectural details for stunning interiors.",
+      description: "Creative POP ceiling designs with modern lighting solutions and architectural details for stunning interiors.",
       price: 1299,
       unit: "room",
       rating: 4.8,
@@ -79,8 +72,7 @@ const ProductsPage = () => {
     {
       id: 7,
       title: "Bamboo Wall Panels",
-      description:
-        "Natural bamboo wall panels for eco-friendly interior decoration with artistic finishes.",
+      description: "Natural bamboo wall panels for eco-friendly interior decoration with artistic finishes.",
       price: 299,
       unit: "sq ft",
       rating: 4.4,
@@ -90,8 +82,7 @@ const ProductsPage = () => {
     {
       id: 8,
       title: "POP Installation",
-      description:
-        "Expert POP installation services for walls, ceilings with precision and quality assurance.",
+      description: "Expert POP installation services for walls, ceilings with precision and quality assurance.",
       price: 699,
       unit: "sq ft",
       rating: 4.6,
@@ -101,8 +92,7 @@ const ProductsPage = () => {
     {
       id: 9,
       title: "Bamboo Furniture",
-      description:
-        "Sustainable bamboo furniture including chairs, tables and storage solutions for modern homes.",
+      description: "Sustainable bamboo furniture including chairs, tables and storage solutions for modern homes.",
       price: 799,
       unit: "unit",
       rating: 4.9,
@@ -112,8 +102,7 @@ const ProductsPage = () => {
     {
       id: 10,
       title: "POP Decorative Items",
-      description:
-        "Custom POP decorative items and artistic elements for unique interior designs.",
+      description: "Custom POP decorative items and artistic elements for unique interior designs.",
       price: 4999,
       unit: "project",
       rating: 4.8,
@@ -123,8 +112,7 @@ const ProductsPage = () => {
     {
       id: 11,
       title: "Bamboo Kitchen Solutions",
-      description:
-        "Modern bamboo kitchen solutions with optimal space utilization and eco-friendly materials.",
+      description: "Modern bamboo kitchen solutions with optimal space utilization and eco-friendly materials.",
       price: 2499,
       unit: "kitchen",
       rating: 4.7,
@@ -134,8 +122,7 @@ const ProductsPage = () => {
     {
       id: 12,
       title: "POP Renovation",
-      description:
-        "Complete POP renovation services with modern designs and professional finishing.",
+      description: "Complete POP renovation services with modern designs and professional finishing.",
       price: 1899,
       unit: "room",
       rating: 4.5,
@@ -146,9 +133,8 @@ const ProductsPage = () => {
 
   // Filter products based on category and search
   const filteredProducts = allProducts.filter((product) => {
-    const matchesCategory =
-      selectedCategory === "all" || product.category === selectedCategory;
-    const matchesSearch =
+    const matchesCategory = selectedCategory === "all" || product.category === selectedCategory;
+    const matchesSearch = 
       product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -158,17 +144,12 @@ const ProductsPage = () => {
     { id: "all", name: "All Products", icon: "🏗️" },
     { id: "bamboo", name: "Bamboo", icon: "🎋" },
     { id: "pop", name: "POP", icon: "🏛️" },
-    // { id: "consultation", name: "Consultation", icon: "💼" },
-    // { id: 'design', name: 'Design', icon: '🎨' }
   ];
 
   return (
     <div className="products-page">
-      {/* MAIN HEADING - CENTER TOP */}
+      {/* Header with Filters */}
       <div className="main-heading-container">
-        {/* <h1 className="main-heading">HPS CONSTRUCTION ALL PRODUCTS</h1> */}
-
-        {/* FILTER SECTION */}
         <div className="filter-section">
           <div className="search-container">
             <input
@@ -186,9 +167,7 @@ const ProductsPage = () => {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`category-btn ${
-                  selectedCategory === category.id ? "active" : ""
-                }`}
+                className={`category-btn ${selectedCategory === category.id ? "active" : ""}`}
               >
                 <span className="category-icon">{category.icon}</span>
                 {category.name}
@@ -196,6 +175,7 @@ const ProductsPage = () => {
             ))}
           </div>
         </div>
+        
         <div className="results-info">
           <span className="results-count">
             {filteredProducts.length} Products Found
@@ -203,7 +183,7 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      {/* PRODUCTS GRID SECTION */}
+      {/* Products Grid */}
       <main className="products-main">
         <div className="products-container">
           <div className="products-grid">
@@ -217,15 +197,13 @@ const ProductsPage = () => {
                   rating={product.rating}
                   imageUrl={product.imageUrl}
                   onShare={() => console.log(`Shared: ${product.title}`)}
-                  onLearnMore={() =>
-                    console.log(`Learn more: ${product.title}`)
-                  }
+                  onLearnMore={() => console.log(`Learn more: ${product.title}`)}
                 />
               </div>
             ))}
           </div>
 
-          {/* NO PRODUCTS FOUND */}
+          {/* No Products Found */}
           {filteredProducts.length === 0 && (
             <div className="no-products">
               <div className="no-products-icon">📦</div>
@@ -236,14 +214,11 @@ const ProductsPage = () => {
         </div>
       </main>
 
-      {/* CALL TO ACTION SECTION */}
+      {/* Call to Action Section */}
       <section className="cta-section">
         <div className="cta-container">
           <h2>Need Custom Solutions?</h2>
-          <p>
-            Our experts are ready to help you with personalized construction
-            solutions
-          </p>
+          <p>Our experts are ready to help you with personalized construction solutions</p>
           <button
             className="cta-button"
             onClick={() => (window.location.href = "/contact")}
@@ -252,9 +227,10 @@ const ProductsPage = () => {
           </button>
         </div>
       </section>
+
       <Poster />
-      <Footer />  
-      </div>
+      <Footer />
+    </div>
   );
 };
 

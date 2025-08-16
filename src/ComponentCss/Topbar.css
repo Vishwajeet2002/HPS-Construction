@@ -1,354 +1,469 @@
-/* --- HPS Construction - Professional Topbar Styles --- */
-
 /* Main Topbar Container */
 .topbar {
-    background-color: #ffffff;
-    padding: 0 20px; /* Reduced from 30px */
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-    border-bottom: 1px solid #E5E7EB;
-    font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border-bottom: 1px solid #E5E7EB;
+  font-family: 'Poppins', sans-serif;
 }
 
 .topbar-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    padding: 0 15px; /* Reduced padding */
-    height: 70px;
-    gap: 15px; /* Reduced gap */
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 0 15px;
+  height: 70px;
+  gap: 15px;
 }
 
-/* --- Logo --- */
+/* Logo */
 .topbar-logo {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .topbar-logo img {
-    max-height: 55px;
-    width: auto;
-    display: block;
+  max-height: 55px;
+  width: auto;
+  display: block;
 }
 
 .topbar-logo:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
-/* --- Navigation Menu --- */
+/* Navigation Menu */
 .topbar-menu {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 35px;
-    justify-self: center;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 35px;
+  justify-self: center;
 }
 
 .topbar-menu li {
-    position: relative;
+  position: relative;
 }
 
 .topbar-menu li a {
-    color: #374151;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    padding: 10px 0;
-    position: relative;
-    transition: color 0.3s ease;
+  color: #374151;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 0;
+  position: relative;
+  transition: all 0.3s ease;
+  display: block;
 }
 
+/* Hover effect underline */
 .topbar-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #C58022;
-    transition: width 0.3s ease;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #C58022;
+  transition: width 0.3s ease;
 }
 
 .topbar-menu li a:hover {
-    color: #233528;
+  color: #233528;
 }
 
 .topbar-menu li a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
-/* --- Right-Side Actions & Contact --- */
+/* Active Page Styles */
+.topbar-menu li a.active {
+  color: #C58022;
+  font-weight: 700;
+  position: relative;
+}
+
+.topbar-menu li a.active::after {
+  width: 100%;
+  background: linear-gradient(90deg, #C58022, #9E671C);
+  height: 3px;
+  animation: activeGlow 2s ease-in-out infinite;
+}
+
+/* Active indicator dot */
+.active-indicator {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #C58022, #9E671C);
+  border-radius: 50%;
+  animation: activePulse 2s ease-in-out infinite;
+}
+
+/* Active animations */
+@keyframes activeGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(197, 128, 34, 0.5);
+    opacity: 1;
+  }
+  50% { 
+    box-shadow: 0 0 15px rgba(197, 128, 34, 0.8);
+    opacity: 0.8;
+  }
+}
+
+@keyframes activePulse {
+  0%, 100% { 
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: translateX(-50%) scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+/* Page transition effect */
+.topbar-menu li a.active {
+  background: linear-gradient(135deg, transparent 0%, rgba(197, 128, 34, 0.1) 50%, transparent 100%);
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 0 -15px;
+}
+
+/* Right Side Actions */
 .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Reduced gap */
-    justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-self: end;
 }
 
 .topbar-actions, .topbar-contact {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Call-to-Action Buttons (e.g., Wishlist, Phone) */
+/* Action Icons */
 .contact-icon, .topbar-wishlist {
-    cursor: pointer;
-    color: #6B7280;
-    font-size: 22px;
-    padding: 8px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  cursor: pointer;
+  color: #6B7280;
+  font-size: 22px;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .contact-icon:hover, .topbar-wishlist:hover {
-    background-color: #F3F4F6;
-    color: #C58022;
-    transform: scale(1.1);
+  background-color: #F3F4F6;
+  color: #C58022;
+  transform: scale(1.1);
 }
 
 .wishlist-icon.active {
-    color: #EF4444;
+  color: #EF4444;
+  animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
 /* WhatsApp Button */
 .whatsapp-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    padding: 10px 18px;
-    border-radius: 25px;
-    background-color: #10B981;
-    color: white;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 25px;
+  background-color: #10B981;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .whatsapp-container:hover {
-    background-color: #047857;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  background-color: #047857;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .whatsapp-container .whatsapp-icon {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-/* --- Mobile Menu Toggle --- */
+/* Mobile Menu Toggle */
 .topbar-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 24px; /* Reduced from 28px */
-    height: 20px; /* Reduced from 24px */
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin-right: 5px; /* Add small margin to prevent cutoff */
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-right: 5px;
 }
 
 .topbar-toggle span {
-    width: 24px; /* Reduced from 28px */
-    height: 3px;
-    background-color: #233528;
-    border-radius: 3px;
-    transition: all 0.3s ease;
+  width: 24px;
+  height: 3px;
+  background-color: #233528;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  transform-origin: center;
 }
 
-/* --- Responsive Styles --- */
+/* Animated hamburger menu */
+.topbar-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.topbar-toggle.active span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.topbar-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 992px) {
-    .topbar-menu, .topbar-actions {
-        display: none;
-    }
+  .topbar-menu, .topbar-actions {
+    display: none;
+  }
 
-    .topbar-toggle {
-        display: flex;
-    }
+  .topbar-toggle {
+    display: flex;
+  }
 
-    .topbar-container {
-        grid-template-columns: auto 1fr auto;
-        justify-content: space-between;
-        padding: 0 10px; /* Reduced padding for mobile */
-        gap: 10px; /* Reduced gap */
-    }
+  .topbar-container {
+    grid-template-columns: auto 1fr auto;
+    justify-content: space-between;
+    padding: 0 10px;
+    gap: 10px;
+  }
 
-    .topbar-right {
-        justify-self: end;
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Reduced gap */
-    }
+  .topbar-right {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-    .whatsapp-container {
-        display: flex;
-        padding: 8px 14px; /* Slightly reduced padding */
-    }
+  .whatsapp-container {
+    padding: 8px 14px;
+  }
 
-    /* Mobile Menu (when active) */
-    .topbar-menu.active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        padding: 0;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-        gap: 0;
-        border-top: 1px solid #E5E7EB;
-    }
+  /* Mobile Menu */
+  .topbar-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    gap: 0;
+    border-top: 1px solid #E5E7EB;
+    animation: slideDown 0.3s ease-out;
+  }
 
-    .topbar-menu.active li {
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid #F3F4F6;
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
     }
-    
-    .topbar-menu.active li:last-child {
-        border-bottom: none;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-    
-    .topbar-menu.active li a {
-        padding: 20px 15px;
-        display: block;
-        width: 100%;
-        border-radius: 0;
-    }
+  }
 
-    .topbar-menu.active li a:hover {
-        background-color: #F3F4F6;
-        color: #C58022;
-    }
-    
-    .topbar-menu.active li a::after {
-        display: none;
-    }
+  .topbar-menu.active li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #F3F4F6;
+  }
+  
+  .topbar-menu.active li:last-child {
+    border-bottom: none;
+  }
+  
+  .topbar-menu.active li a {
+    padding: 20px 15px;
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+    background: none !important;
+  }
+
+  .topbar-menu.active li a:hover {
+    background-color: #F3F4F6 !important;
+    color: #C58022;
+  }
+  
+  .topbar-menu.active li a.active {
+    background: linear-gradient(135deg, #C58022, #9E671C) !important;
+    color: white;
+  }
+  
+  .topbar-menu.active li a::after {
+    display: none;
+  }
+
+  /* Hide active indicator on mobile */
+  .active-indicator {
+    display: none;
+  }
+
+  /* Mobile active indicator - left border */
+  .topbar-menu.active li a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #C58022, #9E671C);
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { width: 0; }
+    to { width: 4px; }
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .topbar {
-        padding: 0 10px; /* Further reduced padding */
-    }
-    
-    .topbar-container {
-        height: 60px;
-        grid-template-columns: auto 1fr auto;
-        padding: 0 5px; /* Very small padding */
-        gap: 8px; /* Minimal gap */
-    }
-    
-    .topbar-logo img {
-        max-height: 40px; /* Smaller logo for tiny screens */
-    }
-    
-    .topbar-toggle {
-        width: 22px; /* Even smaller for very small screens */
-        height: 18px;
-        margin-right: 3px;
-    }
-    
-    .topbar-toggle span {
-        width: 22px;
-        height: 2.5px; /* Slightly thinner lines */
-    }
-    
-    .whatsapp-container {
-        padding: 6px 10px; /* Smaller padding */
-        font-size: 12px; /* Smaller text */
-    }
-    
-    .whatsapp-container .whatsapp-icon {
-        font-size: 16px; /* Smaller icon */
-    }
-    
-    /* Adjust mobile menu for smaller screens */
-    .topbar-menu.active {
-        top: 60px;
-    }
-    
-    .topbar-menu.active li a {
-        padding: 18px 15px;
-    }
+  .topbar {
+    padding: 0 10px;
+  }
+  
+  .topbar-container {
+    height: 60px;
+    padding: 0 5px;
+    gap: 8px;
+  }
+  
+  .topbar-logo img {
+    max-height: 40px;
+  }
+  
+  .topbar-toggle {
+    width: 22px;
+    height: 18px;
+    margin-right: 3px;
+  }
+  
+  .topbar-toggle span {
+    width: 22px;
+    height: 2.5px;
+  }
+  
+  .whatsapp-container {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .whatsapp-container .whatsapp-icon {
+    font-size: 16px;
+  }
+  
+  .topbar-menu.active {
+    top: 60px;
+  }
+  
+  .topbar-menu.active li a {
+    padding: 18px 15px;
+  }
 }
 
-/* Extra small devices (iPhone SE, etc.) */
 @media screen and (max-width: 375px) {
-    .topbar {
-        padding: 0 8px;
-    }
-    
-    .topbar-container {
-        padding: 0 3px;
-        gap: 5px;
-    }
-    
-    .topbar-logo img {
-        max-height: 35px;
-    }
-    
-    .topbar-toggle {
-        width: 20px;
-        height: 16px;
-        margin-right: 2px;
-    }
-    
-    .topbar-toggle span {
-        width: 20px;
-        height: 2px;
-    }
-    
-    .whatsapp-container {
-        padding: 5px 8px;
-        font-size: 11px;
-    }
-    
-    .whatsapp-container .whatsapp-icon {
-        font-size: 14px;
-    }
+  .topbar {
+    padding: 0 8px;
+  }
+  
+  .topbar-container {
+    padding: 0 3px;
+    gap: 5px;
+  }
+  
+  .topbar-logo img {
+    max-height: 35px;
+  }
+  
+  .topbar-toggle {
+    width: 20px;
+    height: 16px;
+    margin-right: 2px;
+  }
+  
+  .topbar-toggle span {
+    width: 20px;
+    height: 2px;
+  }
+  
+  .whatsapp-container {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  
+  .whatsapp-container .whatsapp-icon {
+    font-size: 14px;
+  }
 }
 
-/* Very small devices */
 @media screen and (max-width: 320px) {
-    .topbar-container {
-        padding: 0 2px;
-        gap: 3px;
-    }
-    
-    .topbar-logo img {
-        max-height: 32px;
-    }
-    
-    .topbar-toggle {
-        width: 18px;
-        height: 15px;
-    }
-    
-    .topbar-toggle span {
-        width: 18px;
-    }
+  .topbar-container {
+    padding: 0 2px;
+    gap: 3px;
+  }
+  
+  .topbar-logo img {
+    max-height: 32px;
+  }
+  
+  .topbar-toggle {
+    width: 18px;
+    height: 15px;
+  }
+  
+  .topbar-toggle span {
+    width: 18px;
+  }
 }
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

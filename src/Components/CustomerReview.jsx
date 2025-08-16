@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useRef } from "react";
 import "../ComponentCss/CustomerReview.css";
 
-// Import all customer images
+// Customer avatars
 import luffyImg from "/images/luffy.jpg";
 import img413842 from "/images/413842.jpg";
 import img12345 from "/images/12345.avif";
@@ -16,8 +16,7 @@ const CustomerReview = () => {
       location: "Singapore",
       avatar: luffyImg,
       email: "@ecostruct.sg",
-      review:
-        "I've been sourcing bamboo from this team for years and every shipment has been flawless. Service is top-notch, and the customer service is responsive and professional. Highly recommended for any large-scale eco-construction projects.",
+      review: "I've been sourcing bamboo from this team for years and every shipment has been flawless. Service is top-notch, and the customer service is responsive and professional. Highly recommended for any large-scale eco-construction projects.",
       score: 4.2,
       verified: true,
     },
@@ -28,8 +27,7 @@ const CustomerReview = () => {
       location: "India",
       avatar: img413842,
       email: "anita.sharma@greeninteriors.in",
-      review:
-        "Their bamboo panels added such a natural charm to our eco-resort. What impressed us the most was their dedication to sustainability and detail. Truly a reliable partner for green design needs.",
+      review: "Their bamboo panels added such a natural charm to our eco-resort. What impressed us the most was their dedication to sustainability and detail. Truly a reliable partner for green design needs.",
       score: 4.8,
       verified: true,
     },
@@ -40,8 +38,7 @@ const CustomerReview = () => {
       location: "Brazil",
       avatar: img12345,
       email: "@carlosdesign",
-      review:
-        "Consistent quality and excellent service delivery. We've been working with them for over 2 years now and their reliability and customer support is unmatched. Professional and efficient team for large-scale construction projects.",
+      review: "Consistent quality and excellent service delivery. We've been working with them for over 2 years now and their reliability and customer support is unmatched. Professional and efficient team for large-scale construction projects.",
       score: 4.6,
       verified: true,
     },
@@ -52,8 +49,7 @@ const CustomerReview = () => {
       location: "USA",
       avatar: img123,
       email: "@sustainablehomes",
-      review:
-        "Outstanding bamboo quality and timely delivery. The team goes above and beyond to ensure customer satisfaction. Their eco-friendly approach aligns perfectly with our sustainability goals.",
+      review: "Outstanding bamboo quality and timely delivery. The team goes above and beyond to ensure customer satisfaction. Their eco-friendly approach aligns perfectly with our sustainability goals.",
       score: 4.7,
       verified: true,
     },
@@ -64,19 +60,18 @@ const CustomerReview = () => {
       location: "South Korea",
       avatar: img413842,
       email: "@urbandev.kr",
-      review:
-        "Exceptional service and premium quality materials. Their bamboo products have transformed our construction projects. Highly recommend for anyone looking for sustainable building solutions.",
+      review: "Exceptional service and premium quality materials. Their bamboo products have transformed our construction projects. Highly recommend for anyone looking for sustainable building solutions.",
       score: 4.9,
       verified: true,
     },
   ];
 
-  // Create multiple copies for seamless infinite scroll
+  // Duplicate reviews for infinite scroll effect
   const infiniteReviews = [...reviews, ...reviews, ...reviews, ...reviews];
 
   const containerRef = useRef(null);
 
-  // Don Score Component
+  // Star rating component
   const DonScore = ({ score }) => {
     const dons = [];
     const fullDons = Math.floor(score);
@@ -84,17 +79,11 @@ const CustomerReview = () => {
 
     for (let i = 0; i < 5; i++) {
       if (i < fullDons) {
-        dons.push(
-          <span key={i} className="don filled">★</span>
-        );
+        dons.push(<span key={i} className="don filled">★</span>);
       } else if (i === fullDons && hasHalfDon) {
-        dons.push(
-          <span key={i} className="don half-filled">★</span>
-        );
+        dons.push(<span key={i} className="don half-filled">★</span>);
       } else {
-        dons.push(
-          <span key={i} className="don empty">★</span>
-        );
+        dons.push(<span key={i} className="don empty">★</span>);
       }
     }
 
@@ -139,9 +128,7 @@ const CustomerReview = () => {
                       <div className="customer-name-section">
                         <h4 className="customer-name">{review.name}</h4>
                         {review.verified && (
-                          <span className="verified-badge">
-                            ✔ Verified
-                          </span>
+                          <span className="verified-badge">✔ Verified</span>
                         )}
                       </div>
                       <p className="customer-company">

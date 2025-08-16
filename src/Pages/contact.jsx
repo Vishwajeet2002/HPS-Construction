@@ -30,9 +30,9 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  // ✨ Initialize EmailJS
+  // Initialize EmailJS
   useEffect(() => {
-    emailjs.init("aalvm8cdhpgqGnbdN"); // Replace with your EmailJS public key
+    emailjs.init("aalvm8cdhpgqGnbdN");
   }, []);
 
   const handleInputChange = (e) => {
@@ -47,7 +47,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // ✨ Send Email via EmailJS
+      // Send Email via EmailJS
       await emailjs.send("service_xz17hoo", "template_ergrx3a", {
         from_name: formData.name,
         from_email: formData.email,
@@ -62,9 +62,9 @@ const Contact = () => {
         }),
       });
 
-      // ✨ Send to WhatsApp
+      // Send to WhatsApp
       const whatsappMessage = encodeURIComponent(
-        `🏗️ *New Inquiry from HPS Constructions Website*
+`🏗️ *New Inquiry from HPS Constructions Website*
 
 👤 *Name:* ${formData.name}
 📧 *Email:* ${formData.email}
@@ -107,9 +107,9 @@ Please contact me regarding bamboo and POP services. Thank you!`
       setIsSubmitting(false);
       setSubmitStatus('error');
       
-      // Still send WhatsApp message as fallback
+      // WhatsApp fallback
       const fallbackMessage = encodeURIComponent(
-        `🏗️ *HPS Constructions Inquiry*
+`🏗️ *HPS Constructions Inquiry*
 
 👤 ${formData.name}
 📧 ${formData.email}
@@ -121,7 +121,7 @@ Please contact me regarding bamboo and POP services. Thank you!`
 Please contact me for bamboo and POP services.`
       );
       
-      window.open(`https://wa.me/919555633827?text=${fallbackMessage}`, '_blank');
+      window.open(`https://wa.me/919565550142?text=${fallbackMessage}`, '_blank');
       
       setTimeout(() => {
         setSubmitStatus(null);
@@ -158,8 +158,8 @@ Please contact me for bamboo and POP services.`
     {
       icon: <FaEnvelope />,
       title: 'Email',
-      info: 'haripalsingh2580@gmailcom',
-      action: () => window.location.href = 'mailto:haripalsingh2580@gmailcom',
+      info: 'haripalsingh2580@gmail.com',
+      action: () => window.location.href = 'mailto:haripalsingh2580@gmail.com',
       color: '#dc2626'
     },
     {
@@ -227,7 +227,7 @@ Please contact me for bamboo and POP services.`
         </div>
       </section>
 
-      {/* Main Contact Form Section */}
+      {/* Contact Form Section */}
       <section className="contact-form-section">
         <div className="container">
           <div className="form-wrapper">
@@ -267,9 +267,8 @@ Please contact me for bamboo and POP services.`
                 <div className="form-header">
                   <h3>Send Us A Message</h3>
                   <p>Fill out the form and we'll get back to you within 24 hours</p>
-                  {/* ✨ Added dual sending info */}
                   <div className="dual-send-info">
-                    📧 Your message will be sent from here
+                    📧 Your message will be sent instantly via Email & WhatsApp
                   </div>
                 </div>
 
@@ -298,7 +297,6 @@ Please contact me for bamboo and POP services.`
                   </div>
                 </div>
 
-                {/* ✨ FIXED: Email field centered and full width */}
                 <div className="form-group email-centered">
                   <label>Email Address *</label>
                   <input
@@ -362,7 +360,7 @@ Please contact me for bamboo and POP services.`
                   ) : (
                     <>
                       <FaPaperPlane />
-                      Click here
+                      Send Message
                     </>
                   )}
                 </button>

@@ -1,9 +1,7 @@
-// src/Components/QueryForm.jsx
 import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import '../ComponentCss/queryForm.css';
 
-/* ---------------------------------- options -------------------------------- */
 const services = [
   'Bamboo Flooring',
   'Bamboo Wall Panels',
@@ -15,83 +13,85 @@ const services = [
   'Custom Solutions'
 ];
 
-/* --------------------------------------------------------------------------- */
 const QueryForm = () => {
   const [isFloatingVisible, setIsFloatingVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasAutoOpened, setHasAutoOpened] = useState(false);
-
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: '',   // mandatory
-    query: ''      // optional
+    service: '',
+    query: ''
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState(null);
   const [errors, setErrors] = useState({});
 
-  /* --------------------------- initialise EmailJS -------------------------- */
+  // Initialize EmailJS
   useEffect(() => {
     emailjs.init('aalvm8cdhpgqGnbdN');
   }, []);
 
-  /* ------------------------------ auto-open logic -------------------------- */
+  // Auto-open modal after 4 seconds
   useEffect(() => {
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (!hasAutoOpened) {
         setIsModalOpen(true);
         setHasAutoOpened(true);
       }
     }, 4000);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, [hasAutoOpened]);
 
-  useEffect(() => {
-    const focusOpen = () => hasAutoOpened && setTimeout(() => setIsModalOpen(true), 1500);
-    document.addEventListener('visibilitychange', focusOpen);
-    window.addEventListener('focus', focusOpen);
-    return () => {
-      document.removeEventListener('visibilitychange', focusOpen);
-      window.removeEventListener('focus', focusOpen);
-    };
-  }, [hasAutoOpened]);
-
-  /* --------------------------- floating-button logic ----------------------- */
+  // Show floating button when modal is closed
   useEffect(() => {
     if (!isModalOpen && hasAutoOpened) {
-      const t = setTimeout(() => setIsFloatingVisible(true), 3000);
-      return () => clearTimeout(t);
+      const timer = setTimeout(() => setIsFloatingVisible(true), 3000);
+      return () => clearTimeout(timer);
     }
   }, [isModalOpen, hasAutoOpened]);
 
-  /* ------------------------------ helpers ---------------------------------- */
+  // Re-open modal on focus return
+  useEffect(() => {
+    const handleFocusReturn = () => {
+      if (hasAutoOpened) {
+        setTimeout(() => setIsModalOpen(true), 1500);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleFocusReturn);
+    window.addEventListener('focus', handleFocusReturn);
+    return () => {
+      document.removeEventListener('visibilitychange', handleFocusReturn);
+      window.removeEventListener('focus', handleFocusReturn);
+    };
+  }, [hasAutoOpened]);
+
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(p => ({ ...p, [name]: value }));
-    if (errors[name]) setErrors(p => ({ ...p, [name]: '' }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim() || formData.name.trim().length < 2)
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
+    }
 
-    if (
-      !formData.phone.trim() ||
-      !/^[+]?[\d\s\-\(\)]{7,15}$/.test(formData.phone)
-    )
+    if (!formData.phone.trim() || !/^[+]?[\d\s\-\(\)]{7,15}$/.test(formData.phone)) {
       newErrors.phone = 'Please enter a valid phone number';
+    }
 
-    if (!formData.service)
+    if (!formData.service) {
       newErrors.service = 'Please select the service you need';
+    }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length) {
@@ -101,8 +101,7 @@ const QueryForm = () => {
     return true;
   };
 
-  /* ------------------------------- submit ---------------------------------- */
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     setIsSubmitting(true);
@@ -136,12 +135,11 @@ const QueryForm = () => {
 
 Please contact me regarding my construction needs.`
       );
+      
       window.open(`https://wa.me/919565550142?text=${whatsappMessage}`, '_blank');
-
       showToast('🎉 Message sent via Email & WhatsApp!', 'success');
       setFormData({ name: '', phone: '', service: '', query: '' });
 
-      /* close modal then show button again */
       setTimeout(() => {
         setIsModalOpen(false);
         setTimeout(() => setIsFloatingVisible(true), 8000);
@@ -154,13 +152,15 @@ Please contact me regarding my construction needs.`
     }
   };
 
-  /* ------------------------------ rendering -------------------------------- */
   return (
     <>
-      {/* floating contact button */}
+      {/* Floating Contact Button */}
       {isFloatingVisible && !isModalOpen && hasAutoOpened && (
         <div className={`floating-contact-widget ${isFloatingVisible ? 'visible' : ''}`}>
-          <div className="floating-button" onClick={() => { setIsModalOpen(true); setIsFloatingVisible(false); }}>
+          <div className="floating-button" onClick={() => { 
+            setIsModalOpen(true); 
+            setIsFloatingVisible(false); 
+          }}>
             <div className="floating-icon">💬</div>
             <div className="floating-text">Need Help?</div>
             <div className="floating-pulse"></div>
@@ -168,7 +168,7 @@ Please contact me regarding my construction needs.`
         </div>
       )}
 
-      {/* modal */}
+      {/* Modal */}
       {isModalOpen && (
         <div className="contact-overlay modal-open auto-open">
           <div className="contact-container modal scrollable">
@@ -198,7 +198,6 @@ Please contact me regarding my construction needs.`
               )}
 
               <form className="contact-form" onSubmit={handleSubmit}>
-                {/* name */}
                 <div className="form-group">
                   <label>Full Name *</label>
                   <input
@@ -213,7 +212,6 @@ Please contact me regarding my construction needs.`
                   {errors.name && <span className="error-message">{errors.name}</span>}
                 </div>
 
-                {/* service */}
                 <div className="form-group">
                   <label>Service Needed *</label>
                   <select
@@ -225,14 +223,13 @@ Please contact me regarding my construction needs.`
                     required
                   >
                     <option value="">Select a service</option>
-                    {services.map(s => (
-                      <option key={s} value={s}>{s}</option>
+                    {services.map(service => (
+                      <option key={service} value={service}>{service}</option>
                     ))}
                   </select>
                   {errors.service && <span className="error-message">{errors.service}</span>}
                 </div>
 
-                {/* phone */}
                 <div className="form-group">
                   <label>Phone Number *</label>
                   <input
@@ -247,7 +244,6 @@ Please contact me regarding my construction needs.`
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
 
-                {/* optional query */}
                 <div className="form-group">
                   <label>Your Quantity & Unit or Query</label>
                   <textarea
@@ -275,7 +271,7 @@ Please contact me regarding my construction needs.`
         </div>
       )}
 
-      {/* toast */}
+      {/* Toast Notifications */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
           <span className="toast-message">{toast.message}</span>

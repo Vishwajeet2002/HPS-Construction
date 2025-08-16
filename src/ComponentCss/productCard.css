@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* Carousel Container */
 .infinite-carousel {
   width: 100%;
   overflow: hidden;
   padding: 50px 0;
-  /* background: linear-gradient(135deg, #F3F4F6 0%, #EEF2F7 100%); */
   position: relative;
   cursor: grab;
 }
@@ -26,6 +26,7 @@
   transform: translateX(var(--mouse-x, 0px));
 }
 
+/* Infinite scroll animation - moves exactly 4 cards worth */
 @keyframes infiniteScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-340px * 4 - 25px * 4)); }
@@ -41,6 +42,7 @@
   z-index: 10;
 }
 
+/* Main Card */
 .hps-card {
   width: 320px;
   height: 420px;
@@ -57,8 +59,11 @@
   cursor: pointer;
   transform-style: preserve-3d;
   animation: cardBreathe 4s ease-in-out infinite;
+  contain: layout style paint;
+  will-change: transform;
 }
 
+/* Subtle breathing animation */
 @keyframes cardBreathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.02); }
@@ -69,8 +74,10 @@
   transform: translateY(-12px) scale(1.03);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
   border-color: #233528;
+  will-change: transform, box-shadow;
 }
 
+/* Gradient border effect on hover */
 .hps-card::after {
   content: '';
   position: absolute;
@@ -89,6 +96,7 @@
   opacity: 0.3;
 }
 
+/* Top accent line */
 .hps-card::before {
   content: '';
   position: absolute;
@@ -107,6 +115,7 @@
   transform: scaleX(1);
 }
 
+/* Card Image Section */
 .card-image {
   height: 210px;
   position: relative;
@@ -147,6 +156,7 @@
   opacity: 0.8;
 }
 
+/* Card Content Section */
 .card-content {
   height: 210px;
   padding: 16px;
@@ -175,6 +185,7 @@
   overflow: hidden;
 }
 
+/* Shimmer effect on title */
 .card-title::before {
   content: '';
   position: absolute;
@@ -182,12 +193,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(35, 53, 40, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(35, 53, 40, 0.2), transparent);
   transition: left 0.6s ease;
 }
 
@@ -222,6 +228,7 @@
   color: #374151;
 }
 
+/* Expand description on hover */
 @keyframes textReveal {
   from {
     max-height: 2.8em;
@@ -234,6 +241,7 @@
   }
 }
 
+/* Rating and Price Row */
 .rating-price-row {
   display: flex;
   justify-content: space-between;
@@ -254,22 +262,6 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-}
-
-.rating-section::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  transform: translate(-50%, -50%);
-  transition: all 0.6s ease;
-}
-
-.hps-card:hover .rating-section::before {
-  width: 200px;
-  height: 200px;
 }
 
 .rating-section:hover {
@@ -327,7 +319,6 @@
   align-items: center;
   gap: 2px;
   justify-content: center;
-  font-size: xx-large;
 }
 
 .rating-number {
@@ -347,6 +338,7 @@
   font-weight: 600;
 }
 
+/* Price Section */
 .price-section {
   flex: 1;
   min-width: 0;
@@ -361,6 +353,7 @@
   overflow: hidden;
 }
 
+/* Shimmer effect on price */
 .price-section::after {
   content: '';
   position: absolute;
@@ -424,6 +417,7 @@
   display: inline-block;
 }
 
+/* Action Buttons */
 .card-actions {
   display: flex;
   gap: 8px;
@@ -453,10 +447,11 @@
 
 .btn-share:hover,
 .btn-learn:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-1px) scale(1.05);
   box-shadow: 0 8px 20px rgba(35, 53, 40, 0.4);
 }
 
+/* Button ripple effect */
 .btn-share::before,
 .btn-learn::before {
   content: '';
@@ -486,7 +481,6 @@
 .btn-share:hover {
   background: #233528;
   color: white;
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(35, 53, 40, 0.3);
 }
 
@@ -498,10 +492,10 @@
 
 .btn-learn:hover {
   background: linear-gradient(135deg, #1A271E, #2F4A36);
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(35, 53, 40, 0.4);
 }
 
+/* Responsive Design */
 @media (max-width: 1024px) {
   .infinite-carousel {
     padding: 40px 20px;
@@ -611,15 +605,7 @@
   }
 }
 
-.hps-card {
-  contain: layout style paint;
-  will-change: transform;
-}
-
-.hps-card:hover {
-  will-change: transform, box-shadow;
-}
-
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .carousel-track,
   .hps-card,
