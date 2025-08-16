@@ -6,7 +6,7 @@ import ProductCard from "../Components/productCard";
 import Poster from "../Components/poster";
 import CustomerReview from "../Components/CustomerReview";
 import Footer from "./footer";
-import ImageSlider from "../Components/ImageSlider";
+import ImageSlider from "../Components/imageSlider";
 import "../Style/Home.css";
 
 const Home = () => {
