@@ -1,201 +1,153 @@
-import React, { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
-import '../ComponentCss/queryForm.css';
+import React, { useState, useEffect, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { useUser } from "../context/UserContext";
+import "../ComponentCss/queryForm.css";
 
 const services = [
-  'Bamboo Flooring',
-  'Bamboo Wall Panels',
-  'Bamboo Furniture',
-  'POP Ceiling Design',
-  'POP Wall Installation',
-  'POP Decorative Items',
-  'Bulk Supply',
-  'Custom Solutions'
+  "Bamboo Flooring",
+  "Bamboo Wall Panels", 
+  "Bamboo Furniture",
+  "POP Ceiling Design",
+  "POP Wall Installation",
+  "POP Decorative Items",
+  "Bulk Supply",
+  "Custom Solutions",
 ];
 
+// Global variable to track if modal was shown (survives component remounts)
+let globalModalShown = false;
+
 const QueryForm = () => {
+  const { updateUserData } = useUser();
   const [isFloatingVisible, setIsFloatingVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hasAutoOpened, setHasAutoOpened] = useState(false);
-  const [userHasInteracted, setUserHasInteracted] = useState(false); // Track if user filled form
+  const [userHasInteracted, setUserHasInteracted] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    service: '',
-    query: ''
+    name: "",
+    phone: "",
+    service: "",
+    query: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState(null);
   const [errors, setErrors] = useState({});
+  
+  const timerRef = useRef(null);
 
   // Initialize EmailJS
   useEffect(() => {
-    emailjs.init('aalvm8cdhpgqGnbdN');
+    emailjs.init("aalvm8cdhpgqGnbdN");
   }, []);
 
-  // Auto-open modal after 4 seconds
+  // Check both sessionStorage AND global variable on mount
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!hasAutoOpened) {
-        setIsModalOpen(true);
-        setHasAutoOpened(true);
-      }
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, [hasAutoOpened]);
-
-  // Show floating button when modal is closed
-  useEffect(() => {
-    if (!isModalOpen && hasAutoOpened) {
-      const timer = setTimeout(() => setIsFloatingVisible(true), 3000);
-      return () => clearTimeout(timer);
+    const sessionModalShown = sessionStorage.getItem("modalShown");
+    
+    // If either global variable OR sessionStorage says modal was shown
+    if (globalModalShown || sessionModalShown === "true") {
+      setIsFloatingVisible(true);
+      return;
     }
-  }, [isModalOpen, hasAutoOpened]);
-
-  // Auto-fill phone number detection
-  useEffect(() => {
-    const tryAutoFill = () => {
-      // Try to get phone from browser autofill
-      const phoneInput = document.querySelector('input[name="phone"]');
-      if (phoneInput) {
-        // Trigger autofill
-        phoneInput.focus();
-        phoneInput.click();
-        
-        // Check for autofill after a delay
-        setTimeout(() => {
-          if (phoneInput.value && phoneInput.value.trim()) {
-            setFormData(prev => ({ ...prev, phone: phoneInput.value.trim() }));
-            setUserHasInteracted(true);
-          }
-        }, 500);
-
-        // Try alternative methods
-        const testInput = document.createElement('input');
-        testInput.type = 'tel';
-        testInput.name = 'phone';
-        testInput.autocomplete = 'tel';
-        testInput.style.position = 'absolute';
-        testInput.style.left = '-9999px';
-        testInput.style.opacity = '0';
-        document.body.appendChild(testInput);
-        
-        testInput.focus();
-        
-        setTimeout(() => {
-          if (testInput.value && testInput.value.trim()) {
-            setFormData(prev => ({ ...prev, phone: testInput.value.trim() }));
-            setUserHasInteracted(true);
-          }
-          if (document.body.contains(testInput)) {
-            document.body.removeChild(testInput);
-          }
-        }, 1000);
+    
+    // First time ever - show modal after 4 seconds
+    timerRef.current = setTimeout(() => {
+      setIsModalOpen(true);
+      globalModalShown = true;
+      sessionStorage.setItem("modalShown", "true");
+    }, 4000);
+    
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
       }
     };
+  }, []);
 
-    if (isModalOpen) {
-      setTimeout(tryAutoFill, 200);
-    }
-  }, [isModalOpen]);
-
-  const showToast = (message, type = 'info') => {
+  const showToast = (message, type = "info") => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 4000);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    setUserHasInteracted(true); // Mark user as having interacted
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setUserHasInteracted(true);
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const validateMandatoryFields = () => {
     const newErrors = {};
-
-    if (!formData.name.trim() || formData.name.trim().length < 2) {
-      newErrors.name = 'Name is required (minimum 2 characters)';
-    }
-
-    if (!formData.phone.trim() || !/^[+]?[\d\s\-\(\)]{7,15}$/.test(formData.phone)) {
-      newErrors.phone = 'Valid phone number is required';
-    }
-
-    if (!formData.service) {
-      newErrors.service = 'Please select a service';
-    }
-
+    if (!formData.name.trim() || formData.name.trim().length < 2)
+      newErrors.name = "Name is required (minimum 2 characters)";
+    if (!formData.phone.trim() || !/^[+]?[\d\s\-()]{7,15}$/.test(formData.phone))
+      newErrors.phone = "Valid phone number is required";
+    if (!formData.service)
+      newErrors.service = "Please select a service";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim() || formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
-
-    if (!formData.phone.trim() || !/^[+]?[\d\s\-\(\)]{7,15}$/.test(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
-    }
-
-    if (!formData.service) {
-      newErrors.service = 'Please select the service you need';
-    }
-
+    if (!formData.name.trim() || formData.name.trim().length < 2)
+      newErrors.name = "Name must be at least 2 characters";
+    if (!formData.phone.trim() || !/^[+]?[\d\s\-()]{7,15}$/.test(formData.phone))
+      newErrors.phone = "Please enter a valid phone number";
+    if (!formData.service)
+      newErrors.service = "Please select the service you need";
     setErrors(newErrors);
     if (Object.keys(newErrors).length) {
-      showToast('Please fix the form errors before submitting', 'error');
+      showToast("Please fix the form errors before submitting", "error");
       return false;
     }
     return true;
   };
 
-  const sendEmailAndWhatsApp = async (actionType = 'submit') => {
+  const sendEmailAndWhatsApp = async (actionType = "submit") => {
     try {
-      // Send email
-      await emailjs.send('service_xz17hoo', 'template_ergrx3a', {
+      await emailjs.send("service_xz17hoo", "template_ergrx3a", {
         from_name: formData.name,
         phone_number: formData.phone,
         service_needed: formData.service,
-        user_query: formData.query || '—',
-        submission_time: new Date().toLocaleString('en-IN', {
-          timeZone: 'Asia/Kolkata',
-          dateStyle: 'full',
-          timeStyle: 'short'
+        user_query: formData.query || "No specific query provided",
+        submission_time: new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          dateStyle: "full",
+          timeStyle: "short",
         }),
-        interaction_type: `Query Form - ${actionType === 'cancel' ? 'Cancelled' : 'Submitted'}`
+        interaction_type: `Query Form - ${actionType === "cancel" ? "Cancelled" : "Submitted"}`,
       });
 
-      // Send WhatsApp message
       const whatsappMessage = encodeURIComponent(
-`🏗️ *${actionType === 'cancel' ? 'Cancelled' : 'New'} Query – HPS Constructions*
-
-👤 *Name:* ${formData.name}
-📞 *Phone:* ${formData.phone}
-🔧 *Service:* ${formData.service}
-📝 *Query:* ${formData.query || '—'}
-
-📅 *${actionType === 'cancel' ? 'Cancelled' : 'Submitted'}:* ${new Date().toLocaleString('en-IN', {
-  timeZone: 'Asia/Kolkata',
-  dateStyle: 'medium',
-  timeStyle: 'short'
-})}
-
-${actionType === 'cancel' 
-  ? 'User filled the form but cancelled. Please follow up!' 
-  : 'Please contact me regarding my construction needs.'}`
+        `🏗️ *${actionType === "cancel" ? "Cancelled" : "New"} Query – HPS Constructions*\n\n👤 *Name:* ${formData.name}\n📞 *Phone:* ${formData.phone}\n🔧 *Service:* ${formData.service}\n📝 *Query:* ${formData.query || "No specific query provided"}\n\n📅 *${actionType === "cancel" ? "Cancelled" : "Submitted"}:* ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" })}\n\n${actionType === "cancel" ? "User filled the form but cancelled. Please follow up!" : "Please contact me regarding my construction needs."}`
       );
-      
-      window.open(`https://wa.me/919565550142?text=${whatsappMessage}`, '_blank');
-      
+
+      window.open(`https://wa.me/919565550142?text=${whatsappMessage}`, "_blank");
       return true;
     } catch (error) {
-      console.error('Failed to send email/WhatsApp:', error);
-      return false;
+      console.error("Failed to send email/WhatsApp:", error);
+      throw error;
     }
+  };
+
+  const closeModal = () => {
+    // Store user data in context before closing modal
+    updateUserData({
+      name: formData.name,
+      phone: formData.phone,
+      service: formData.service,
+      query: formData.query,
+      submittedAt: new Date().toISOString()
+    });
+
+    // Set both global variable AND sessionStorage
+    globalModalShown = true;
+    sessionStorage.setItem("modalShown", "true");
+    setIsModalOpen(false);
+    setIsFloatingVisible(true);
+    setFormData({ name: "", phone: "", service: "", query: "" });
+    setErrors({});
+    setUserHasInteracted(false);
   };
 
   const handleSubmit = async (e) => {
@@ -204,58 +156,47 @@ ${actionType === 'cancel'
     setIsSubmitting(true);
 
     try {
-      await sendEmailAndWhatsApp('submit');
-      showToast('🎉 Message sent via Email & WhatsApp!', 'success');
-      setFormData({ name: '', phone: '', service: '', query: '' });
-
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setUserHasInteracted(false);
-        // Don't show floating button until user clicks it manually
-      }, 3000);
+      await sendEmailAndWhatsApp("submit");
+      showToast("🎉 Message sent via Email & WhatsApp!", "success");
+      setTimeout(closeModal, 2000);
     } catch (err) {
-      console.error(err);
-      showToast('❌ Failed to send email. WhatsApp message sent.', 'error');
+      console.error("Email/WhatsApp error:", err);
+      showToast("❌ Failed to send email. Please try again or contact us directly.", "error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleCancel = async () => {
-    // Check if user has filled mandatory fields
     if (!validateMandatoryFields()) {
-      showToast('Please fill in Name, Phone, and Service before cancelling', 'error');
+      showToast("Please fill in Name, Phone, and Service before cancelling", "error");
       return;
     }
-
     setIsSubmitting(true);
 
     try {
-      await sendEmailAndWhatsApp('cancel');
-      showToast('📝 Your details have been sent! We\'ll follow up with you.', 'success');
-      
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setUserHasInteracted(false);
-        setFormData({ name: '', phone: '', service: '', query: '' });
-        // Don't show floating button until user clicks it manually
-      }, 2000);
+      await sendEmailAndWhatsApp("cancel");
+      showToast("📝 Your details have been sent! We'll follow up with you.", "success");
+      setTimeout(closeModal, 2000);
     } catch (error) {
-      showToast('❌ Failed to send details. Please try again.', 'error');
+      console.error("Cancel error:", error);
+      showToast("❌ Failed to send details. Please try again.", "error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const handleFloatingButtonClick = () => {
+    setIsModalOpen(true);
+    setIsFloatingVisible(false);
+  };
+
   return (
     <>
-      {/* Floating Contact Button - Only show if user manually dismissed */}
+      {/* Floating Contact Button */}
       {isFloatingVisible && !isModalOpen && (
-        <div className={`floating-contact-widget ${isFloatingVisible ? 'visible' : ''}`}>
-          <div className="floating-button" onClick={() => { 
-            setIsModalOpen(true); 
-            setIsFloatingVisible(false); 
-          }}>
+        <div className={`floating-contact-widget ${isFloatingVisible ? "visible" : ""}`}>
+          <div className="floating-button" onClick={handleFloatingButtonClick}>
             <div className="floating-icon">💬</div>
             <div className="floating-text">Need Help?</div>
             <div className="floating-pulse"></div>
@@ -265,32 +206,48 @@ ${actionType === 'cancel'
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="query-modal-overlay">
+        <div className="query-modal-overlay" onClick={(e) => {
+          if (e.target === e.currentTarget && !userHasInteracted) {
+            closeModal();
+          }
+        }}>
           <div className="query-modal-container">
             <div className="query-modal-header">
-              <h2 className="query-modal-title">
-                {hasAutoOpened ? '👋 Welcome to HPS Constructions!' : 'Contact HPS Constructions'}
-              </h2>
-              {/* Removed close button - modal is now mandatory */}
+              <h2 className="query-modal-title">👋 Welcome to HPS Constructions!</h2>
+              <button
+                className="modal-close-btn"
+                onClick={closeModal}
+                type="button"
+                style={{
+                  background: "none",
+                  border: "none", 
+                  fontSize: "24px",
+                  cursor: "pointer",
+                  color: "#666",
+                  padding: "0",
+                  width: "30px",
+                  height: "30px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                ✕
+              </button>
             </div>
 
             <div className="query-modal-content">
               <p className="query-modal-subtitle">
-                {hasAutoOpened
-                  ? "We're here to help with all your bamboo and POP construction needs!"
-                  : 'Get in touch with us for your construction needs'}
+                We're here to help with all your bamboo and POP construction needs!
               </p>
 
               <div className="dual-send-info">
                 📧 Your message will be sent instantly via Email & WhatsApp
               </div>
 
-              {hasAutoOpened && (
-                <div className="welcome-message">
-                  🏗️ Tell us about your project and get expert advice on bamboo flooring,
-                  POP ceiling designs, and sustainable construction solutions.
-                </div>
-              )}
+              <div className="welcome-message">
+                🏗️ Tell us about your project and get expert advice on bamboo flooring, POP ceiling designs, and sustainable construction solutions.
+              </div>
 
               <form className="query-form" onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -302,7 +259,7 @@ ${actionType === 'cancel'
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
                     disabled={isSubmitting}
-                    className={errors.name ? 'error' : ''}
+                    className={errors.name ? "error" : ""}
                     required
                     autoComplete="name"
                   />
@@ -316,11 +273,11 @@ ${actionType === 'cancel'
                     value={formData.service}
                     onChange={handleInputChange}
                     disabled={isSubmitting}
-                    className={errors.service ? 'error' : ''}
+                    className={errors.service ? "error" : ""}
                     required
                   >
                     <option value="">Select a service</option>
-                    {services.map(service => (
+                    {services.map((service) => (
                       <option key={service} value={service}>{service}</option>
                     ))}
                   </select>
@@ -336,10 +293,10 @@ ${actionType === 'cancel'
                     onChange={handleInputChange}
                     placeholder="Enter your phone number"
                     disabled={isSubmitting}
-                    className={errors.phone ? 'error' : ''}
+                    className={errors.phone ? "error" : ""}
                     required
                     autoComplete="tel"
-                    pattern="[+]?[\d\s\-\(\)]{7,15}"
+                    pattern="[+]?[\d\s\-()]{7,15}"
                   />
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
@@ -356,28 +313,18 @@ ${actionType === 'cancel'
                   />
                 </div>
 
-                <button 
-                  type="submit" 
-                  className="submit-button" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? '📤 Sending…' : '🚀 Send Message'}
+                <button type="submit" className="submit-button" disabled={isSubmitting}>
+                  {isSubmitting ? "📤 Sending…" : "🚀 Send Message"}
                 </button>
 
-                <button 
-                  type="button" 
-                  className="cancel-button" 
-                  onClick={handleCancel}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? '📝 Saving Details…' : 'Cancel (We\'ll save your details)'}
+                <button type="button" className="cancel-button" onClick={handleCancel} disabled={isSubmitting}>
+                  {isSubmitting ? "📝 Saving Details…" : "Cancel (We'll save your details)"}
                 </button>
               </form>
 
               <div className="mandatory-notice">
                 <small>
-                  <strong>Note:</strong> Please fill in your Name, Phone, and Service before cancelling. 
-                  We'll send your details to our team for follow-up.
+                  <strong>Note:</strong> Please fill in your Name, Phone, and Service before cancelling. We'll send your details to our team for follow-up.
                 </small>
               </div>
             </div>

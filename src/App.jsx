@@ -1,6 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
 import Topbar from './Components/Topbar';
 import Home from './Pages/home';
 import ProductsPage from './Pages/products';
@@ -10,18 +11,20 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Topbar />
-      <ScrollToTop>
-        <Routes>
-          {/* Homepage ("/") now shows ProductsPage content */}
-          <Route path="/" element={<ProductsPage />} />
-          {/* About page ("/about") shows the old Home content */}
-          <Route path="/about" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </ScrollToTop>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Topbar />
+        <ScrollToTop>
+          <Routes>
+            {/* Homepage ("/") now shows ProductsPage content */}
+            <Route path="/" element={<ProductsPage />} />
+            {/* About page ("/about") shows the old Home content */}
+            <Route path="/about" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </ScrollToTop>
+      </Router>
+    </UserProvider>
   );
 }
 
