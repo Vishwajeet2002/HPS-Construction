@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart, FaPhone, FaWhatsapp } from "react-icons/fa";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom"; // Use Link for SPA navigation
 import "../ComponentCss/Topbar.css";
 
 const Topbar = () => {
@@ -10,13 +10,8 @@ const Topbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleWishlist = () => {
-    setIsWishlistActive(!isWishlistActive);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleWishlist = () => setIsWishlistActive(!isWishlistActive);
 
   const handlePhoneCall = () => {
     window.location.href = "tel:9565550142";
@@ -37,64 +32,33 @@ const Topbar = () => {
     return false;
   };
 
-  const handleNavigation = (e, path) => {
-    e.preventDefault();
-    if (path === "/") {
-      if (location.pathname === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        navigate("/");
-      }
-    } else if (path === "/about") {
-      navigate("/about");
-    } else if (path === "/contact") {
-      navigate("/contact");
-    }
-    setIsMenuOpen(false);
-  };
-
   return (
     <nav className="topbar">
       <div className="topbar-container">
-        {/* Logo - now routes to homepage (/) */}
-        <div className="topbar-logo" onClick={(e) => handleNavigation(e, "/")}>
+        {/* Logo - routes to homepage (/) */}
+        <div className="topbar-logo" onClick={() => navigate("/")}>
           <img src="/images/nlogo.png" alt="HPS Constructions Logo" />
         </div>
 
         {/* Navigation Links */}
         <ul className={`topbar-menu ${isMenuOpen ? "active" : ""}`}>
-          {/* Home - routes to / (ProductsPage content) */}
           <li>
-            <a
-              href="/"
-              onClick={(e) => handleNavigation(e, "/")}
-              className={isActive("/") ? "active" : ""}
-            >
+            <Link to="/" className={isActive("/") ? "active" : ""} onClick={() => setIsMenuOpen(false)}>
               Home
               {isActive("/") && <span className="active-indicator"></span>}
-            </a>
+            </Link>
           </li>
-          {/* About - routes to /about (old Home content) */}
           <li>
-            <a
-              href="/about"
-              onClick={(e) => handleNavigation(e, "/about")}
-              className={isActive("/about") ? "active" : ""}
-            >
+            <Link to="/about" className={isActive("/about") ? "active" : ""} onClick={() => setIsMenuOpen(false)}>
               About
               {isActive("/about") && <span className="active-indicator"></span>}
-            </a>
+            </Link>
           </li>
-          {/* Contact */}
           <li>
-            <a
-              href="/contact"
-              onClick={(e) => handleNavigation(e, "/contact")}
-              className={isActive("/contact") ? "active" : ""}
-            >
+            <Link to="/contact" className={isActive("/contact") ? "active" : ""} onClick={() => setIsMenuOpen(false)}>
               Contact
               {isActive("/contact") && <span className="active-indicator"></span>}
-            </a>
+            </Link>
           </li>
         </ul>
 

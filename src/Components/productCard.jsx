@@ -23,6 +23,17 @@ export default function ProductCard({
     emailjs.init('aalvm8cdhpgqGnbdN');
   }, []);
 
+  // Get user data from localStorage (persistent storage)
+  const getSavedUserData = () => {
+    try {
+      const savedData = localStorage.getItem('userData');
+      return savedData ? JSON.parse(savedData) : {};
+    } catch (error) {
+      console.error("Error parsing saved user data:", error);
+      return {};
+    }
+  };
+
   // Star rating component
   const StarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
@@ -60,14 +71,25 @@ export default function ProductCard({
     onCall();
   };
 
-  // Function to send email with user data from QueryForm
+  // Function to send email with user data from localStorage
   const sendEmailWithUserData = async () => {
+    const savedUserData = getSavedUserData();
+    const currentUserData = userData || {};
+    
+    // Combine saved data with current context data
+    const finalUserData = {
+      name: savedUserData.name || currentUserData.name || 'Website Visitor',
+      phone: savedUserData.phone || currentUserData.phone || 'Not provided',
+      service: savedUserData.service || currentUserData.service || title,
+      query: savedUserData.query || currentUserData.query || 'No specific query'
+    };
+    
     try {
       await emailjs.send('service_xz17hoo', 'template_ergrx3a', {
-        from_name: userData?.name || 'Website Visitor',
-        phone_number: userData?.phone || 'Not provided',
-        service_needed: userData?.service || title,
-        user_query: `${userData?.query || 'No specific query'} | Product Interest: ${title} (₹${price}/${unit}). ${description}`,
+        from_name: finalUserData.name,
+        phone_number: finalUserData.phone,
+        service_needed: finalUserData.service,
+        user_query: `${finalUserData.query} | Product Interest: ${title} (₹${price}/${unit}). ${description}`,
         submission_time: new Date().toLocaleString('en-IN', {
           timeZone: 'Asia/Kolkata',
           dateStyle: 'full',
@@ -78,18 +100,23 @@ export default function ProductCard({
       });
       
       console.log('Email sent with user data successfully');
-      return true;
+      return { success: true, userData: finalUserData };
     } catch (error) {
       console.error('Failed to send email with user data:', error);
-      return false;
+      return { success: false, userData: finalUserData };
     }
   };
 
   const handleLearnMore = async (e) => {
     e.stopPropagation();
     
-    // Check if user data exists
-    if (!userData || !userData.name || !userData.phone) {
+    const savedUserData = getSavedUserData();
+    const currentUserData = userData || {};
+    
+    // Check if user data exists in either localStorage or context
+    const hasUserData = (savedUserData.name && savedUserData.phone) || (currentUserData.name && currentUserData.phone);
+    
+    if (!hasUserData) {
       // Show message that user needs to fill query form first
       const modal = document.createElement('div');
       modal.className = 'contact-modal-overlay';
@@ -140,9 +167,9 @@ export default function ProductCard({
     }
     
     // Send email with user data
-    const emailSent = await sendEmailWithUserData();
+    const emailResult = await sendEmailWithUserData();
     
-    if (emailSent) {
+    if (emailResult.success) {
       // Create modal for contact options with user data
       const modal = document.createElement('div');
       modal.className = 'contact-modal-overlay';
@@ -157,7 +184,7 @@ export default function ProductCard({
               <span class="notification-icon">📧</span>
               <p>We've sent your interest with your contact details to our team!</p>
               <div class="user-details-preview">
-                <small>👤 ${userData.name} | 📞 ${userData.phone}</small>
+                <small>👤 ${emailResult.userData.name} | 📞 ${emailResult.userData.phone}</small>
               </div>
             </div>
             <p><strong>How would you like us to contact you?</strong></p>
@@ -178,7 +205,7 @@ export default function ProductCard({
               </button>
             </div>
             <div class="modal-footer-note">
-              <small>💡 Our team has your details: ${userData.name} (${userData.phone})</small>
+              <small>💡 Our team has your details: ${emailResult.userData.name} (${emailResult.userData.phone})</small>
             </div>
           </div>
         </div>
@@ -194,7 +221,7 @@ export default function ProductCard({
       // Handle WhatsApp (use actual user data)
       modal.querySelector('.whatsapp-option').onclick = () => {
         const message = encodeURIComponent(
-          `🏗️ *Interest in ${title}*\n\nHi HPS Constructions!\n\nName: ${userData.name}\nPhone: ${userData.phone}\n\nI'm interested in ${title} (₹${price}/${unit}).\n\n${description}\n\nOriginal Query: ${userData.query || 'General interest'}\n\nPlease provide more details about:\n• Availability\n• Installation process\n• Bulk pricing\n• Quality specifications\n\nThank you!`
+          `🏗️ *Interest in ${title}*\n\nHi HPS Constructions!\n\nName: ${emailResult.userData.name}\nPhone: ${emailResult.userData.phone}\n\nI'm interested in ${title} (₹${price}/${unit}).\n\n${description}\n\nOriginal Query: ${emailResult.userData.query || 'General interest'}\n\nPlease provide more details about:\n• Availability\n• Installation process\n• Bulk pricing\n• Quality specifications\n\nThank you!`
         );
         window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
         closeModal();
@@ -236,7 +263,9 @@ export default function ProductCard({
     onLearnMore();
   };
 
-  // REMOVED: handleCardClick navigation function and onClick from card
+  // Check if user data exists (from localStorage or context)
+  const savedUserData = getSavedUserData();
+  const hasUserData = (savedUserData.name && savedUserData.phone) || (userData?.name && userData?.phone);
 
   return (
     <div className="hps-card">
@@ -291,7 +320,7 @@ export default function ProductCard({
           <button className="btn-learn" onClick={handleLearnMore} title="Show Interest">
             <span className="btn-text">Learn More</span>
             <span className="btn-icon learn-icon">💬</span>
-            {userData && userData.name && (
+            {hasUserData && (
               <span className="user-indicator">✓</span>
             )}
           </button>

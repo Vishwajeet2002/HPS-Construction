@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../ComponentCss/poster.css";
 
 // Business images
@@ -7,6 +8,8 @@ import img413842 from "/images/413842.jpg";
 import logoImg from "/images/logo.png";
 
 const Poster = () => {
+  const navigate = useNavigate();
+
   const products = [
     { src: luffyImg, name: "Bamboo Dining Table", type: "bamboo" },
     { src: img413842, name: "Pop Art Chair", type: "pop" },
@@ -104,7 +107,12 @@ const Poster = () => {
               <div className="badge-cards-container">
                 <div className="badge-cards-track">
                   {products.map((item, idx) => (
-                    <div key={`card-${idx}`} className="badge-card">
+                    <div
+                      key={`card-${idx}`}
+                      className="badge-card"
+                      onClick={() => navigate("/")} // ← Fixed: Navigate to Home.jsx
+                      style={{cursor: 'pointer'}} // ← Added cursor pointer
+                    >
                       <div className="badge-card-image-full">
                         <img
                           src={item.src}
@@ -116,7 +124,7 @@ const Poster = () => {
                             e.target.style.display = 'flex';
                             e.target.style.alignItems = 'center';
                             e.target.style.justifyContent = 'center';
-                            e.target.innerHTML = '<span style="color: white; font-size: 14px;">Image not found</span>';
+                            e.target.alt = 'Image not found';
                           }}
                         />
                         <div className="badge-card-overlay">
@@ -143,3 +151,4 @@ const Poster = () => {
 };
 
 export default Poster;
+ 
