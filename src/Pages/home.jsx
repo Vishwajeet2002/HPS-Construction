@@ -233,7 +233,7 @@ const Home = () => { // ← Changed from ProductsPage
       <Footer />
 
       {/* QueryForm Component - Handles floating button and popup */}
-      {/* <QueryForm /> */}
+      <QueryForm />
     </div>
   );
 };
