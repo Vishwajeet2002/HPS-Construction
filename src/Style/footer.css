@@ -3,17 +3,22 @@
   color: #9CA3AF;
   padding: 60px 20px 20px;
   font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 10; /* FIXED: Added z-index to ensure footer appears above other elements */
 }
+
 .footer-container {
   max-width: 1300px;
   margin: 0 auto;
 }
+
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
   margin-bottom: 40px;
 }
+
 .footer-column {
   display: flex;
   flex-direction: column;
@@ -27,12 +32,14 @@
   align-self: flex-start;
   filter: brightness(1.2);
 }
+
 .company-description {
   font-size: 14px;
   line-height: 1.6;
   margin-bottom: 20px;
   color: rgba(255,255,255,0.8);
 }
+
 .social-links {
   display: flex;
   gap: 12px;
@@ -40,6 +47,7 @@
   margin: 0;
   flex-wrap: wrap;
 }
+
 .social-icon {
   display: flex;
   align-items: center;
@@ -53,11 +61,13 @@
   font-size: 16px;
   transition: all 0.3s ease;
 }
+
 .social-icon:hover {
   background-color: #C58022;
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(197,128,34,0.3);
 }
+
 /* Columns 2 & 3: Links */
 .column-title {
   font-size: 16px;
@@ -67,6 +77,7 @@
   position: relative;
   padding-bottom: 8px;
 }
+
 .column-title::after {
   content: '';
   position: absolute;
@@ -76,6 +87,7 @@
   height: 2px;
   background: #C58022;
 }
+
 .footer-links {
   list-style: none;
   padding: 0;
@@ -84,6 +96,7 @@
   flex-direction: column;
   gap: 8px;
 }
+
 .footer-links a {
   color: #9CA3AF;
   text-decoration: none;
@@ -91,10 +104,12 @@
   font-size: 14px;
   padding: 5px 0;
 }
+
 .footer-links a:hover {
   color: #C58022;
   padding-left: 3px;
 }
+
 /* Column 4: Newsletter */
 .newsletter-section p {
   font-size: 13px;
@@ -102,29 +117,38 @@
   margin-bottom: 12px;
   color: rgba(255,255,255,0.8);
 }
+
 .newsletter-form {
   display: flex;
   position: relative;
   width: 100%;
 }
+
 .newsletter-form input {
   width: 100%;
   padding: 10px 38px 10px 10px;
   border: 1px solid #4B5563;
   border-radius: 6px;
   background: #374151;
-  color: #000000;
+  color: #ffffff;
   font-size: 13px;
   outline: none;
   transition: border-color 0.3s ease;
   box-sizing: border-box;
+  -webkit-transition: border-color 0.3s ease;
+  -moz-transition: border-color 0.3s ease;
+  -ms-transition: border-color 0.3s ease;
+  -o-transition: border-color 0.3s ease;
 }
+
 .newsletter-form input:focus {
   border-color: #C58022;
 }
+
 .newsletter-form input::placeholder {
   color: rgba(255,255,255,0.6);
 }
+
 .newsletter-form button {
   position: absolute;
   right: 3px;
@@ -143,23 +167,111 @@
   justify-content: center;
   transition: background 0.3s;
 }
+
 .newsletter-form button:hover {
   background: #9E671C;
 }
-/* Footer Bottom */
+
+/* Footer Bottom with Agency Credit */
 .footer-bottom {
   border-top: 1px solid #4B5563;
-  padding-top: 12px;
-  margin-top: 12px;
-  text-align: center;
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
+  padding-top: 20px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 15; /* FIXED: Higher z-index for agency credit section */
 }
 
-/* --- Mobile & Small Screen Enhancements --- */
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.copyright-section p {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+.agency-credit-section {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 20; /* FIXED: Highest z-index for agency credit */
+}
+
+.agency-credit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.code-icon {
+  color: #C58022;
+  font-size: 14px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.agency-link {
+  color: #C58022;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: rgba(197, 128, 34, 0.1);
+  border: 1px solid rgba(197, 128, 34, 0.2);
+  position: relative;
+  z-index: 25; /* FIXED: Ensure agency link is clickable above floating button */
+}
+
+.agency-link:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #C58022, #9E671C);
+  border-color: #C58022;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(197, 128, 34, 0.3);
+}
+
+/* FIXED: Ensure floating button doesn't overlap footer content */
+.footer-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* FIXED: Add padding at bottom to prevent floating button overlap */
+.footer-section {
+  padding-bottom: 100px; /* Space for floating button */
+}
+
+/* Mobile & Small Screen Enhancements */
 @media (max-width: 768px) {
-  .footer-section { padding: 40px 10px 10px; }
-  .footer-container { padding: 0; }
+  .footer-section { 
+    padding: 40px 10px 120px; /* FIXED: More bottom padding on mobile */
+    z-index: 10;
+  }
+  
+  .footer-container { 
+    padding: 0; 
+  }
+  
   .footer-grid {
     display: grid;
     grid-template-areas:
@@ -170,44 +282,285 @@
     text-align: left;
     margin-bottom: 20px;
   }
-  .company-info { grid-area: company; }
-  .newsletter-section { grid-area: newsletter; }
-  .quick-links { grid-area: quick; }
-  .support { grid-area: support; }
-  .footer-column { align-items: flex-start; margin-bottom: 0; padding: 0 5px;}
-  .footer-logo { max-height: 46px; width: 36px; align-self: flex-start; margin-bottom: 10px;}
-  .column-title { font-size: 14px; margin-bottom: 8px; padding-bottom: 4px;}
-  .column-title::after { width: 20px; height: 2px; }
-  .footer-links { gap: 5px; text-align: left; }
-  .footer-links a { font-size: 13px; padding: 4px 0;}
-  .company-description, .newsletter-section p { font-size: 12px; margin-bottom: 7px;}
-  .social-links { gap: 8px; margin-bottom: 7px; }
-  .social-icon { width: 28px; height: 28px; font-size: 13px;}
-  .newsletter-form input { padding: 7px 30px 7px 7px; font-size: 12px;}
-  .newsletter-form button { width: 22px; height: 22px; font-size: 12px;}
-  .footer-bottom { font-size: 10px; padding-top: 8px; margin-top: 8px;}
+  
+  .company-info { 
+    grid-area: company; 
+  }
+  
+  .newsletter-section { 
+    grid-area: newsletter; 
+  }
+  
+  .quick-links { 
+    grid-area: quick; 
+  }
+  
+  .support { 
+    grid-area: support; 
+  }
+  
+  .footer-column { 
+    align-items: flex-start; 
+    margin-bottom: 0; 
+    padding: 0 5px;
+  }
+  
+  .footer-logo { 
+    max-height: 46px; 
+    width: 36px; 
+    align-self: flex-start; 
+    margin-bottom: 10px;
+  }
+  
+  .column-title { 
+    font-size: 14px; 
+    margin-bottom: 8px; 
+    padding-bottom: 4px;
+  }
+  
+  .column-title::after { 
+    width: 20px; 
+    height: 2px; 
+  }
+  
+  .footer-links { 
+    gap: 5px; 
+    text-align: left; 
+  }
+  
+  .footer-links a { 
+    font-size: 13px; 
+    padding: 4px 0;
+  }
+  
+  .company-description, .newsletter-section p { 
+    font-size: 12px; 
+    margin-bottom: 7px;
+  }
+  
+  .social-links { 
+    gap: 8px; 
+    margin-bottom: 7px; 
+  }
+  
+  .social-icon { 
+    width: 28px; 
+    height: 28px; 
+    font-size: 13px;
+  }
+  
+  .newsletter-form input { 
+    padding: 7px 30px 7px 7px; 
+    font-size: 12px;
+    color: #ffffff;
+  }
+  
+  .newsletter-form button { 
+    width: 22px; 
+    height: 22px; 
+    font-size: 12px;
+  }
+  
+  /* Mobile responsiveness for agency footer */
+  .footer-bottom {
+    position: relative;
+    z-index: 15;
+    padding-bottom: 20px; /* FIXED: Extra padding on mobile */
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .agency-credit-section {
+    order: -1;
+    z-index: 20;
+  }
+  
+  .agency-credit {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    font-size: 11px;
+  }
+  
+  .copyright-section p {
+    font-size: 11px;
+  }
+  
+  .agency-link {
+    font-size: 11px;
+    padding: 2px 4px;
+    z-index: 25;
+  }
+  
+  .code-icon {
+    font-size: 12px;
+  }
 }
 
 /* Extra Small Screens */
 @media (max-width: 480px) {
-  .footer-section { padding: 15px 4px 6px; }
-  .footer-grid { gap: 7px; }
-  .footer-logo { max-height: 30px; width: 22px; }
-  .column-title { font-size: 12px; margin-bottom: 6px; }
-  .column-title::after { width: 12px; }
-  .footer-links a { font-size: 11px; padding: 3px 0;}
-  .company-description, .newsletter-section p { font-size: 10px; }
-  .social-icon { width: 22px; height: 22px; font-size: 10px;}
-  .newsletter-form input { font-size: 10px; }
-  .newsletter-form button { font-size: 10px;}
-  .footer-bottom { font-size: 8px;}
+  .footer-section { 
+    padding: 15px 4px 130px; /* FIXED: Even more bottom padding on small screens */
+    z-index: 10;
+  }
+  
+  .footer-grid { 
+    gap: 7px; 
+  }
+  
+  .footer-logo { 
+    max-height: 30px; 
+    width: 22px; 
+  }
+  
+  .column-title { 
+    font-size: 12px; 
+    margin-bottom: 6px; 
+  }
+  
+  .column-title::after { 
+    width: 12px; 
+  }
+  
+  .footer-links a { 
+    font-size: 11px; 
+    padding: 3px 0;
+  }
+  
+  .company-description, .newsletter-section p { 
+    font-size: 10px; 
+  }
+  
+  .social-icon { 
+    width: 22px; 
+    height: 22px; 
+    font-size: 10px;
+  }
+  
+  .newsletter-form input { 
+    font-size: 10px;
+    color: #ffffff;
+  }
+  
+  .newsletter-form button { 
+    font-size: 10px;
+  }
+  
+  /* Extra small screen agency footer */
+  .footer-bottom {
+    padding-top: 12px;
+    margin-top: 12px;
+    padding-bottom: 30px; /* FIXED: Extra padding for small screens */
+    z-index: 15;
+  }
+  
+  .agency-credit {
+    font-size: 10px;
+    gap: 4px;
+  }
+  
+  .copyright-section p {
+    font-size: 10px;
+  }
+  
+  .agency-link {
+    font-size: 10px;
+    padding: 2px 4px;
+    z-index: 25;
+  }
+  
+  .code-icon {
+    font-size: 11px;
+  }
 }
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .footer-section {
+    padding-bottom: 140px; /* FIXED: Maximum padding for very small screens */
+  }
+  
+  .footer-bottom-content {
+    gap: 8px;
+  }
+  
+  .footer-bottom {
+    padding-bottom: 40px; /* FIXED: Extra space from floating button */
+  }
+  
+  .agency-credit {
+    font-size: 9px;
+  }
+  
+  .copyright-section p {
+    font-size: 9px;
+  }
+  
+  .agency-link {
+    font-size: 9px;
+    padding: 1px 3px;
+    z-index: 25;
+  }
+  
+  .code-icon {
+    font-size: 10px;
+  }
+}
+
 @media (prefers-contrast: high) {
-  .footer-section { background: #000; color: #fff; }
-  .social-icon { border: 2px solid #fff;}
-  .newsletter-form input { border: 2px solid #fff;}
+  .footer-section { 
+    background: #000; 
+    color: #fff; 
+  }
+  
+  .social-icon { 
+    border: 2px solid #fff;
+  }
+  
+  .newsletter-form input { 
+    border: 2px solid #fff;
+    color: #ffffff;
+  }
+  
+  .agency-link {
+    border: 1px solid #fff;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .social-icon, .footer-links a, .newsletter-form button { transition: none;}
-  .social-icon:hover { transform: none;}
+  .social-icon, 
+  .footer-links a, 
+  .newsletter-form button,
+  .agency-link,
+  .code-icon { 
+    transition: none;
+    animation: none;
+  }
+  
+  .social-icon:hover { 
+    transform: none;
+  }
+  
+  .agency-link:hover {
+    transform: none;
+  }
+}
+
+/* FIXED: Override floating button z-index when near footer */
+@media (max-height: 600px) {
+  .footer-section {
+    z-index: 10000; /* Higher than floating button when screen is short */
+  }
+  
+  .agency-credit-section {
+    z-index: 10005;
+  }
+  
+  .agency-link {
+    z-index: 10010;
+  }
 }

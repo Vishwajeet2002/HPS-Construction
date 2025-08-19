@@ -142,7 +142,7 @@ const QueryForm = () => {
       console.log('🔑 Using Query Service ID:', import.meta.env.VITE_EMAILJS_QUERY_SERVICE_ID);
       console.log('🔑 Using Query Template ID:', import.meta.env.VITE_EMAILJS_QUERY_TEMPLATE_ID);
       
-      // FIXED: Use import.meta.env instead of process.env
+      // Send Email via EmailJS
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_QUERY_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_QUERY_TEMPLATE_ID,
@@ -159,12 +159,47 @@ const QueryForm = () => {
           interaction_type: "Query Form - Submitted",
         }
       );
+
+      // ADDED: Send to WhatsApp (same as Contact component)
+      const whatsappMessage = encodeURIComponent(
+`🏗️ *New Inquiry from HPS Constructions Website*
+
+👤 *Name:* ${formData.name}
+📞 *Phone:* ${formData.phone}
+🔧 *Service:* ${formData.service}
+💬 *Query:* ${formData.query || 'No specific query provided'}
+
+📅 *Submitted:* ${new Date().toLocaleString("en-IN", {
+  timeZone: "Asia/Kolkata",
+  dateStyle: "medium",
+  timeStyle: "short",
+})}
+
+Please contact me. Thank you!`
+      );
       
-      console.log('✅ QueryForm email sent successfully');
+      window.open(`https://wa.me/919565550142?text=${whatsappMessage}`, '_blank');
+      
+      console.log('✅ QueryForm email and WhatsApp sent successfully');
       return true;
     } catch (error) {
       console.error("❌ Failed to send QueryForm email:", error);
       console.error("❌ Error details:", error.text || error.message);
+      
+      // ADDED: WhatsApp fallback (same as Contact component)
+      const fallbackMessage = encodeURIComponent(
+`🏗️ *HPS Constructions Inquiry*
+
+👤 ${formData.name}
+📞 ${formData.phone}
+🔧 ${formData.service}
+💬 ${formData.query || 'No specific query'}
+
+Please contact me for bamboo and POP services.`
+      );
+      
+      window.open(`https://wa.me/919565550142?text=${fallbackMessage}`, '_blank');
+      
       return false;
     }
   };
@@ -205,10 +240,11 @@ const QueryForm = () => {
     try {
       const emailSuccess = await sendEmailAndWhatsApp();
       if (emailSuccess) {
-        alert("✅ Your message has been sent successfully! We'll contact you soon.");
+        alert("✅ Your message has been sent successfully via Email & WhatsApp! We'll contact you soon.");
         closeModal();
       } else {
-        alert("❌ Failed to send message. Please try again.");
+        alert("📱 Email failed but WhatsApp message sent! We'll contact you soon.");
+        closeModal();
       }
     } catch (error) {
       console.error("Submit error:", error);

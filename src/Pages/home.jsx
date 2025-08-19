@@ -191,19 +191,10 @@ const Home = () => {
     { id: "pop", name: "POP", icon: "🏛️" },
   ];
 
-  const handleProductLearnMore = useCallback((success, userData, title, price, unit, description) => {
-    if (!success) {
-      alert("Please fill the contact form first via the floating 'Need Help?' button.");
-      return;
-    }
-
-    console.log("🎯 Opening modal with data:", userData);
-    setModalUserData({
-      userData,
-      productInfo: { title, price, unit, description }
-    });
-    setModalOpen(true);
-    console.log("✅ Modal should be open now");
+  // REMOVED: Alert has been removed, ProductCard now handles its own popups
+  const handleProductLearnMore = useCallback(() => {
+    // ProductCard now handles its own success/error states with popups
+    // No need for additional handling here
   }, []);
 
   const closeModal = () => {
@@ -271,7 +262,6 @@ const Home = () => {
               <div className="product-details-section">
                 <p className="product-title">
                   <strong>Product:</strong> {productInfo?.title || 'Unknown Product'} 
-                  {/* FIXED: Safe price formatting */}
                   (₹{safeFormatPrice(productInfo?.price)}/{productInfo?.unit || 'unit'})
                 </p>
               </div>
@@ -392,7 +382,7 @@ const Home = () => {
               Get Free Consultation
             </button>
           </div>
-        </section>
+      </section>
 
         <Poster />
         <Footer />

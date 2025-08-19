@@ -15,7 +15,8 @@ import {
   FaInstagram,
   FaFacebook,
   FaLinkedin,
-  FaPaperPlane
+  FaPaperPlane,
+  FaCode
 } from 'react-icons/fa';
 
 const Contact = () => {
@@ -29,49 +30,99 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [errors, setErrors] = useState({});
 
-  // Initialize EmailJS
+  // Initialize EmailJS with environment variable
   useEffect(() => {
-    emailjs.init("aalvm8cdhpgqGnbdN");
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+    console.log('🔑 Contact EmailJS initialized with:', import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
   }, []);
 
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear specific field error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
+  // FIXED: Updated validation - only name, phone, and service are mandatory
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Name is required
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = "Name is required and must be at least 2 characters";
+    }
+    
+    // Phone is required
+    if (!formData.phone.trim() || !/^[+]?[\d\s\-()]{7,15}$/.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+    
+    // Service is required
+    if (!formData.service) {
+      newErrors.service = "Please select a service";
+    }
+    
+    // Email and location are optional - no validation needed
+    // Message is optional - no validation needed
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form before submitting
+    if (!validateForm()) {
+      console.log('❌ Form validation failed:', errors);
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
-      // Send Email via EmailJS
-      await emailjs.send("service_xz17hoo", "template_ergrx3a", {
-        from_name: formData.name,
-        from_email: formData.email,
-        phone_number: formData.phone,
-        service_type: formData.service,
-        project_location: formData.location,
-        user_message: formData.message,
-        submission_time: new Date().toLocaleString("en-IN", {
-          timeZone: "Asia/Kolkata",
-          dateStyle: "full",
-          timeStyle: "short",
-        }),
-      });
+      console.log('📧 Sending Contact form email with data:', formData);
+      console.log('🔑 Using Service ID:', import.meta.env.VITE_EMAILJS_SERVICE_ID);
+      console.log('🔑 Using Template ID:', import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+      
+      // Send Email via EmailJS using environment variables
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email || 'Not provided',
+          phone_number: formData.phone,
+          service_type: formData.service,
+          project_location: formData.location || 'Not provided',
+          user_message: formData.message || 'No specific message provided',
+          submission_time: new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+            dateStyle: "full",
+            timeStyle: "short",
+          }),
+          interaction_type: "Contact Form - Submitted",
+        }
+      );
 
       // Send to WhatsApp
       const whatsappMessage = encodeURIComponent(
 `🏗️ *New Inquiry from HPS Constructions Website*
 
 👤 *Name:* ${formData.name}
-📧 *Email:* ${formData.email}
+📧 *Email:* ${formData.email || 'Not provided'}
 📞 *Phone:* ${formData.phone}
 🔧 *Service:* ${formData.service}
-📍 *Location:* ${formData.location}
-💬 *Message:* ${formData.message}
+📍 *Location:* ${formData.location || 'Not provided'}
+💬 *Message:* ${formData.message || 'No specific message'}
 
 📅 *Submitted:* ${new Date().toLocaleString("en-IN", {
           timeZone: "Asia/Kolkata",
@@ -97,13 +148,19 @@ Please contact me regarding bamboo and POP services. Thank you!`
         location: ''
       });
 
+      // Clear any errors
+      setErrors({});
+
       // Hide success message after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
       }, 5000);
 
+      console.log('✅ Contact form email and WhatsApp sent successfully');
+
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("❌ Contact EmailJS Error:", error);
+      console.error("❌ Error details:", error.text || error.message);
       setIsSubmitting(false);
       setSubmitStatus('error');
       
@@ -112,11 +169,11 @@ Please contact me regarding bamboo and POP services. Thank you!`
 `🏗️ *HPS Constructions Inquiry*
 
 👤 ${formData.name}
-📧 ${formData.email}
+📧 ${formData.email || 'Not provided'}
 📞 ${formData.phone}
 🔧 ${formData.service}
-📍 ${formData.location}
-💬 ${formData.message}
+📍 ${formData.location || 'Not provided'}
+💬 ${formData.message || 'No specific message'}
 
 Please contact me for bamboo and POP services.`
       );
@@ -263,7 +320,7 @@ Please contact me for bamboo and POP services.`
             </div>
 
             <div className="contact-form">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} noValidate>
                 <div className="form-header">
                   <h3>Send Us A Message</h3>
                   <p>Fill out the form and we'll get back to you within 24 hours</p>
@@ -281,8 +338,9 @@ Please contact me for bamboo and POP services.`
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Enter your full name"
-                      required
+                      className={errors.name ? "error" : ""}
                     />
+                    {errors.name && <div className="error-message">{errors.name}</div>}
                   </div>
                   <div className="form-group">
                     <label>Phone Number *</label>
@@ -292,36 +350,38 @@ Please contact me for bamboo and POP services.`
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="Enter your phone number"
-                      required
+                      className={errors.phone ? "error" : ""}
                     />
+                    {errors.phone && <div className="error-message">{errors.phone}</div>}
                   </div>
                 </div>
 
                 <div className="form-group email-centered">
-                  <label>Email Address *</label>
+                  <label>Email Address</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Enter your email address"
-                    required
+                    placeholder="Enter your email address (optional)"
                   />
                 </div>
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Service Needed</label>
+                    <label>Service Needed *</label>
                     <select
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
+                      className={errors.service ? "error" : ""}
                     >
                       <option value="">Select a service</option>
                       {services.map((service, index) => (
                         <option key={index} value={service}>{service}</option>
                       ))}
                     </select>
+                    {errors.service && <div className="error-message">{errors.service}</div>}
                   </div>
                   <div className="form-group">
                     <label>Project Location</label>
@@ -330,20 +390,19 @@ Please contact me for bamboo and POP services.`
                       name="location"
                       value={formData.location}
                       onChange={handleInputChange}
-                      placeholder="Where is your project located?"
+                      placeholder="Where is your project located? (optional)"
                     />
                   </div>
                 </div>
 
                 <div className="form-group">
-                  <label>Message *</label>
+                  <label>Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Tell us about your project requirements..."
+                    placeholder="Tell us about your project requirements... (optional)"
                     rows="4"
-                    required
                   />
                 </div>
 
@@ -456,6 +515,32 @@ Please contact me for bamboo and POP services.`
                 <FaPhone />
                 Call Now: +91 9565550142
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ADDED: Agency Credit Footer Section */}
+      <section className="agency-footer">
+        <div className="container">
+          <div className="agency-footer-content">
+            <div className="copyright-section">
+              <p>&copy; 2025 HPS Constructions. All rights reserved.</p>
+            </div>
+            
+            <div className="agency-credit-section">
+              <div className="agency-credit">
+                <FaCode className="code-icon" />
+                <span>Website designed & developed by </span>
+                <a 
+                  href="https://youragencywebsite.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="agency-link"
+                >
+                  Your Agency Name ✨
+                </a>
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import hpsLogo from '/images/logo.png'; // Ensure correct logo path
 import '../Style/footer.css';
-import { FaEnvelope, FaPhoneAlt, FaWhatsapp, FaInstagram } from 'react-icons/fa';
+import { FaEnvelope, FaPhoneAlt, FaWhatsapp, FaInstagram, FaCode } from 'react-icons/fa';
 
 const Footer = () => {
   const [phone, setPhone] = useState('');
@@ -49,7 +49,7 @@ const Footer = () => {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="footer-column">
+          <div className="footer-column quick-links">
             <h3 className="column-title">Quick Links</h3>
             <ul className="footer-links">
               <li><Link to="/">Home</Link></li>
@@ -60,7 +60,7 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Support */}
-          <div className="footer-column">
+          <div className="footer-column support">
             <h3 className="column-title">Support</h3>
             <ul className="footer-links">
               <li><Link to="/contact">Request a Quote</Link></li>
@@ -81,15 +81,35 @@ const Footer = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="Your phone number"
                 required
-                pattern="[+]?[\\d\\s\\-()]{7,15}"
+                pattern="[+]?[\d\s\-()]{7,15}"
               />
               <button type="submit" aria-label="Subscribe">→</button>
             </form>
           </div>
         </div>
 
+        {/* Footer Bottom with Agency Credit */}
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} HPS Construction. All Rights Reserved.</p>
+          <div className="footer-bottom-content">
+            <div className="copyright-section">
+              <p>© {new Date().getFullYear()} HPS Construction. All Rights Reserved.</p>
+            </div>
+            
+            <div className="agency-credit-section">
+              <div className="agency-credit">
+                <FaCode className="code-icon" />
+                <span>Website designed & developed by </span>
+                <a 
+                  href="https://youragencywebsite.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="agency-link"
+                >
+                  Your Agency Name ✨
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -97,4 +117,3 @@ const Footer = () => {
 };
 
 export default Footer;
-    

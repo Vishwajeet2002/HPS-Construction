@@ -612,3 +612,212 @@ body {
   .products-grid { display: block; columns: 2; column-gap: 15px;}
   .product-item { break-inside: avoid; margin-bottom: 15px;}
 }
+/* Popup Styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  animation: popupFadeIn 0.3s ease;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popup-content {
+  background: white;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: popupSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.popup-header {
+  padding: 20px 25px 15px;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  text-align: center;
+}
+
+.popup-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.popup-close:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.popup-body {
+  padding: 20px 25px 25px;
+}
+
+.popup-body p {
+  margin: 0 0 15px 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.popup-body p:last-of-type {
+  margin-bottom: 20px;
+}
+
+.popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.popup-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.popup-btn.primary-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.popup-btn.primary-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.popup-btn.secondary-btn {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.popup-btn.secondary-btn:hover {
+  background: #e5e7eb;
+}
+
+.popup-btn.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366, #20b358);
+  color: white;
+}
+
+.popup-btn.whatsapp-btn:hover {
+  background: linear-gradient(135deg, #20b358, #1da851);
+  transform: translateY(-1px);
+}
+
+.success-popup .popup-header {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.success-popup .popup-close {
+  color: white;
+}
+
+.success-popup .popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.error-popup .popup-header {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.error-popup .popup-close {
+  color: white;
+}
+
+.error-popup .popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.whatsapp-popup .popup-header {
+  background: linear-gradient(135deg, #25D366, #20b358);
+  color: white;
+  border-radius: 16px 16px 0 0;
+}
+
+.whatsapp-popup .popup-close {
+  color: white;
+}
+
+.whatsapp-popup .popup-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .popup-content {
+    margin: 20px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  .popup-actions {
+    gap: 8px;
+  }
+  
+  .popup-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
