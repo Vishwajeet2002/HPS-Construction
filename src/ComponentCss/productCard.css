@@ -478,9 +478,9 @@
 .btn-call,
 .btn-learn {
   flex: 1;
-  padding: 10px 8px;
+  padding: 8px 8px;
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
   border: none;
   cursor: pointer;
@@ -492,7 +492,7 @@
   color: #fff;
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   position: relative;
   overflow: hidden;
 }
@@ -1347,5 +1347,281 @@
 @media print {
   .contact-modal-overlay {
     display: none !important;
+  }
+}
+/* Contact Modal Styles */
+.contact-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  backdrop-filter: blur(5px);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to { opacity: 1; backdrop-filter: blur(5px); }
+}
+
+.contact-modal {
+  background: white;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #C58022, #9E671C);
+  color: white;
+  padding: 25px 30px 20px;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
+  position: relative;
+}
+
+.success-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  animation: bounce 0.6s ease-out 0.2s both;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+.user-info {
+  background: #f8f9ff;
+  border: 2px solid #e3e8ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user-info p {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  color: #374151;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-details span {
+  background: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.product-info {
+  background: #fff7ed;
+  border: 2px solid #fed7aa;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.product-info p {
+  margin: 0;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+.contact-question {
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #374151;
+  margin-bottom: 25px;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.whatsapp-btn,
+.call-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366, #20b358);
+  color: white;
+}
+
+.whatsapp-btn:hover {
+  background: linear-gradient(135deg, #20b358, #1da851);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+.call-btn {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.call-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-icon {
+  font-size: 24px;
+  min-width: 30px;
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+
+.btn-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.btn-desc {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .contact-modal {
+    margin: 20px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  .modal-header {
+    padding: 20px 25px 15px;
+  }
+  
+  .modal-body {
+    padding: 25px 20px;
+  }
+  
+  .contact-buttons {
+    gap: 12px;
+  }
+  
+  .whatsapp-btn,
+  .call-btn {
+    padding: 15px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-modal {
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .modal-header h3 {
+    font-size: 18px;
+  }
+  
+  .success-icon {
+    font-size: 35px;
   }
 }

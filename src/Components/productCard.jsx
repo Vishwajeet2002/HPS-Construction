@@ -1,6 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import emailjs from '@emailjs/browser';
+import React, { useCallback } from "react";
+import emailjs from "@emailjs/browser";
 import { useUser } from "../context/UserContext";
 import "../ComponentCss/productCard.css";
 import bambooFlooringImage from "/images/luffy.jpg";
@@ -13,32 +12,177 @@ export default function ProductCard({
   rating = 4.8,
   imageUrl = bambooFlooringImage,
   onCall = () => console.log("Call clicked"),
-  onLearnMore = () => console.log("Learn more clicked"),
+  onLearnMore = (success, userData, productTitle) => {
+    if (success) {
+      alert(`✅ Thank you for your interest in ${productTitle}! We'll contact you soon.`);
+    } else {
+      alert("📋 Please fill out the contact form with your name and phone number first.");
+    }
+  },
 }) {
-  const navigate = useNavigate();
   const { userData } = useUser();
 
-  // Initialize EmailJS
   React.useEffect(() => {
-    emailjs.init('aalvm8cdhpgqGnbdN');
+    // FIXED: Use import.meta.env instead of process.env
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+    console.log('🔑 EmailJS initialized with:', import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
   }, []);
 
-  // Get user data from localStorage (persistent storage)
-  const getSavedUserData = () => {
-    try {
-      const savedData = localStorage.getItem('userData');
-      return savedData ? JSON.parse(savedData) : {};
-    } catch (error) {
-      console.error("Error parsing saved user data:", error);
-      return {};
+  const getValidUserData = () => {
+    let validData = userData;
+    
+    if (!validData || !validData.name || !validData.phone) {
+      try {
+        const saved = localStorage.getItem('userData');
+        if (saved && saved !== 'null') {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.name && parsed.phone) {
+            validData = parsed;
+            console.log('📋 Using localStorage data as fallback:', parsed);
+          }
+        }
+      } catch (error) {
+        console.error('Error reading localStorage:', error);
+      }
     }
+    
+    return validData;
   };
 
-  // Star rating component
-  const StarRating = ({ rating }) => {
+  const isUserDataComplete = () => {
+    const data = getValidUserData();
+    const isComplete = data && 
+                      data.name && 
+                      typeof data.name === 'string' &&
+                      data.name.trim().length >= 2 && 
+                      data.phone && 
+                      typeof data.phone === 'string' &&
+                      data.phone.trim().length >= 7;
+    
+    console.log('🎯 ProductCard validation:', {
+      data,
+      hasName: data?.name,
+      nameLength: data?.name?.trim()?.length,
+      hasPhone: data?.phone,
+      phoneLength: data?.phone?.trim()?.length,
+      isComplete
+    });
+    
+    return isComplete;
+  };
+
+  const sendEmailWithUserData = useCallback(async (finalUserData) => {
+    try {
+      console.log('📧 Sending product interest email with data:', finalUserData);
+      
+      const templateParams = {
+        from_name: finalUserData.name,
+        phone_number: finalUserData.phone,
+        service_needed: finalUserData.service,
+        user_query: `${finalUserData.query} | Product Interest: ${title} (Rs.${price}/${unit}). ${description}`,
+        submission_time: new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          dateStyle: "full",
+          timeStyle: "short",
+        }),
+        product_details: `Product: ${title}, Price: Rs.${price}/${unit}, Rating: ${rating}`,
+        interaction_type: "Product Interest with User Details",
+      };
+      
+      console.log('🔑 Using Service ID:', import.meta.env.VITE_EMAILJS_SERVICE_ID);
+      console.log('🔑 Using Template ID:', import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+      
+      // FIXED: Use import.meta.env instead of process.env
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+      
+      console.log("✅ Product interest email sent successfully:", result);
+      return true;
+    } catch (error) {
+      console.error("❌ Product interest email failed:", error);
+      console.error("❌ Error details:", error.text || error.message);
+      return false;
+    }
+  }, [title, price, unit, description, rating]);
+
+  const handleCall = useCallback(async (e) => {
+    e.stopPropagation();
+
+    const validData = getValidUserData();
+    const callUserData = {
+      name: validData?.name || "Anonymous User",
+      phone: validData?.phone || "Call button clicked",
+      service: validData?.service || title,
+      query: validData?.query || "Direct call request",
+    };
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: callUserData.name,
+          phone_number: callUserData.phone,
+          service_needed: callUserData.service,
+          user_query: `${callUserData.query} | Call Button Clicked: ${title} (Rs.${price}/${unit}). ${description}`,
+          submission_time: new Date().toLocaleString("en-IN", {
+            timeZone: "Asia/Kolkata",
+            dateStyle: "full",
+            timeStyle: "short",
+          }),
+          product_details: `Product: ${title}, Price: Rs.${price}/${unit}, Rating: ${rating}`,
+          interaction_type: "Call Button - Auto Email",
+        }
+      );
+      console.log("✅ Auto-email sent on call button click");
+    } catch (error) {
+      console.error("❌ Call button email failed:", error);
+    }
+
+    window.location.href = "tel:9565550142";
+    onCall();
+  }, [title, price, unit, description, rating, onCall]);
+
+  const handleLearnMore = useCallback(async (e) => {
+    e.stopPropagation();
+    
+    console.log('🚀 Learn More clicked for:', title);
+    
+    const validData = getValidUserData();
+    console.log('📊 Valid user data found:', validData);
+    
+    const finalUserData = {
+      name: validData?.name || "",
+      phone: validData?.phone || "",
+      service: validData?.service || title,
+      query: validData?.query || "Product interest",
+    };
+    
+    console.log('📝 Final data for validation:', finalUserData);
+    
+    const isComplete = isUserDataComplete();
+    console.log('✅ Is data complete?', isComplete);
+
+    if (!isComplete) {
+      console.log('❌ Data incomplete - showing form prompt');
+      onLearnMore(false, finalUserData, title);
+      return;
+    }
+
+    console.log('📧 Data is complete - sending email');
+    const success = await sendEmailWithUserData(finalUserData);
+    console.log('📧 Email send result:', success);
+    
+    onLearnMore(success, finalUserData, title);
+  }, [title, price, unit, description, sendEmailWithUserData, onLearnMore]);
+
+  const StarRating = React.memo(({ rating }) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-
+    
     return (
       <div className="rating-container">
         <div className="stars">
@@ -63,209 +207,9 @@ export default function ProductCard({
         </div>
       </div>
     );
-  };
+  });
 
-  const handleCall = (e) => {
-    e.stopPropagation();
-    window.location.href = "tel:9565550142";
-    onCall();
-  };
-
-  // Function to send email with user data from localStorage
-  const sendEmailWithUserData = async () => {
-    const savedUserData = getSavedUserData();
-    const currentUserData = userData || {};
-    
-    // Combine saved data with current context data
-    const finalUserData = {
-      name: savedUserData.name || currentUserData.name || 'Website Visitor',
-      phone: savedUserData.phone || currentUserData.phone || 'Not provided',
-      service: savedUserData.service || currentUserData.service || title,
-      query: savedUserData.query || currentUserData.query || 'No specific query'
-    };
-    
-    try {
-      await emailjs.send('service_xz17hoo', 'template_ergrx3a', {
-        from_name: finalUserData.name,
-        phone_number: finalUserData.phone,
-        service_needed: finalUserData.service,
-        user_query: `${finalUserData.query} | Product Interest: ${title} (₹${price}/${unit}). ${description}`,
-        submission_time: new Date().toLocaleString('en-IN', {
-          timeZone: 'Asia/Kolkata',
-          dateStyle: 'full',
-          timeStyle: 'short'
-        }),
-        product_details: `Product: ${title}, Price: ₹${price}/${unit}, Rating: ${rating}`,
-        interaction_type: 'Product Interest with User Details'
-      });
-      
-      console.log('Email sent with user data successfully');
-      return { success: true, userData: finalUserData };
-    } catch (error) {
-      console.error('Failed to send email with user data:', error);
-      return { success: false, userData: finalUserData };
-    }
-  };
-
-  const handleLearnMore = async (e) => {
-    e.stopPropagation();
-    
-    const savedUserData = getSavedUserData();
-    const currentUserData = userData || {};
-    
-    // Check if user data exists in either localStorage or context
-    const hasUserData = (savedUserData.name && savedUserData.phone) || (currentUserData.name && currentUserData.phone);
-    
-    if (!hasUserData) {
-      // Show message that user needs to fill query form first
-      const modal = document.createElement('div');
-      modal.className = 'contact-modal-overlay';
-      modal.innerHTML = `
-        <div class="contact-modal">
-          <div class="contact-modal-header">
-            <h3>📋 Contact Details Required</h3>
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-          </div>
-          <div class="contact-modal-body">
-            <div class="requirement-notice">
-              <span class="notification-icon">⚠️</span>
-              <p>Please fill the contact form first to show interest in products!</p>
-            </div>
-            <p>To proceed with <strong>${title}</strong>, we need your contact information:</p>
-            <ul>
-              <li>✓ Your Name</li>
-              <li>✓ Phone Number</li>
-              <li>✓ Service Requirements</li>
-            </ul>
-            <div class="modal-footer-note">
-              <small>💡 Look for the floating "Need Help?" button or wait for the contact form to appear.</small>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-      requestAnimationFrame(() => modal.classList.add('show'));
-
-      const closeModal = () => {
-        if (document.body.contains(modal)) {
-          modal.classList.add('hide');
-          setTimeout(() => {
-            if (document.body.contains(modal)) {
-              document.body.removeChild(modal);
-            }
-          }, 300);
-        }
-      };
-
-      modal.querySelector('.modal-close').onclick = closeModal;
-      modal.onclick = (e) => {
-        if (e.target === modal) closeModal();
-      };
-
-      return;
-    }
-    
-    // Send email with user data
-    const emailResult = await sendEmailWithUserData();
-    
-    if (emailResult.success) {
-      // Create modal for contact options with user data
-      const modal = document.createElement('div');
-      modal.className = 'contact-modal-overlay';
-      modal.innerHTML = `
-        <div class="contact-modal">
-          <div class="contact-modal-header">
-            <h3>Interest Recorded for ${title}</h3>
-            <button class="modal-close" aria-label="Close modal">&times;</button>
-          </div>
-          <div class="contact-modal-body">
-            <div class="auto-email-notification">
-              <span class="notification-icon">📧</span>
-              <p>We've sent your interest with your contact details to our team!</p>
-              <div class="user-details-preview">
-                <small>👤 ${emailResult.userData.name} | 📞 ${emailResult.userData.phone}</small>
-              </div>
-            </div>
-            <p><strong>How would you like us to contact you?</strong></p>
-            <div class="contact-options">
-              <button class="contact-option whatsapp-option">
-                <span class="option-icon">💬</span>
-                <div class="option-content">
-                  <span class="option-text">WhatsApp</span>
-                  <span class="option-description">Chat with us instantly</span>
-                </div>
-              </button>
-              <button class="contact-option call-option">
-                <span class="option-icon">📞</span>
-                <div class="option-content">
-                  <span class="option-text">Call Now</span>
-                  <span class="option-description">Speak directly with us</span>
-                </div>
-              </button>
-            </div>
-            <div class="modal-footer-note">
-              <small>💡 Our team has your details: ${emailResult.userData.name} (${emailResult.userData.phone})</small>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-
-      // Add entrance animation
-      requestAnimationFrame(() => {
-        modal.classList.add('show');
-      });
-
-      // Handle WhatsApp (use actual user data)
-      modal.querySelector('.whatsapp-option').onclick = () => {
-        const message = encodeURIComponent(
-          `🏗️ *Interest in ${title}*\n\nHi HPS Constructions!\n\nName: ${emailResult.userData.name}\nPhone: ${emailResult.userData.phone}\n\nI'm interested in ${title} (₹${price}/${unit}).\n\n${description}\n\nOriginal Query: ${emailResult.userData.query || 'General interest'}\n\nPlease provide more details about:\n• Availability\n• Installation process\n• Bulk pricing\n• Quality specifications\n\nThank you!`
-        );
-        window.open(`https://wa.me/919565550142?text=${message}`, "_blank");
-        closeModal();
-      };
-
-      // Handle Call
-      modal.querySelector('.call-option').onclick = () => {
-        window.location.href = "tel:9565550142";
-        closeModal();
-      };
-
-      // Handle close
-      const closeModal = () => {
-        if (document.body.contains(modal)) {
-          modal.classList.add('hide');
-          setTimeout(() => {
-            if (document.body.contains(modal)) {
-              document.body.removeChild(modal);
-            }
-          }, 300);
-        }
-      };
-
-      modal.querySelector('.modal-close').onclick = closeModal;
-      modal.onclick = (e) => {
-        if (e.target === modal) closeModal();
-      };
-
-      // Close on Escape key
-      const handleEscape = (e) => {
-        if (e.key === 'Escape') {
-          closeModal();
-          document.removeEventListener('keydown', handleEscape);
-        }
-      };
-      document.addEventListener('keydown', handleEscape);
-    }
-    
-    onLearnMore();
-  };
-
-  // Check if user data exists (from localStorage or context)
-  const savedUserData = getSavedUserData();
-  const hasUserData = (savedUserData.name && savedUserData.phone) || (userData?.name && userData?.phone);
+  const showCheckmark = isUserDataComplete();
 
   return (
     <div className="hps-card">
@@ -278,7 +222,6 @@ export default function ProductCard({
           }}
         />
         <div className="image-overlay"></div>
-        {/* Mobile Description Overlay */}
         <div className="mobile-description-overlay">
           <div className="mobile-description-content">
             <p className="mobile-description-text">{description}</p>
@@ -290,9 +233,7 @@ export default function ProductCard({
       <div className="card-content">
         <div className="title-description-group">
           <h3 className="card-title">{title}</h3>
-          {/* Desktop description */}
           <p className="card-description desktop-only">{description}</p>
-          {/* Mobile description trigger */}
           <div className="mobile-description-trigger">
             <span className="description-hint">Tap to see details</span>
           </div>
@@ -302,7 +243,6 @@ export default function ProductCard({
           <div className="rating-section">
             <StarRating rating={rating} />
           </div>
-
           <div className="price-section">
             <div className="price-main">
               <span className="currency">₹</span>
@@ -317,12 +257,14 @@ export default function ProductCard({
             <span className="btn-text">Call</span>
             <span className="btn-icon call-icon">📞</span>
           </button>
-          <button className="btn-learn" onClick={handleLearnMore} title="Show Interest">
+          <button
+            className="btn-learn"
+            onClick={handleLearnMore}
+            title="Show Interest"
+          >
             <span className="btn-text">Learn More</span>
             <span className="btn-icon learn-icon">💬</span>
-            {hasUserData && (
-              <span className="user-indicator">✓</span>
-            )}
+            {showCheckmark && <span className="user-indicator">✓</span>}
           </button>
         </div>
       </div>

@@ -148,7 +148,7 @@
   flex: 1;
 }
 
-.modal-close-btn {
+/* .modal-close-btn {
   background: none;
   border: none;
   color: white;
@@ -162,12 +162,12 @@
   font-size: 24px;
   border-radius: 50%;
   transition: all 0.2s;
-}
+} */
 
-.modal-close-btn:hover {
+/* .modal-close-btn:hover {
   background: rgba(255,255,255,0.2);
   transform: scale(1.1);
-}
+} */
 
 /* ====== MODAL CONTENT ====== */
 .query-modal-content {
